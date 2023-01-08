@@ -1,19 +1,19 @@
-import React from "react";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import Home from "./Home";
-import Tabs from "./Tabs";
+import React from 'react';
+import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Stacks from './Stacks';
+import Tabs from './Tabs';
 
-const Stack = createNativeStackNavigator();
+const NativeStack = createNativeStackNavigator();
 
 export default function Root() {
   return (
-    <Stack.Navigator
-      initialRouteName="Tabs"
-      screenOptions={{ headerShown: false, headerTitle: "222" }}
+    <NativeStack.Navigator
+      // initialRouteName="Tabs"
+      screenOptions={{ headerShown: false }}
     >
-      <Stack.Screen name="Home" component={Home} />
-      <Stack.Screen name="Tabs" component={Tabs} />
-    </Stack.Navigator>
+      <NativeStack.Screen name="Tabs" component={Tabs} />
+      <NativeStack.Screen name="Stacks" component={Stacks} />
+    </NativeStack.Navigator>
   );
 }
 
