@@ -1,9 +1,9 @@
-import React from 'react';
-import { Text, View } from 'react-native';
+import React from "react";
+import { Text, View } from "react-native";
 export default function Main() {
   return (
     <View>
-      <Text>하1이</Text>
+      <Text>Main입니다.</Text>
     </View>
   );
 }
