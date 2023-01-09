@@ -2,7 +2,7 @@ import { useState } from "react";
 import styled from "@emotion/native";
 import { addDoc, collection } from "firebase/firestore";
 import { Modal } from "react-native";
-import { Rating } from "react-native-ratings";
+import { AirbnbRating, Rating } from "react-native-ratings";
 import { authService, dbService } from "../firebase";
 
 export default function CommentModal({ isOpenModal, setIsOpenModal }) {
@@ -25,20 +25,15 @@ export default function CommentModal({ isOpenModal, setIsOpenModal }) {
     setRatings(0);
   };
   return (
-    <Modal visible={isOpenModal} transparent animationType="slide">
+    <Modal visible={isOpenModal} transparent animationType="fade">
       <Backdrop>
         <Dialog>
           <InputWrapper>
             <ModalTitle>평가</ModalTitle>
-            <Rating
-              startingValue={0}
-              style={{
-                alignItems: "flex-start",
-              }}
+            <AirbnbRating
               onFinishRating={getRatings}
-              ratingCount={10}
-              imageSize={20}
-              tintColor="#d2dae2"
+              ratingCount={5}
+              size={20}
             />
             <ModalTitle>제목</ModalTitle>
             <TitleInput

@@ -58,7 +58,7 @@ export default function Commentedit({
           try {
             // await deleteDoc(doc(dbService, "comment", comment.id));
             await removeComment(comment.id);
-
+            Alert.alert("삭제가 완료되었습니다");
             navigation.navigate("TestComment");
           } catch (err) {
             console.log("err:", err);
@@ -105,11 +105,11 @@ export default function Commentedit({
               setNewTitle("");
               setRatings(0);
 
-              navigation.navigate({
+              navigation.reset({
                 routes: [
                   {
                     name: "Comment",
-                    params: { comment: comment.id },
+                    params: { comment: { ...comment, ...editingObj }, from },
                   },
                 ],
               });

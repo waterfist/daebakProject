@@ -5,8 +5,6 @@ import { GREEN_COLOR, YELLOW_COLOR } from "../color";
 import Login from "../screen/Login";
 import { authService } from "../firebase";
 import { signOut } from "firebase/auth";
-import CommentInput from "../screen/CommentInput";
-import CommentList from "../screen/CommentList";
 import Join from "../screen/Join";
 import Main from "../screen/Main";
 import My from "../screen/My";
