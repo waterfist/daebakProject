@@ -5,6 +5,8 @@ import { GREEN_COLOR, YELLOW_COLOR } from "../color";
 import Login from "../screen/Login";
 import { authService } from "../firebase";
 import { signOut } from "firebase/auth";
+import CommentInput from "../screen/CommentInput";
+import CommentList from "../screen/CommentList";
 import Join from "../screen/Join";
 import Main from "../screen/Main";
 import My from "../screen/My";
@@ -63,6 +65,8 @@ export default function Stack({
       <NativeStack.Screen name="Comment" component={Comment} />
       <NativeStack.Screen name="TestComment" component={TestComment} />
       <NativeStack.Screen name="Commentedit" component={Commentedit} />
+      {/* <NativeStack.Screen name="CommentInput" component={CommentInput} />
+      <NativeStack.Screen name="CommentList" component={CommentList} /> */}
       <NativeStack.Screen name="Join" component={Join} />
       <NativeStack.Screen name="Login" component={Login} />
       <NativeStack.Screen name="Post" component={Post} />
