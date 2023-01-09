@@ -63,8 +63,6 @@ export default function Stack({
       <NativeStack.Screen name="Comment" component={Comment} />
       <NativeStack.Screen name="TestComment" component={TestComment} />
       <NativeStack.Screen name="Commentedit" component={Commentedit} />
-      {/* <NativeStack.Screen name="CommentInput" component={CommentInput} />
-      <NativeStack.Screen name="CommentList" component={CommentList} /> */}
       <NativeStack.Screen name="Join" component={Join} />
       <NativeStack.Screen name="Login" component={Login} />
       <NativeStack.Screen name="Post" component={Post} />

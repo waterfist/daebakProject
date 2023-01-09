@@ -82,31 +82,54 @@ const JoinTopView = styled.View`
   margin-bottom: 80px;
 `;
 
-export default function Join() {
+export default function Join({ navigation: { navigate } }) {
+  const emailRef = useRef(null);
+  const nicknameRef = useRef(null);
+  const passwordRef = useRef(null);
+  const PasswordCheckRef = useRef(null);
   return (
     <BgSafeAreaView>
       <Background>
         <JoinTopView>
           <JoinTopText>2023 그거알고 있니?</JoinTopText>
         </JoinTopView>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => emailRef.current.focus()}>
           <Text style={{ color: "#3b71f3", right: 155, top: 10 }}>이메일</Text>
         </TouchableOpacity>
-        <ContainerStyle placeholder="Id" />
-        <Text style={{ color: "#3b71f3", right: 155, top: 10 }}>닉네임</Text>
-        <ContainerStyle placeholder="NickName" />
-        <Text style={{ color: "#3b71f3", right: 150, top: 10 }}>비밀번호</Text>
-        <ContainerStyle placeholder="Password" secureTextEntry={true} />
-        <Text style={{ color: "#3b71f3", right: 135, top: 10 }}>
-          비밀번호 확인
-        </Text>
-        <ContainerStyle placeholder="Password" secureTextEntry={true} />
+        <ContainerStyle placeholder="email" ref={emailRef} />
+
+        <TouchableOpacity onPress={() => nicknameRef.current.focus()}>
+          <Text style={{ color: "#3b71f3", right: 155, top: 10 }}>닉네임</Text>
+        </TouchableOpacity>
+        <ContainerStyle placeholder="nickname" ref={nicknameRef} />
+        <TouchableOpacity onPress={() => passwordRef.current.focus()}>
+          <Text style={{ color: "#3b71f3", right: 150, top: 10 }}>
+            비밀번호
+          </Text>
+        </TouchableOpacity>
+        <ContainerStyle
+          placeholder="Password"
+          secureTextEntry={true}
+          ref={passwordRef}
+        />
+        <TouchableOpacity onPress={() => PasswordCheckRef.current.focus()}>
+          <Text style={{ color: "#3b71f3", right: 135, top: 10 }}>
+            비밀번호 확인
+          </Text>
+        </TouchableOpacity>
+        <ContainerStyle
+          placeholder="PasswordCheck"
+          secureTextEntry={true}
+          ref={PasswordCheckRef}
+        />
 
         <CustomButton>
           <CustomButtonText>회원가입</CustomButtonText>
         </CustomButton>
         <CustomButton2>
-          <CustomButtonText2>취소</CustomButtonText2>
+          <CustomButtonText2 onPress={() => navigate("Login")}>
+            취소
+          </CustomButtonText2>
         </CustomButton2>
       </Background>
     </BgSafeAreaView>

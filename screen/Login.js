@@ -65,9 +65,11 @@ const CustomButtonText2 = styled.Text`
   font-weight: bold;
 `;
 
-export default function Login() {
-  const [id, setId] = useState(id);
-  const [password, setPassword] = useState(password);
+export default function Login({ navigation: { navigate } }) {
+  const [id, setId] = useState("");
+  const [nickname, setNickname] = useState("");
+  const [password, setPassword] = useState("");
+
   const textRef = useRef(null);
   const passwordRef = useRef(null);
 
@@ -96,7 +98,7 @@ export default function Login() {
         <CustomButton>
           <CustomButtonText>로그인</CustomButtonText>
         </CustomButton>
-        <CustomButton2>
+        <CustomButton2 onPress={() => navigate("Join")}>
           <CustomButtonText2>회원가입</CustomButtonText2>
         </CustomButton2>
       </Background>
