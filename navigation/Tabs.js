@@ -1,17 +1,23 @@
 import React from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { GREEN_COLOR, YELLOW_COLOR } from "../color";
-import { Text, useColorScheme, View } from "react-native";
+import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
 import { MaterialIcons } from "@expo/vector-icons";
 import { AntDesign } from "@expo/vector-icons";
-import Home from "./Home";
-import Explore from "./Explore";
-import Account from "./Account";
+import Main from "../screen/Main";
+import Search from "../screen/Search";
+import My from "../screen/My";
+import TestComment from "../screen/TestComment";
 
 const Tab = createBottomTabNavigator();
 
-export default function Tabs() {
+export default function Tabs({ navigation: { navigate } }) {
   const isDark = useColorScheme() === "dark";
+
+  const commentInputHandle = () => {
+    navigate("Stacks", { screen: "CommentInput" });
+  };
+
   return (
     <Tab.Navigator
       screenOptions={{
@@ -23,12 +29,23 @@ export default function Tabs() {
     >
       <Tab.Screen
         options={{
+          headerTitleAlign: "center",
+          headerRight: () => (
+            <TouchableOpacity onPress={() => commentInputHandle()}>
+              <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+                게시글 작성
+              </Text>
+            </TouchableOpacity>
+          ),
+
+          headerTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
+
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="local-movies" size={size} color={color} />
           ),
         }}
         name="Home"
-        component={Home}
+        component={Main}
       />
       <Tab.Screen
         options={{
@@ -36,8 +53,8 @@ export default function Tabs() {
             <AntDesign name="profile" size={size} color={color} />
           ),
         }}
-        name="Explore"
-        component={Explore}
+        name="Search"
+        component={Search}
       />
       <Tab.Screen
         options={{
@@ -45,8 +62,17 @@ export default function Tabs() {
             <AntDesign name="profile" size={size} color={color} />
           ),
         }}
-        name="Account"
-        component={Account}
+        name="My"
+        component={My}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="profile" size={size} color={color} />
+          ),
+        }}
+        name="TestComment"
+        component={TestComment}
       />
     </Tab.Navigator>
   );
