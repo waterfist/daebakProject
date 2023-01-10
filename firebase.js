@@ -1,14 +1,14 @@
-import { initializeApp } from "firebase/app";
-import { getFirestore } from "firebase/firestore";
-import { getAuth } from "firebase/auth";
+import { initializeApp } from 'firebase/app';
+import { getFirestore } from 'firebase/firestore';
+import { getAuth } from 'firebase/auth';
 
 const firebaseConfig = {
-  apiKey: "AIzaSyB0MikxYXJezp0gKwVgJHLJ5J12hVY8iJ4",
-  authDomain: "daebak-8251c.firebaseapp.com",
-  projectId: "daebak-8251c",
-  storageBucket: "daebak-8251c.appspot.com",
-  messagingSenderId: "328238660179",
-  appId: "1:328238660179:web:d8873d4efd0c098b9464a6",
+  apiKey: 'AIzaSyDS59ebs_vteAvZfUDv6pAB83ebibOX604',
+  authDomain: 'rn-teamproject.firebaseapp.com',
+  projectId: 'rn-teamproject',
+  storageBucket: 'rn-teamproject.appspot.com',
+  messagingSenderId: '1005847091124',
+  appId: '1:1005847091124:web:b9e66042ee1dbcf991c4e1',
 };
 
 const app = initializeApp(firebaseConfig);
