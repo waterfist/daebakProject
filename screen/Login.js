@@ -104,7 +104,8 @@ export default function Login({
         console.log("로그인성공");
         setEmail("");
         setPassword("");
-        navigate("Post");
+        // navigate("Stacks", { screen: "Main" });
+        navigate("Stacks", { screen: "Main" });
       })
       .catch((err) => {
         console.log("err.message:", err.message);
