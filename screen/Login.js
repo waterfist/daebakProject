@@ -67,12 +67,17 @@ const CustomButtonText2 = styled.Text`
 
 export default function Login({ navigation: { navigate } }) {
   const [id, setId] = useState("");
-  const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
-
   const textRef = useRef(null);
   const passwordRef = useRef(null);
 
+  const onChangeId = (e) => {
+    setId(e.target.value);
+  };
+
+  const onChangePassword = (e) => {
+    setPassword(e.target.value);
+  };
   return (
     <BgSafeAreaView>
       <Background>
@@ -81,7 +86,7 @@ export default function Login({ navigation: { navigate } }) {
         <TouchableOpacity onPress={() => textRef.current.focus()}>
           <Text style={{ color: "#3b71f3", right: 155, top: 10 }}>아이디</Text>
         </TouchableOpacity>
-        <ContainerStyle placeholder="Id" value={id} ref={textRef} />
+        <ContainerStyle value={id} ref={textRef} onChange={onChangeId} />
 
         <TouchableOpacity onPress={() => passwordRef.current.focus()}>
           <Text style={{ color: "#3b71f3", right: 150, top: 10 }}>
@@ -89,9 +94,9 @@ export default function Login({ navigation: { navigate } }) {
           </Text>
         </TouchableOpacity>
         <ContainerStyle
-          placeholder="Password"
           value={password}
           ref={passwordRef}
+          onChange={onChangePassword}
           secureTextEntry={true}
         />
 
