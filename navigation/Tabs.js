@@ -1,21 +1,21 @@
-import React from "react";
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
-import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
-import { AntDesign } from "@expo/vector-icons";
-import Main from "../screen/Main";
-import Search from "../screen/Search";
-import My from "../screen/My";
-import TestComment from "../screen/TestComment";
+import React from 'react';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import { GREEN_COLOR, YELLOW_COLOR } from '../color';
+import { Text, TouchableOpacity, useColorScheme, View } from 'react-native';
+import { MaterialIcons } from '@expo/vector-icons';
+import { AntDesign } from '@expo/vector-icons';
+import Main from '../screen/Main';
+import Search from '../screen/Search';
+import My from '../screen/My';
+import TestComment from '../screen/TestComment';
 
 const Tab = createBottomTabNavigator();
 
 export default function Tabs({ navigation: { navigate } }) {
-  const isDark = useColorScheme() === "dark";
+  const isDark = useColorScheme() === 'dark';
 
   const commentInputHandle = () => {
-    navigate("Stacks", { screen: "CommentInput" });
+    navigate('Stacks', { screen: 'CommentInput' });
   };
 
   return (
@@ -23,13 +23,13 @@ export default function Tabs({ navigation: { navigate } }) {
       screenOptions={{
         headerTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
         tabBarActiveTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
-        tabBarLabelPosition: "beside-icon",
-        headerTitleAlign: "center",
+        tabBarLabelPosition: 'beside-icon',
+        headerTitleAlign: 'center',
       }}
     >
       <Tab.Screen
         options={{
-          headerTitleAlign: "center",
+          headerTitleAlign: 'center',
           headerRight: () => (
             <TouchableOpacity onPress={() => commentInputHandle()}>
               <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
