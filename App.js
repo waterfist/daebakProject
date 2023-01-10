@@ -6,7 +6,7 @@ import {
 } from "@react-navigation/native";
 import { StatusBar } from "expo-status-bar";
 
-import { useColorScheme } from "react-native";
+import { LogBox, useColorScheme } from "react-native";
 import { QueryClient, QueryClientProvider } from "react-query";
 import Root from "./navigation/Root";
 import { darkTheme, lightTheme } from "./theme";

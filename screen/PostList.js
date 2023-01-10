@@ -99,11 +99,7 @@ export default function PostList({
     // getCategory();
   }, []);
 
-  return (
-    <Container>
-      <PostLoader />
-    </Container>
-  );
+  return <Container>{/* <PostLoader /> */}</Container>;
 }
 
 export const Container = styled.ScrollView`
