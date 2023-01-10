@@ -71,7 +71,7 @@ export default function Login({
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const emailRef = useRef(null);
-  const pwRef = useRef(null);
+  const passwordRef = useRef(null);
 
   const handleLogin = () => {
     if (!email) {
@@ -81,7 +81,7 @@ export default function Login({
     }
     if (!password) {
       alert("password를 입력해주세요.");
-      pwRef.current.focus();
+      passwordRef.current.focus();
       return true;
     }
 
@@ -104,7 +104,8 @@ export default function Login({
         console.log("로그인성공");
         setEmail("");
         setPassword("");
-        navigate("Post");
+        // navigate("Stacks", { screen: "Main" });
+        navigate("Stacks", { screen: "Main" });
       })
       .catch((err) => {
         console.log("err.message:", err.message);
@@ -130,12 +131,12 @@ export default function Login({
       </TouchableOpacity>
       <ContainerStyle value={email} ref={emailRef} onChangeText={setEmail} />
 
-      <TouchableOpacity onPress={() => pwRef.current.focus()}>
+      <TouchableOpacity onPress={() => passwordRef.current.focus()}>
         <Text style={{ color: "#3b71f3", right: 150, top: 10 }}>비밀번호</Text>
       </TouchableOpacity>
       <ContainerStyle
         value={password}
-        ref={pwRef}
+        ref={passwordRef}
         onChangeText={setPassword}
         secureTextEntry={true}
       />
