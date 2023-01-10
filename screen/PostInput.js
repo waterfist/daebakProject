@@ -87,7 +87,7 @@ export default function PostInput({ navigation: { goBack, setOptions } }) {
           value={addPostContents}
           onChangeText={text => setAddPostContents(text)}
         />
-        <Button title="작성 완료" onPress={addPost} />
+        <Button title="작성완료" onPress={addPost} />
       </InputBox>
     </Container>
   );
