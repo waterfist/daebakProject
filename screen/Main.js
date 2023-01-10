@@ -1,6 +1,6 @@
-import React from 'react';
-import { Text, TouchableOpacity, View } from 'react-native';
-import styled from '@emotion/native';
+import React, { useState } from "react";
+import { Text, TouchableOpacity, View } from "react-native";
+import styled from "@emotion/native";
 
 export default function Main({ navigation: { navigate } }) {
   // const setCat = async cat => {
@@ -11,33 +11,51 @@ export default function Main({ navigation: { navigate } }) {
   //   });
   // };
 
+  const [category, setCategory] = useState("");
+
   return (
     <Container>
       <MainLeftContainer>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("기술");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>기술</Title>
         </MainButton>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("교육");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>교육</Title>
         </MainButton>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("보건");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>보건</Title>
         </MainButton>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("문화");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>문화</Title>
@@ -46,28 +64,44 @@ export default function Main({ navigation: { navigate } }) {
       <MainRightContainer>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("환경");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>환경</Title>
         </MainButton>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("교통");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>교통</Title>
         </MainButton>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("정치");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>정치</Title>
         </MainButton>
         <MainButton
           onPress={() => {
-            navigate('Stacks', { screen: 'PostList' });
+            setCategory("경제");
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: category },
+            });
           }}
         >
           <Title>경제</Title>

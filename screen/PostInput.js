@@ -1,5 +1,5 @@
-import { addDoc, collection } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Text,
@@ -7,18 +7,18 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
-} from 'react-native';
-import { authService, dbService } from '../firebase';
-import { AntDesign } from '@expo/vector-icons';
-import { GREEN_COLOR, YELLOW_COLOR } from '../color';
-import { SelectList } from 'react-native-dropdown-select-list';
-import styled from '@emotion/native';
-import uuid from 'react-native-uuid';
+} from "react-native";
+import { authService, dbService } from "../firebase";
+import { AntDesign } from "@expo/vector-icons";
+import { GREEN_COLOR, YELLOW_COLOR } from "../color";
+import { SelectList } from "react-native-dropdown-select-list";
+import styled from "@emotion/native";
+import uuid from "react-native-uuid";
 
 export default function PostInput({ navigation: { goBack, setOptions } }) {
-  const [addPostTitle, setAddPostTitle] = useState('');
-  const [addPostContents, setAddPostContents] = useState('');
-  const [addPostCategory, setAddPostCategory] = useState('');
+  const [addPostTitle, setAddPostTitle] = useState("");
+  const [addPostContents, setAddPostContents] = useState("");
+  const [addPostCategory, setAddPostCategory] = useState("");
 
   const newPost = {
     title: addPostTitle,
@@ -30,24 +30,23 @@ export default function PostInput({ navigation: { goBack, setOptions } }) {
   };
 
   const addPost = async () => {
-    await addDoc(collection(dbService, 'Posts'), newPost);
-    setAddPostTitle('');
-    setAddPostContents('');
-    setAddPostCategory('');
+    await addDoc(collection(dbService, "posts"), newPost);
+    setAddPostTitle("");
+    setAddPostContents("");
   };
 
   const data = [
-    { key: '1', value: '기술' },
-    { key: '2', value: '교육' },
-    { key: '3', value: '보건' },
-    { key: '4', value: '문화' },
-    { key: '5', value: '환경' },
-    { key: '6', value: '교통' },
-    { key: '7', value: '정치' },
-    { key: '8', value: '경제' },
+    { key: "1", value: "기술" },
+    { key: "2", value: "교육" },
+    { key: "3", value: "보건" },
+    { key: "4", value: "문화" },
+    { key: "5", value: "환경" },
+    { key: "6", value: "교통" },
+    { key: "7", value: "정치" },
+    { key: "8", value: "경제" },
   ];
 
-  const isDark = useColorScheme() === 'dark';
+  const isDark = useColorScheme() === "dark";
 
   useEffect(() => {
     setOptions({
@@ -68,7 +67,7 @@ export default function PostInput({ navigation: { goBack, setOptions } }) {
     <Container>
       <SelectBox>
         <SelectList
-          setSelected={val => setAddPostCategory(val)}
+          setSelected={(val) => setAddPostCategory(val)}
           data={data}
           save="value"
           placeholder="Select category"
@@ -80,12 +79,12 @@ export default function PostInput({ navigation: { goBack, setOptions } }) {
         <TitleInput
           placeholder="Title"
           value={addPostTitle}
-          onChangeText={text => setAddPostTitle(text)}
+          onChangeText={(text) => setAddPostTitle(text)}
         />
         <TitleInput
           placeholder="Content"
           value={addPostContents}
-          onChangeText={text => setAddPostContents(text)}
+          onChangeText={(text) => setAddPostContents(text)}
         />
         <Button title="작성완료" onPress={addPost} />
       </InputBox>
