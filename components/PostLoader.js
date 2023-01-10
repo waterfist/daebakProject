@@ -5,10 +5,12 @@ export default function PostLoader({ posts, category }) {
   return (
     <>
       {posts
-        .filter((post) => post.category === category)
-        .map((post) => {
+        .filter(
+          (cate) => cate.category === category && cate.category !== undefined
+        )
+        .map((post, key) => {
           return (
-            <ListBox>
+            <ListBox key={key}>
               <ListButton>
                 <ListCardTitle>
                   <TitleText>{post.title}</TitleText>
