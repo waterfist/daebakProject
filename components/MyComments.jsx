@@ -1,30 +1,28 @@
 import React, { useState, useCallback } from "react";
 import styled from "@emotion/native";
 import {
-  getDoc,
   onSnapshot,
   query,
   collection,
-  doc,
-  oderBy,
-  updateDoc,
-  deleteDoc,
   orderBy,
-  getDocs,
+  where,
 } from "firebase/firestore";
-import { Text, View } from "react-native";
+import { Text, TouchableOpacity } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
-import { dbService } from "../firebase";
+import { authService, dbService } from "../firebase";
 
 const MyComments = () => {
   const [comments, setComments] = useState([]);
 
   useFocusEffect(
     useCallback(() => {
+      // 현재 로그인 사용자의 comment만 나오도록 구현
       const q = query(
         collection(dbService, "comment"),
         orderBy("createdAt", "desc")
+        // where("userId", "==", authService.currentUser?.uid)
       );
+
       const unsubcribe = onSnapshot(q, (snapshot) => {
         const newComments = snapshot.docs.map((doc) => ({
           id: doc.id,
@@ -32,6 +30,7 @@ const MyComments = () => {
         }));
         setComments(newComments);
       });
+
       return unsubcribe;
     }, [])
   );
@@ -40,9 +39,13 @@ const MyComments = () => {
     <>
       {comments.map((comment) => {
         return (
+          // delete 기능 구현
           <UserCommentView key={comment.id}>
             <Text>{comment.title}</Text>
             <Text>{comment.contents}</Text>
+            <TouchableOpacity>
+              <Text>삭제</Text>
+            </TouchableOpacity>
           </UserCommentView>
         );
       })}
