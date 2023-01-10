@@ -69,6 +69,7 @@ export default function Stack({
       <NativeStack.Screen name="Post" component={Post} />
       <NativeStack.Screen name="PostInput" component={PostInput} />
       <NativeStack.Screen name="PostList" component={PostList} />
+      <NativeStack.Screen name="Main" component={Main} />
     </NativeStack.Navigator>
   );
 }

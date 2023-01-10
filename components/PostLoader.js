@@ -11,11 +11,13 @@ export default function PostLoader({ posts, navigate, category }) {
   return (
     <>
       {posts
-        .filter((post) => post.category === category)
-        .map((post) => {
+        .filter(
+          (cate) => cate.category === category && cate.category !== undefined
+        )
+        .map((post, key) => {
           return (
-            <ListBox>
-              <ListButton onPress={() => goToComment(post)}>
+            <ListBox key={key}>
+              <ListButton>
                 <ListCardTitle>
                   <TitleText>{post.title}</TitleText>
                 </ListCardTitle>

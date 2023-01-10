@@ -38,7 +38,11 @@ export default function PostList({
   useEffect(() => {
     setOptions({
       headerLeft: () => (
-        <TouchableOpacity onPress={() => goBack()}>
+        <TouchableOpacity
+          onPress={() => {
+            goBack();
+          }}
+        >
           <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
             뒤로
           </Text>
