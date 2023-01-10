@@ -7,6 +7,7 @@ import { AntDesign } from '@expo/vector-icons';
 import Main from '../screen/Main';
 import Search from '../screen/Search';
 import My from '../screen/My';
+import TestComment from '../screen/TestComment';
 
 const Tab = createBottomTabNavigator();
 
@@ -63,6 +64,15 @@ export default function Tabs({ navigation: { navigate } }) {
         }}
         name="My"
         component={My}
+      />
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="profile" size={size} color={color} />
+          ),
+        }}
+        name="TestComment"
+        component={TestComment}
       />
     </Tab.Navigator>
   );

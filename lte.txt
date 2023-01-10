@@ -1,0 +1,5 @@
+<dropdown install>
+npm install react-native-dropdown-select-list
+<package.json>
+  "scripts": {
+    "start": "expo start --tunnel",
