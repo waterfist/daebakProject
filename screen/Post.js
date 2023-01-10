@@ -50,14 +50,10 @@ export default function Post({
   // ------------- Post 내용  --------------
   return (
     <View>
-<<<<<<< HEAD
       <Text>{comment.title}</Text>
       <AddComment onPress={goToComment}>
         <TempText>댓글 리스트</TempText>
       </AddComment>
-=======
-      <Text>내 자리</Text>
->>>>>>> dev
     </View>
   );
 }
