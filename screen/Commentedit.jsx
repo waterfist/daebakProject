@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/native";
-import { Rating } from "react-native-ratings";
+import { AirbnbRating } from "react-native-ratings";
 import { TouchableOpacity, useColorScheme } from "react-native";
 import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { dbService } from "../firebase";
@@ -156,17 +156,7 @@ export default function Commentedit({
       </EditButton>
       <SectionTitle>평점</SectionTitle>
 
-      <Rating
-        startingValue={comment.rating}
-        style={{
-          alignItems: "flex-start",
-          marginBottom: 20,
-        }}
-        onFinishRating={getRatings}
-        ratingCount={10}
-        imageSize={20}
-        tintColor={isDark ? "black" : "#d2dae2"}
-      />
+      <AirbnbRating onFinishRating={getRatings} ratingCount={5} size={20} />
 
       <SectionTitle>제목</SectionTitle>
 
