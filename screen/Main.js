@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import styled from "@emotion/native";
 
@@ -13,6 +13,9 @@ export default function Main({ navigation: { navigate } }) {
 
   const [category, setCategory] = useState("");
 
+  useEffect(() => {
+    setCategory();
+  }, []);
   return (
     <Container>
       <MainLeftContainer>
@@ -29,6 +32,7 @@ export default function Main({ navigation: { navigate } }) {
         </MainButton>
         <MainButton
           onPress={() => {
+            console.log("category", category);
             setCategory("교육");
             navigate("Stacks", {
               screen: "PostList",
