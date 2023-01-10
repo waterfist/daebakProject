@@ -14,6 +14,7 @@ import Search from "../screen/Search";
 import TestComment from "../screen/TestComment";
 import Comment from "../screen/Comment";
 import Commentedit from "../screen/Commentedit";
+import PostList from "../screen/PostList";
 
 const NativeStack = createNativeStackNavigator();
 
@@ -67,6 +68,7 @@ export default function Stack({
       <NativeStack.Screen name="Login" component={Login} />
       <NativeStack.Screen name="Post" component={Post} />
       <NativeStack.Screen name="PostInput" component={PostInput} />
+      <NativeStack.Screen name="PostList" component={PostList} />
     </NativeStack.Navigator>
   );
 }

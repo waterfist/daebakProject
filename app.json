@@ -13,7 +13,6 @@
     },
     "updates": {
       "fallbackToCacheTimeout": 0
-     
     },
     "assetBundlePatterns": ["**/*"],
     "ios": {
@@ -28,4 +27,5 @@
     "web": {
       "favicon": "./assets/favicon.png"
     }
+  }
 }

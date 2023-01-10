@@ -8,6 +8,7 @@ import Main from "../screen/Main";
 import Search from "../screen/Search";
 import My from "../screen/My";
 import TestComment from "../screen/TestComment";
+import Post from "../screen/Post";
 
 const Tab = createBottomTabNavigator();
 

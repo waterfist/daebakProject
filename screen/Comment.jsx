@@ -4,6 +4,7 @@ import { useColorScheme, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import { GREEN_COLOR, YELLOW_COLOR } from "../color";
 import { authService } from "../firebase";
+import { useFocusEffect } from "@react-navigation/native";
 
 export default function Comment({
   navigation,

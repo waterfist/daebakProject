@@ -7,10 +7,7 @@ const NativeStack = createNativeStackNavigator();
 
 export default function Root() {
   return (
-    <NativeStack.Navigator
-      // initialRouteName="Tabs"
-      screenOptions={{ headerShown: false }}
-    >
+    <NativeStack.Navigator screenOptions={{ headerShown: false }}>
       <NativeStack.Screen name="Tabs" component={Tabs} />
       <NativeStack.Screen name="Stacks" component={Stacks} />
     </NativeStack.Navigator>

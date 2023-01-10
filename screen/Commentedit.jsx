@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/native";
-import { Rating } from "react-native-ratings";
+import { AirbnbRating } from "react-native-ratings";
 import { TouchableOpacity, useColorScheme } from "react-native";
 import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
 import { dbService } from "../firebase";
@@ -58,7 +58,7 @@ export default function Commentedit({
           try {
             // await deleteDoc(doc(dbService, "comment", comment.id));
             await removeComment(comment.id);
-
+            Alert.alert("삭제가 완료되었습니다");
             navigation.navigate("TestComment");
           } catch (err) {
             console.log("err:", err);
@@ -105,11 +105,11 @@ export default function Commentedit({
               setNewTitle("");
               setRatings(0);
 
-              navigation.navigate({
+              navigation.reset({
                 routes: [
                   {
                     name: "Comment",
-                    params: { comment: comment.id },
+                    params: { comment: { ...comment, ...editingObj }, from },
                   },
                 ],
               });
@@ -156,17 +156,7 @@ export default function Commentedit({
       </EditButton>
       <SectionTitle>평점</SectionTitle>
 
-      <Rating
-        startingValue={comment.rating}
-        style={{
-          alignItems: "flex-start",
-          marginBottom: 20,
-        }}
-        onFinishRating={getRatings}
-        ratingCount={10}
-        imageSize={20}
-        tintColor={isDark ? "black" : "#d2dae2"}
-      />
+      <AirbnbRating onFinishRating={getRatings} ratingCount={5} size={20} />
 
       <SectionTitle>제목</SectionTitle>
 

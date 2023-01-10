@@ -8,5 +8,5 @@ const Rating = styled.Text`
 `;
 
 export default function Vote({ vote_average }) {
-  return <Rating>⭐️{vote_average}/10</Rating>;
+  return <Rating>⭐️{vote_average}</Rating>;
 }
