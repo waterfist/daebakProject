@@ -105,7 +105,7 @@ export default function Login({
         setEmail("");
         setPassword("");
         // navigate("Stacks", { screen: "Main" });
-        navigate("Stacks", { screen: "Main" });
+        navigate("Tabs", { screen: "Home" });
       })
       .catch((err) => {
         console.log("err.message:", err.message);
