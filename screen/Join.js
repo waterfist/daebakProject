@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,10 +8,10 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
-} from "react-native";
-import Logo from "../assets/images/Logo_1.png";
+} from 'react-native';
+import Logo from '../assets/images/Logo_1.png';
 
-import styled from "@emotion/native";
+import styled from '@emotion/native';
 
 const BgSafeAreaView = styled.View`
   flex: 1;
@@ -89,10 +89,10 @@ export default function Join({ navigation: { navigate } }) {
   const passwordRef = useRef(null);
   const checkPasswordRef = useRef(null);
 
-  const [id, setId] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
+  const [id, setId] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
   const [passwordError, setPasswordError] = useState(false);
 
   // const onChangeId = (e) => {
@@ -140,12 +140,12 @@ export default function Join({ navigation: { navigate } }) {
           <JoinTopText>2023 그거알고 있니?</JoinTopText>
         </JoinTopView>
         {/* <TouchableOpacity onPress={() => idRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>아이디</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>아이디</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle ref={idRef} value={id} onChangeText={setId} />
 
         {/* <TouchableOpacity onPress={() => nicknameRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>닉네임</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>닉네임</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
           ref={nicknameRef}
@@ -153,7 +153,7 @@ export default function Join({ navigation: { navigate } }) {
           onChangeText={setNickname}
         />
         {/* <TouchableOpacity onPress={() => passwordRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>비밀번호</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
           // secureTextEntry={true}
@@ -163,7 +163,7 @@ export default function Join({ navigation: { navigate } }) {
         />
         {/* <TouchableOpacity onPress={() => checkPasswordRef.current.focus()}> */}
 
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호 확인</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>비밀번호 확인</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
           // secureTextEntry={true}
@@ -173,7 +173,7 @@ export default function Join({ navigation: { navigate } }) {
           // setCheckPassword
         />
         {passwordError && (
-          <Text style={{ color: "red", marginTop: 10 }}>
+          <Text style={{ color: 'red', marginTop: 10 }}>
             비밀번호 에러 입니다.
           </Text>
         )}
@@ -181,7 +181,7 @@ export default function Join({ navigation: { navigate } }) {
           <CustomButtonText>회원가입</CustomButtonText>
         </CustomButton>
         <CustomButton2>
-          <CustomButtonText2 onPress={() => navigate("Login")}>
+          <CustomButtonText2 onPress={() => navigate('Login')}>
             취소
           </CustomButtonText2>
         </CustomButton2>

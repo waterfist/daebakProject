@@ -30,13 +30,13 @@ export default function Tabs({ navigation: { navigate } }) {
       <Tab.Screen
         options={{
           headerTitleAlign: 'center',
-          headerRight: () => (
-            <TouchableOpacity onPress={() => commentInputHandle()}>
-              <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
-                게시글 작성
-              </Text>
-            </TouchableOpacity>
-          ),
+          // headerRight: () => (
+          //   <TouchableOpacity onPress={() => commentInputHandle()}>
+          //     <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+          //       게시글 작성
+          //     </Text>
+          //   </TouchableOpacity>
+          // ),
 
           headerTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
 
