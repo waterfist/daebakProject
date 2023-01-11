@@ -1,6 +1,6 @@
 import styled from "@emotion/native";
-import React, { useCallback, useEffect, useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity, Image } from "react-native";
+import React, { useCallback, useState } from "react";
+import { Text, View, ScrollView, TouchableOpacity } from "react-native";
 import {
   getDoc,
   onSnapshot,
@@ -13,16 +13,62 @@ import {
   orderBy,
   getDocs,
 } from "firebase/firestore";
-import { dbService } from "../firebase";
+import { authService, dbService } from "../firebase";
+import { signOut } from "firebase/auth";
 import {
-  createNavigatorFactory,
+  NavigationHelpersContext,
   useFocusEffect,
 } from "@react-navigation/native";
 import MyComments from "../components/MyComments";
 import MyPosts from "../components/MyPosts";
 
 // 로그인 후에만 해당 컴포넌트가 렌더링 되도록 해야한다.
-export default function My() {
+
+export default function My({ navigation: { navigate, reset, setOptions } }) {
+  const logout = () => {
+    signOut(authService)
+      .then(() => {
+        console.log("로그아웃 성공");
+        navigate("Main");
+      })
+      .catch((err) => alert(err));
+  };
+
+  useFocusEffect(
+    useCallback(() => {
+      if (!authService.currentUser) {
+        reset({
+          index: 1,
+          routes: [
+            {
+              name: "Tabs",
+              params: {
+                screen: "Home",
+              },
+            },
+            {
+              name: "Stacks",
+              params: {
+                screen: "Login",
+              },
+            },
+          ],
+        });
+        return;
+      }
+
+      setOptions({
+        headerRight: () => {
+          return (
+            <TouchableOpacity style={{ marginRight: 10 }} onPress={logout}>
+              <Text>로그아웃</Text>
+            </TouchableOpacity>
+          );
+        },
+      });
+    }, [])
+  );
+
   return (
     <ScrollView>
       <UserInformationView>

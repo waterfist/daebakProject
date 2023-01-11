@@ -108,7 +108,12 @@ export default function PostList({
 
   return (
     <Container>
-      <PostLoader key={posts.id} posts={posts} category={category} />
+      <PostLoader
+        key={posts.id}
+        posts={posts}
+        navigate={navigate}
+        category={category}
+      />
     </Container>
   );
 }

@@ -8,6 +8,7 @@ import Main from "../screen/Main";
 import Search from "../screen/Search";
 import My from "../screen/My";
 import TestComment from "../screen/TestComment";
+import Post from "../screen/Post";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ export default function Tabs({ navigation: { navigate } }) {
   const isDark = useColorScheme() === "dark";
 
   const commentInputHandle = () => {
-    navigate("Stacks", { screen: "Login" });
+    navigate("Stacks", { screen: "CommentInput" });
   };
 
   return (
@@ -73,6 +74,16 @@ export default function Tabs({ navigation: { navigate } }) {
         }}
         name="TestComment"
         component={TestComment}
+      />
+
+      <Tab.Screen
+        options={{
+          tabBarIcon: ({ color, size }) => (
+            <AntDesign name="profile" size={size} color={color} />
+          ),
+        }}
+        name="Post"
+        component={Post}
       />
     </Tab.Navigator>
   );

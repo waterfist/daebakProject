@@ -1,7 +1,13 @@
 import styled from "@emotion/native";
 import React from "react";
 
-export default function PostLoader({ posts, category }) {
+export default function PostLoader({ posts, navigate, category }) {
+  const goToComment = (theComment) => {
+    navigate("Stacks", {
+      screen: "Post",
+      params: { comment: theComment, from: "My" },
+    });
+  };
   return (
     <>
       {posts
@@ -10,8 +16,8 @@ export default function PostLoader({ posts, category }) {
         )
         .map((post, key) => {
           return (
-            <ListBox key={key}>
-              <ListButton>
+            <ListBox>
+              <ListButton onPress={() => goToComment(post)}>
                 <ListCardTitle>
                   <TitleText>{post.title}</TitleText>
                 </ListCardTitle>
