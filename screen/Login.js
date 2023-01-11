@@ -20,7 +20,7 @@ const Background = styled.View`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* background-color: black; */
+  background-color: white;
   padding: 20px;
 `;
 const ImageLogo = styled.Image`
@@ -82,13 +82,13 @@ export default function Login({
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const inputRef = createRef();
+  // const inputRef = createRef();
 
-  // const handlerInputClear = () => {
-  //   setPassword("");
-  //   inputRef.current.clear;
-  //   console.log(inputRef);
-  // };
+  const handlerInputClear = () => {
+    setPassword("");
+    // inputRef.current.clear;
+    // clearRef.current.value = "";
+  };
 
   const visibleToggle = () => {
     setVisablePassword(!visablePassword);
@@ -182,9 +182,17 @@ export default function Login({
           value={password}
           onChangeText={setPassword}
           style={{ position: "relative" }}
-          inputRef={inputRef}
+          // inputRef={inputRef}
         />
 
+        <TouchableOpacity onPress={handlerInputClear}>
+          <MaterialIcons
+            name="cancel"
+            size={24}
+            color="black"
+            style={{ position: "absolute", top: -35, right: 35, color: "gray" }}
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={visibleToggle}>
           {visablePassword ? (
             <Entypo
@@ -195,7 +203,7 @@ export default function Login({
                 // color: "gray",
                 marginTop: 10,
                 position: "absolute",
-                top: -42,
+                top: -45,
                 right: 10,
               }}
             />
@@ -208,15 +216,12 @@ export default function Login({
                 // color: "gray",
                 marginTop: 10,
                 position: "absolute",
-                top: -42,
+                top: -45,
                 right: 10,
               }}
             />
           )}
         </TouchableOpacity>
-        {/* <TouchableOpacity onPress={handlerInputClear}>
-          <MaterialIcons name="cancel" size={24} color="black" />
-        </TouchableOpacity> */}
       </View>
       {passwordShortError && (
         <Text style={{ color: "red", marginTop: 10 }}>

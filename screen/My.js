@@ -29,7 +29,8 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
     signOut(authService)
       .then(() => {
         console.log("로그아웃 성공");
-        navigate("Tabs", { name: "Home" });
+        alert("로그아웃 성공");
+        navigate("Tabs", { screen: "Home" });
       })
       .catch((err) => alert(err));
   };
@@ -81,7 +82,9 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
         {/* onPress 속성으로 닉네임 update */}
         <TouchableOpacity onPress={editNickName}>
           <UserIdText>
-            @{authService.currentUser.email.split("@")[0]}
+            @
+            {!authService.currentUser ||
+              authService.currentUser.email.split("@")[0]}
           </UserIdText>
         </TouchableOpacity>
       </UserInformationView>
