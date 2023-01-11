@@ -1,9 +1,19 @@
-import React, { useEffect, useCallback } from "react";
-import { Text, TouchableOpacity, useColorScheme, View } from "react-native";
+import React, { useEffect, useCallback, useState } from "react";
+import {
+  FlatList,
+  Text,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
 import { GREEN_COLOR, YELLOW_COLOR } from "../color";
 import styled from "@emotion/native";
+import { authService, dbService } from "../firebase";
+import CommentModal from "../components/CommentModal";
+import CommentLoader from "../components/CommnetLoader";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 
 export default function Post({
   navigation,
@@ -12,6 +22,9 @@ export default function Post({
   },
 }) {
   const isDark = useColorScheme() === "dark";
+  const [comments, setComments] = useState([]);
+  const [isOpenModal, setIsOpenModal] = useState(false);
+
   // ------------- 상단 header --------------
   useEffect(() => {
     navigation.setOptions({
@@ -37,14 +50,29 @@ export default function Post({
         );
       },
     });
+
+    const q = query(
+      collection(dbService, "comment"),
+      orderBy("createdAt", "desc")
+    );
+    const unsubscribe = onSnapshot(q, (snapshot) => {
+      const newComments = snapshot.docs.map((doc) => ({
+        id: doc.id,
+        ...doc.data(),
+      }));
+      setComments(newComments);
+    });
+    return unsubscribe;
   }, []);
   // ------------- 상단 header --------------
   // ------------- 댓글 box --------------
-  const goToComment = () => {
-    navigation.navigate("Stacks", {
-      screen: "TestComment",
-      params: { comment: comment, from: "My" },
-    });
+  const goToComment = async () => {
+    const isLogin = !!authService.currentUser;
+    if (!isLogin) {
+      navigation.navigate("Login");
+      return;
+    }
+    setIsOpenModal(true);
   };
   // ------------- 댓글 box --------------
   // ------------- Post 내용  --------------
@@ -52,8 +80,26 @@ export default function Post({
     <View>
       <Text>{comment.title}</Text>
       <AddComment onPress={goToComment}>
-        <TempText>댓글 리스트</TempText>
+        <TempText>댓글 추가</TempText>
       </AddComment>
+
+      <FlatList
+        showsHorizontalScrollIndicator={false}
+        contentContainerStyle={{
+          paddingHorizontal: 20,
+          marginBottom: 50,
+          justifyContent: "flex-start",
+        }}
+        keyExtractor={(item) => item.id}
+        horizontal
+        data={comments}
+        ItemSeparatorComponent={HSeprator}
+        renderItem={({ item }) => {
+          return <CommentLoader comment={item} />;
+        }}
+      />
+
+      <CommentModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
     </View>
   );
 }
@@ -71,4 +117,7 @@ const AddComment = styled.TouchableOpacity`
   border-color: ${(props) => props.theme.color.title};
   align-self: center;
   width: 40%;
+`;
+const HSeprator = styled.View`
+  width: 10px;
 `;

@@ -16,7 +16,7 @@ export default function PostLoader({ posts, navigate, category }) {
         )
         .map((post, key) => {
           return (
-            <ListBox>
+            <ListBox key={key}>
               <ListButton onPress={() => goToComment(post)}>
                 <ListCardTitle>
                   <TitleText>{post.title}</TitleText>
