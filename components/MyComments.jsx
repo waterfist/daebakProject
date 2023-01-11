@@ -10,6 +10,7 @@ import {
 import { Text, TouchableOpacity } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { authService, dbService } from "../firebase";
+import CommentCards from "./CommentCards";
 
 const MyComments = () => {
   const [comments, setComments] = useState([]);
@@ -40,13 +41,14 @@ const MyComments = () => {
       {comments.map((comment) => {
         return (
           // delete 기능 구현
-          <UserCommentView key={comment.id}>
-            <Text>{comment.title}</Text>
-            <Text>{comment.contents}</Text>
-            <TouchableOpacity>
-              <Text>삭제</Text>
-            </TouchableOpacity>
-          </UserCommentView>
+          // <UserCommentView key={comment.id}>
+          //   <Text>{comment.title}</Text>
+          //   <Text>{comment.contents}</Text>
+          //   <TouchableOpacity>
+          //     <Text>삭제</Text>
+          //   </TouchableOpacity>
+          // </UserCommentView>
+          <CommentCards comment={comment} key={comment.id} />
         );
       })}
     </>

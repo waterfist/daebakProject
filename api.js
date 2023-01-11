@@ -8,3 +8,7 @@ export const deleteComment = async (commentId) => {
 export const editComment = async ({ commentId, editingObj }) => {
   await updateDoc(doc(dbService, "comment", commentId), editingObj);
 };
+
+export const deletePost = async (postId) => {
+  await deleteDoc(doc(dbService, "posts", postId));
+};

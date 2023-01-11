@@ -14,7 +14,7 @@ import {
   getDocs,
 } from "firebase/firestore";
 import { authService, dbService } from "../firebase";
-import { signOut } from "firebase/auth";
+import { signOut, getAuth } from "firebase/auth";
 import {
   NavigationHelpersContext,
   useFocusEffect,
@@ -29,10 +29,12 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
     signOut(authService)
       .then(() => {
         console.log("로그아웃 성공");
-        navigate("Main");
+        navigate("Tabs", { name: "Home" });
       })
       .catch((err) => alert(err));
   };
+
+  const editNickName = () => {};
 
   useFocusEffect(
     useCallback(() => {
@@ -77,9 +79,10 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
           <UserImage source={require("../assets/images/nullimage.png")} />
         </TouchableOpacity>
         {/* onPress 속성으로 닉네임 update */}
-        <TouchableOpacity>
-          {/* 유저 id와 일치하는 닉네임 받아오기 */}
-          <UserNickNameText>@닉네임</UserNickNameText>
+        <TouchableOpacity onPress={editNickName}>
+          <UserIdText>
+            @{authService.currentUser.email.split("@")[0]}
+          </UserIdText>
         </TouchableOpacity>
       </UserInformationView>
 
@@ -87,7 +90,6 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
         <MyPostsText>My Posts</MyPostsText>
       </TextView>
       <UserPostContainer>
-        {/* currentUserId와 동일한 포스트를 filter하고 map함수로 서버로부터 받아온 포스트들의 title, 작성일을 뿌려준다. */}
         <MyPosts />
       </UserPostContainer>
 
@@ -121,7 +123,7 @@ const UserImage = styled.Image`
   margin-right: 10%;
 `;
 
-const UserNickNameText = styled.Text`
+const UserIdText = styled.Text`
   font-size: 25px;
 `;
 
