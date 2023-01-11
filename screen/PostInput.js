@@ -1,5 +1,5 @@
-import { addDoc, collection } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import { addDoc, collection } from 'firebase/firestore';
+import React, { useEffect, useState } from 'react';
 import {
   Button,
   Text,
@@ -7,46 +7,47 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
-} from "react-native";
-import { authService, dbService } from "../firebase";
-import { AntDesign } from "@expo/vector-icons";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
-import { SelectList } from "react-native-dropdown-select-list";
-import styled from "@emotion/native";
-import uuid from "react-native-uuid";
+} from 'react-native';
+import { authService, dbService } from '../firebase';
+import { AntDesign } from '@expo/vector-icons';
+import { GREEN_COLOR, YELLOW_COLOR } from '../color';
+import { SelectList } from 'react-native-dropdown-select-list';
+import styled from '@emotion/native';
+import uuid from 'react-native-uuid';
+import Drop from '../components/Drop';
 
 export default function PostInput({ navigation: { goBack, setOptions } }) {
-  const [addPostTitle, setAddPostTitle] = useState("");
-  const [addPostContents, setAddPostContents] = useState("");
-  const [addPostCategory, setAddPostCategory] = useState("");
+  const [addPostTitle, setAddPostTitle] = useState('');
+  const [addPostContents, setAddPostContents] = useState('');
+  const [addPostCategory, setAddPostCategory] = useState('');
 
   const newPost = {
     title: addPostTitle,
     contents: addPostContents,
     category: addPostCategory,
-    // id: uuid.v4(),
     createdAt: Date.now(),
     // userId: authService.currentUser?.uid,
   };
 
   const addPost = async () => {
-    await addDoc(collection(dbService, "posts"), newPost);
-    setAddPostTitle("");
-    setAddPostContents("");
+    await addDoc(collection(dbService, 'posts'), newPost);
+    setAddPostTitle('');
+    setAddPostContents('');
+    setAddPostCategory('');
   };
 
   const data = [
-    { key: "1", value: "기술" },
-    { key: "2", value: "교육" },
-    { key: "3", value: "보건" },
-    { key: "4", value: "문화" },
-    { key: "5", value: "환경" },
-    { key: "6", value: "교통" },
-    { key: "7", value: "정치" },
-    { key: "8", value: "경제" },
+    { key: '1', value: '기술' },
+    { key: '2', value: '교육' },
+    { key: '3', value: '보건' },
+    { key: '4', value: '문화' },
+    { key: '5', value: '환경' },
+    { key: '6', value: '교통' },
+    { key: '7', value: '정치' },
+    { key: '8', value: 'etc' },
   ];
 
-  const isDark = useColorScheme() === "dark";
+  const isDark = useColorScheme() === 'dark';
 
   useEffect(() => {
     setOptions({
@@ -66,8 +67,9 @@ export default function PostInput({ navigation: { goBack, setOptions } }) {
   return (
     <Container>
       <SelectBox>
+        {/* <Drop addPostCategory={addPostCategory} /> */}
         <SelectList
-          setSelected={(val) => setAddPostCategory(val)}
+          setSelected={val => setAddPostCategory(val)}
           data={data}
           save="value"
           placeholder="Select category"
@@ -79,12 +81,14 @@ export default function PostInput({ navigation: { goBack, setOptions } }) {
         <TitleInput
           placeholder="Title"
           value={addPostTitle}
-          onChangeText={(text) => setAddPostTitle(text)}
+          onChangeText={text => setAddPostTitle(text)}
         />
-        <TitleInput
+        <ContentInput
+          style={{ flexShrink: 1 }}
+          multiline={true}
           placeholder="Content"
           value={addPostContents}
-          onChangeText={(text) => setAddPostContents(text)}
+          onChangeText={text => setAddPostContents(text)}
         />
         <Button title="작성완료" onPress={addPost} />
       </InputBox>
@@ -93,7 +97,7 @@ export default function PostInput({ navigation: { goBack, setOptions } }) {
 }
 
 export const Container = styled.View`
-  padding: 40px;
+  padding: 20px;
   flex: 1;
   margin: 30px;
   /* justify-content: space-around; */
@@ -102,6 +106,12 @@ export const Container = styled.View`
 export const TitleInput = styled.TextInput`
   border: 1px solid black;
   height: 45px;
+  border-radius: 10px;
+`;
+
+export const ContentInput = styled.TextInput`
+  border: 1px solid black;
+  height: 150px;
   border-radius: 10px;
 `;
 

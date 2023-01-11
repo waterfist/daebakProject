@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   ScrollView,
@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
-} from "react-native";
-import { authService, dbService } from "../firebase";
-import { AntDesign } from "@expo/vector-icons";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
-import Loader from "../components/Loader";
+} from 'react-native';
+import { authService, dbService } from '../firebase';
+import { AntDesign } from '@expo/vector-icons';
+import { GREEN_COLOR, YELLOW_COLOR } from '../color';
+import Loader from '../components/Loader';
 import {
   collection,
   onSnapshot,
@@ -19,9 +19,9 @@ import {
   query,
   getDoc,
   doc,
-} from "firebase/firestore";
-import styled from "@emotion/native";
-import PostLoader from "../components/PostLoader";
+} from 'firebase/firestore';
+import styled from '@emotion/native';
+import PostLoader from '../components/PostLoader';
 
 export default function PostList({
   navigation: { goBack, navigate, setOptions },
@@ -30,8 +30,8 @@ export default function PostList({
   },
 }) {
   const [posts, setPosts] = useState([]);
-
-  const isDark = useColorScheme() === "dark";
+  // console.log(category);
+  const isDark = useColorScheme() === 'dark';
 
   // ------------- 상단 header --------------
 
@@ -49,25 +49,28 @@ export default function PostList({
         </TouchableOpacity>
       ),
       headerRight: () => {
-        if (!authService.currentUser) {
-          return (
-            <TouchableOpacity
-              style={{ flexDirection: "row" }}
-              onPress={() => {
-                navigate("Stacks", { screen: "PostInput" });
-              }}
-            >
-              <AntDesign
-                name="edit"
-                size={24}
-                color={isDark ? YELLOW_COLOR : GREEN_COLOR}
-              />
-              <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
-                게시글작성
-              </Text>
-            </TouchableOpacity>
-          );
-        }
+        return (
+          <TouchableOpacity
+            style={{ flexDirection: 'row' }}
+            onPress={() => {
+              if (authService.currentUser) {
+                navigate('Stacks', { screen: 'PostInput' });
+              } else {
+                alert('로그인을 먼저 해주세요');
+                navigate('Stacks', { screen: 'Login' });
+              }
+            }}
+          >
+            <AntDesign
+              name="edit"
+              size={24}
+              color={isDark ? YELLOW_COLOR : GREEN_COLOR}
+            />
+            <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+              게시글작성
+            </Text>
+          </TouchableOpacity>
+        );
       },
     });
   }, []);
@@ -78,12 +81,12 @@ export default function PostList({
 
   useEffect(() => {
     const q = query(
-      collection(dbService, "posts"),
-      orderBy("createdAt", "desc")
+      collection(dbService, 'posts'),
+      orderBy('createdAt', 'desc')
     );
 
-    onSnapshot(q, (snapshot) => {
-      const newPosts = snapshot.docs.map((doc) => {
+    onSnapshot(q, snapshot => {
+      const newPosts = snapshot.docs.map(doc => {
         const newPost = {
           id: doc.id,
           ...doc.data(),
@@ -108,7 +111,12 @@ export default function PostList({
 
   return (
     <Container>
-      <PostLoader key={posts.id} posts={posts} category={category} />
+      <PostLoader
+        key={posts.id}
+        posts={posts}
+        navigate={navigate}
+        category={category}
+      />
     </Container>
   );
 }

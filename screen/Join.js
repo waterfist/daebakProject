@@ -10,14 +10,13 @@ import {
   Pressable,
 } from "react-native";
 import Logo from "../assets/images/Logo_1.png";
+import { Entypo } from "@expo/vector-icons";
 
 import styled from "@emotion/native";
 
 import { authService } from "../firebase";
-import {
-  createUserWithEmailAndPassword,
-  signInWithEmailAndPassword,
-} from "firebase/auth";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+
 import { emailRegex, pwRegex } from "../util";
 const BgSafeAreaView = styled.View`
   flex: 1;
@@ -79,6 +78,7 @@ const JoinTopText = styled.Text`
   color: #3b71f3;
   font-size: 32px;
   font-weight: bold;
+  margin-left: 30px;
 `;
 
 const JoinTopView = styled.View`
@@ -97,6 +97,8 @@ export default function Join({ navigation: { navigate } }) {
   const [checkPassword, setCheckPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
+  const [passwordShortError, setPasswordShortError] = useState(false);
+  const [visablePassword, setVisablePassword] = useState(true);
 
   // useEffect(() => {
   //   console.log("작동");
@@ -105,17 +107,34 @@ export default function Join({ navigation: { navigate } }) {
   //   }
   // }, [checkPassword]);
 
+  const visibleToggle = () => {
+    setVisablePassword(!visablePassword);
+  };
+
   const handleRegister = () => {
-    if (
-      (email.includes("@") === false || email.includes(".com") === false) &&
-      email !== ""
-    ) {
+    const matchedEmail = email.match(emailRegex);
+    const matchedPw = password.match(pwRegex);
+
+    if (matchedEmail === null) {
       setEmailError(true);
+      emailRef.current.focus();
+      return;
     } else {
       setEmailError(false);
     }
+
+    if (matchedPw === null) {
+      setPasswordShortError(true);
+      passwordRef.current.focus();
+      return;
+    } else {
+      setPasswordShortError(false);
+    }
+
     if (password !== checkPassword) {
       setPasswordError(true);
+      checkPasswordRef.current.focus();
+      return;
     } else {
       setPasswordError(false);
     }
@@ -149,7 +168,7 @@ export default function Join({ navigation: { navigate } }) {
         <ContainerStyle ref={emailRef} value={email} onChangeText={setEmail} />
         {emailError && (
           <Text style={{ color: "red", marginTop: 10 }}>
-            이메일 에러 입니다.
+            이메일이 올바르지 않습니다.
           </Text>
         )}
 
@@ -161,21 +180,58 @@ export default function Join({ navigation: { navigate } }) {
           value={nickname}
           onChangeText={setNickname}
         />
-        {/* <TouchableOpacity onPress={() => passwordRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
-        {/* </TouchableOpacity> */}
-        <ContainerStyle
-          // secureTextEntry={true}
-          ref={passwordRef}
-          value={password}
-          onChangeText={setPassword}
-        />
+
+        <View style={{ width: "100%" }}>
+          <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
+          <ContainerStyle
+            secureTextEntry={visablePassword}
+            ref={passwordRef}
+            value={password}
+            onChangeText={setPassword}
+            style={{ position: "relative" }}
+          />
+          <TouchableOpacity onPress={visibleToggle}>
+            {visablePassword ? (
+              <Entypo
+                name="eye"
+                size={24}
+                color="gray"
+                style={{
+                  // color: "gray",
+                  marginTop: 10,
+                  position: "absolute",
+                  top: -42,
+                  right: 10,
+                }}
+              />
+            ) : (
+              <Entypo
+                name="eye-with-line"
+                size={24}
+                color="gray"
+                style={{
+                  // color: "gray",
+                  marginTop: 10,
+                  position: "absolute",
+                  top: -42,
+                  right: 10,
+                }}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+
         {/* <TouchableOpacity onPress={() => checkPasswordRef.current.focus()}> */}
 
+        {passwordShortError && (
+          <Text style={{ color: "red", marginTop: 10 }}>
+            8자리 이상 영문자, 숫자, 특수문자 조합이어야 합니다.
+          </Text>
+        )}
         <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호 확인</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
-          // secureTextEntry={true}
+          secureTextEntry={visablePassword}
           ref={checkPasswordRef}
           value={checkPassword}
           onChangeText={setCheckPassword}
@@ -183,9 +239,10 @@ export default function Join({ navigation: { navigate } }) {
         />
         {passwordError && (
           <Text style={{ color: "red", marginTop: 10 }}>
-            비밀번호 에러 입니다.
+            비밀번호가 일치하지 않습니다.
           </Text>
         )}
+        {/* 에러가 있으면 비밀번호 에러 에러 없으면 빈 문자열 */}
         <CustomButton onPress={handleRegister}>
           <CustomButtonText>회원가입</CustomButtonText>
         </CustomButton>
