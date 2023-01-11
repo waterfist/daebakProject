@@ -20,7 +20,7 @@ const Background = styled.View`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* background-color: black; */
+  background-color: white;
   padding: 20px;
 `;
 const ImageLogo = styled.Image`
