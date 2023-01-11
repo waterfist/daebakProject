@@ -39,7 +39,7 @@ export default function Comment({
     <Container>
       <SectionTitle>평점</SectionTitle>
 
-      <Ratings>⭐️ {comment.rating} / 10</Ratings>
+      <Ratings>⭐️{comment.rating}</Ratings>
 
       <SectionTitle>제목</SectionTitle>
 

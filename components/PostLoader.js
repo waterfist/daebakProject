@@ -2,15 +2,23 @@ import styled from '@emotion/native';
 import React from 'react';
 import { FlatList, TouchableOpacity } from 'react-native';
 
-export default function PostLoader({ posts, category }) {
+export default function PostLoader({ posts, category, navigate }) {
+  const goToComment = theComment => {
+    navigate('Stacks', {
+      screen: 'Post',
+      params: { comment: theComment, from: 'My' },
+    });
+  };
   return (
     <>
       {posts
-        .filter(post => post.category === category)
-        .map(post => {
+        .filter(
+          cate => cate.category === category && cate.category !== undefined
+        )
+        .map((post, key) => {
           return (
-            <ListBox>
-              <ListButton>
+            <ListBox key={key}>
+              <ListButton onPress={() => goToComment(post)}>
                 <ListCardTitle>
                   <TitleText numberOfLines={1} ellipsizeMode="tail">
                     {post.title}

@@ -13,12 +13,15 @@ import Logo from '../assets/images/Logo_1.png';
 
 import styled from '@emotion/native';
 
+import { authService } from '../firebase';
+import {
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+} from 'firebase/auth';
+import { emailRegex, pwRegex } from '../util';
 const BgSafeAreaView = styled.View`
   flex: 1;
-  /* background-color: red; */
-  /* display: flex; */
   justify-content: center;
-  /* align-items: center; */
 `;
 
 const Background = styled.View`
@@ -80,37 +83,20 @@ const JoinTopText = styled.Text`
 
 const JoinTopView = styled.View`
   margin-bottom: 80px;
-  text-align: center;
 `;
 
 export default function Join({ navigation: { navigate } }) {
-  const idRef = useRef(null);
+  const emailRef = useRef(null);
   const nicknameRef = useRef(null);
   const passwordRef = useRef(null);
   const checkPasswordRef = useRef(null);
 
-  const [id, setId] = useState('');
+  const [email, setEmail] = useState('');
   const [nickname, setNickname] = useState('');
   const [password, setPassword] = useState('');
   const [checkPassword, setCheckPassword] = useState('');
+  const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
-
-  // const onChangeId = (e) => {
-  //   setId(e.target.value);
-  // };
-
-  // const onChangeNickname = (e) => {
-  //   setNickname(e.target.value);
-  // };
-
-  // const onChangePassword = (e) => {
-  //   setPassword(e.target.value);
-  // };
-
-  // const onChangeCheckPassword = (e) => {
-  //   setCheckPassword(e.target.value);
-  //   console.log(passwordError);
-  // };
 
   // useEffect(() => {
   //   console.log("작동");
@@ -119,18 +105,36 @@ export default function Join({ navigation: { navigate } }) {
   //   }
   // }, [checkPassword]);
 
-  // if (password !== checkPassword) {
-  //   setPasswordError(true);
-  // } else {
-  //   setPasswordError(false);
-  // }
-
-  const handleSignUpComplete = () => {
+  const handleRegister = () => {
+    if (
+      (email.includes('@') === false || email.includes('.com') === false) &&
+      email !== ''
+    ) {
+      setEmailError(true);
+    } else {
+      setEmailError(false);
+    }
     if (password !== checkPassword) {
       setPasswordError(true);
     } else {
       setPasswordError(false);
     }
+
+    createUserWithEmailAndPassword(authService, email, password)
+      .then(() => {
+        console.log('회원가입성공');
+        setEmail('');
+        setNickname('');
+        setPassword('');
+        setCheckPassword('');
+        navigate('Login');
+      })
+      .catch(err => {
+        console.log('err.message:', err.message);
+        if (err.message.includes('already-in-use')) {
+          alert('이미 사용중인 아이디 입니다.');
+        }
+      });
   };
 
   return (
@@ -142,7 +146,12 @@ export default function Join({ navigation: { navigate } }) {
         {/* <TouchableOpacity onPress={() => idRef.current.focus()}> */}
         <Text style={{ color: '#3b71f3', marginTop: 10 }}>아이디</Text>
         {/* </TouchableOpacity> */}
-        <ContainerStyle ref={idRef} value={id} onChangeText={setId} />
+        <ContainerStyle ref={emailRef} value={email} onChangeText={setEmail} />
+        {emailError && (
+          <Text style={{ color: 'red', marginTop: 10 }}>
+            이메일 에러 입니다.
+          </Text>
+        )}
 
         {/* <TouchableOpacity onPress={() => nicknameRef.current.focus()}> */}
         <Text style={{ color: '#3b71f3', marginTop: 10 }}>닉네임</Text>
@@ -177,7 +186,7 @@ export default function Join({ navigation: { navigate } }) {
             비밀번호 에러 입니다.
           </Text>
         )}
-        <CustomButton onPress={handleSignUpComplete}>
+        <CustomButton onPress={handleRegister}>
           <CustomButtonText>회원가입</CustomButtonText>
         </CustomButton>
         <CustomButton2>

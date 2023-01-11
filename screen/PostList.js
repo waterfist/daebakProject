@@ -38,7 +38,11 @@ export default function PostList({
   useEffect(() => {
     setOptions({
       headerLeft: () => (
-        <TouchableOpacity onPress={() => goBack()}>
+        <TouchableOpacity
+          onPress={() => {
+            goBack();
+          }}
+        >
           <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
             뒤로
           </Text>
@@ -104,7 +108,12 @@ export default function PostList({
 
   return (
     <Container>
-      <PostLoader key={posts.id} posts={posts} category={category} />
+      <PostLoader
+        key={posts.id}
+        posts={posts}
+        navigate={navigate}
+        category={category}
+      />
     </Container>
   );
 }
