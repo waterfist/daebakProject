@@ -86,12 +86,6 @@ export default function Post({
               >
                 수정
               </Text>
-              <Text
-                onPress={onDelete}
-                style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}
-              >
-                삭제
-              </Text>
             </TouchableOpacity>
           </View>
         );
@@ -124,8 +118,11 @@ export default function Post({
   // ------------- 댓글 box --------------
   // ------------- Post 내용  --------------
   return (
-    <View>
+    <Container>
       <Text>{comment.title}</Text>
+      <EditButton onPress={onDelete}>
+        <BtnTitle>삭제하기</BtnTitle>
+      </EditButton>
       <AddComment onPress={goToComment}>
         <TempText>댓글추가</TempText>
       </AddComment>
@@ -147,7 +144,7 @@ export default function Post({
       />
 
       <CommentModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
-    </View>
+    </Container>
   );
 }
 // ------------- Post 내용  --------------
@@ -167,4 +164,24 @@ const AddComment = styled.TouchableOpacity`
 `;
 const HSeprator = styled.View`
   width: 10px;
+`;
+const Container = styled.ScrollView`
+  padding: 20px;
+`;
+const EditButton = styled.TouchableOpacity`
+  width: 100%;
+  padding: 10px 15px;
+  justify-content: center;
+  align-items: center;
+  background-color: ${(props) => props.theme.color.overview};
+  border-width: 1px;
+  border-color: ${(props) =>
+    props.disabled ? "grey" : props.theme.color.title};
+  border-radius: 10px;
+  margin-bottom: 20px;
+`;
+const BtnTitle = styled.Text`
+  color: ${(props) => (props.disabled ? "grey" : "yellow")};
+  font-size: 20px;
+  font-weight: 700;
 `;
