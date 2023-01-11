@@ -30,12 +30,13 @@ export default function PostList({
   },
 }) {
   const [posts, setPosts] = useState([]);
-  // console.log(category);
+
   const isDark = useColorScheme() === 'dark';
 
   // ------------- 상단 header --------------
 
   useEffect(() => {
+    console.log(category);
     setOptions({
       headerLeft: () => (
         <TouchableOpacity
