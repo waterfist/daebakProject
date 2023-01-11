@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState } from 'react';
 import {
   FlatList,
   ScrollView,
@@ -7,11 +7,11 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
-} from "react-native";
-import { authService, dbService } from "../firebase";
-import { AntDesign } from "@expo/vector-icons";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
-import Loader from "../components/Loader";
+} from 'react-native';
+import { authService, dbService } from '../firebase';
+import { AntDesign } from '@expo/vector-icons';
+import { GREEN_COLOR, YELLOW_COLOR } from '../color';
+import Loader from '../components/Loader';
 import {
   collection,
   onSnapshot,
@@ -19,9 +19,9 @@ import {
   query,
   getDoc,
   doc,
-} from "firebase/firestore";
-import styled from "@emotion/native";
-import PostLoader from "../components/PostLoader";
+} from 'firebase/firestore';
+import styled from '@emotion/native';
+import PostLoader from '../components/PostLoader';
 
 export default function PostList({
   navigation: { goBack, navigate, setOptions },
@@ -30,8 +30,8 @@ export default function PostList({
   },
 }) {
   const [posts, setPosts] = useState([]);
-
-  const isDark = useColorScheme() === "dark";
+  // console.log(category);
+  const isDark = useColorScheme() === 'dark';
 
   // ------------- 상단 header --------------
 
@@ -52,9 +52,9 @@ export default function PostList({
         if (!authService.currentUser) {
           return (
             <TouchableOpacity
-              style={{ flexDirection: "row" }}
+              style={{ flexDirection: 'row' }}
               onPress={() => {
-                navigate("Stacks", { screen: "PostInput" });
+                navigate('Stacks', { screen: 'PostInput' });
               }}
             >
               <AntDesign
@@ -78,12 +78,12 @@ export default function PostList({
 
   useEffect(() => {
     const q = query(
-      collection(dbService, "posts"),
-      orderBy("createdAt", "desc")
+      collection(dbService, 'posts'),
+      orderBy('createdAt', 'desc')
     );
 
-    onSnapshot(q, (snapshot) => {
-      const newPosts = snapshot.docs.map((doc) => {
+    onSnapshot(q, snapshot => {
+      const newPosts = snapshot.docs.map(doc => {
         const newPost = {
           id: doc.id,
           ...doc.data(),

@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useRef, useState } from 'react';
 import {
   SafeAreaView,
   Text,
@@ -8,17 +8,17 @@ import {
   TextInput,
   TouchableOpacity,
   Pressable,
-} from "react-native";
-import Logo from "../assets/images/Logo_1.png";
+} from 'react-native';
+import Logo from '../assets/images/Logo_1.png';
 
-import styled from "@emotion/native";
+import styled from '@emotion/native';
 
-import { authService } from "../firebase";
+import { authService } from '../firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
-} from "firebase/auth";
-import { emailRegex, pwRegex } from "../util";
+} from 'firebase/auth';
+import { emailRegex, pwRegex } from '../util';
 const BgSafeAreaView = styled.View`
   flex: 1;
   justify-content: center;
@@ -91,10 +91,10 @@ export default function Join({ navigation: { navigate } }) {
   const passwordRef = useRef(null);
   const checkPasswordRef = useRef(null);
 
-  const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
-  const [password, setPassword] = useState("");
-  const [checkPassword, setCheckPassword] = useState("");
+  const [email, setEmail] = useState('');
+  const [nickname, setNickname] = useState('');
+  const [password, setPassword] = useState('');
+  const [checkPassword, setCheckPassword] = useState('');
   const [emailError, setEmailError] = useState(false);
   const [passwordError, setPasswordError] = useState(false);
 
@@ -107,8 +107,8 @@ export default function Join({ navigation: { navigate } }) {
 
   const handleRegister = () => {
     if (
-      (email.includes("@") === false || email.includes(".com") === false) &&
-      email !== ""
+      (email.includes('@') === false || email.includes('.com') === false) &&
+      email !== ''
     ) {
       setEmailError(true);
     } else {
@@ -122,17 +122,17 @@ export default function Join({ navigation: { navigate } }) {
 
     createUserWithEmailAndPassword(authService, email, password)
       .then(() => {
-        console.log("회원가입성공");
-        setEmail("");
-        setNickname("");
-        setPassword("");
-        setCheckPassword("");
-        navigate("Login");
+        console.log('회원가입성공');
+        setEmail('');
+        setNickname('');
+        setPassword('');
+        setCheckPassword('');
+        navigate('Login');
       })
-      .catch((err) => {
-        console.log("err.message:", err.message);
-        if (err.message.includes("already-in-use")) {
-          alert("이미 사용중인 아이디 입니다.");
+      .catch(err => {
+        console.log('err.message:', err.message);
+        if (err.message.includes('already-in-use')) {
+          alert('이미 사용중인 아이디 입니다.');
         }
       });
   };
@@ -144,17 +144,17 @@ export default function Join({ navigation: { navigate } }) {
           <JoinTopText>2023 그거알고 있니?</JoinTopText>
         </JoinTopView>
         {/* <TouchableOpacity onPress={() => idRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>아이디</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>아이디</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle ref={emailRef} value={email} onChangeText={setEmail} />
         {emailError && (
-          <Text style={{ color: "red", marginTop: 10 }}>
+          <Text style={{ color: 'red', marginTop: 10 }}>
             이메일 에러 입니다.
           </Text>
         )}
 
         {/* <TouchableOpacity onPress={() => nicknameRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>닉네임</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>닉네임</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
           ref={nicknameRef}
@@ -162,7 +162,7 @@ export default function Join({ navigation: { navigate } }) {
           onChangeText={setNickname}
         />
         {/* <TouchableOpacity onPress={() => passwordRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>비밀번호</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
           // secureTextEntry={true}
@@ -172,7 +172,7 @@ export default function Join({ navigation: { navigate } }) {
         />
         {/* <TouchableOpacity onPress={() => checkPasswordRef.current.focus()}> */}
 
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호 확인</Text>
+        <Text style={{ color: '#3b71f3', marginTop: 10 }}>비밀번호 확인</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
           // secureTextEntry={true}
@@ -182,7 +182,7 @@ export default function Join({ navigation: { navigate } }) {
           // setCheckPassword
         />
         {passwordError && (
-          <Text style={{ color: "red", marginTop: 10 }}>
+          <Text style={{ color: 'red', marginTop: 10 }}>
             비밀번호 에러 입니다.
           </Text>
         )}
@@ -190,7 +190,7 @@ export default function Join({ navigation: { navigate } }) {
           <CustomButtonText>회원가입</CustomButtonText>
         </CustomButton>
         <CustomButton2>
-          <CustomButtonText2 onPress={() => navigate("Login")}>
+          <CustomButtonText2 onPress={() => navigate('Login')}>
             취소
           </CustomButtonText2>
         </CustomButton2>

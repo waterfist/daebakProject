@@ -1,114 +1,144 @@
-import React, { useEffect, useState } from "react";
-import { Text, TouchableOpacity, View } from "react-native";
-import styled from "@emotion/native";
+import React, { useEffect, useState } from 'react';
+import { Image, Text, TouchableOpacity, View } from 'react-native';
+import styled from '@emotion/native';
+import { StyleSheet } from 'react-native';
 
 export default function Main({ navigation: { navigate } }) {
-  // const setCat = async cat => {
-  //   setCategory(cat);
-  //   // await AsyncStorage.setItem("category", cat);
-  //   await updateDoc(doc(dbService, 'category', 'currentCategory'), {
-  //     category: cat,
-  //   });
-  // };
-
-  const [category, setCategory] = useState("");
-
-  useEffect(() => {
-    setCategory();
-  }, []);
   return (
     <Container>
       <MainLeftContainer>
         <MainButton
           onPress={() => {
-            setCategory("기술");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('기술');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '기술' },
             });
           }}
         >
-          <Title>기술</Title>
+          <Image
+            source={require('../assets/images/technology.png')}
+            style={styles.image}
+          />
+          <Titleposition>기술</Titleposition>
         </MainButton>
         <MainButton
           onPress={() => {
-            console.log("category", category);
-            setCategory("교육");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('교육');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '교육' },
             });
           }}
         >
-          <Title>교육</Title>
+          <Image
+            source={require('../assets/images/education.png')}
+            style={styles.image}
+          />
+          <Titleposition>교육</Titleposition>
         </MainButton>
         <MainButton
           onPress={() => {
-            setCategory("보건");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('보건');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '보건' },
             });
           }}
         >
-          <Title>보건</Title>
+          <Image
+            source={require('../assets/images/health.png')}
+            style={styles.image}
+          />
+          <Titleposition>보건</Titleposition>
         </MainButton>
         <MainButton
           onPress={() => {
-            setCategory("문화");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('문화');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '문화' },
             });
           }}
         >
-          <Title>문화</Title>
+          <Image
+            source={require('../assets/images/culture.png')}
+            style={styles.image}
+          />
+          <Titleposition>문화</Titleposition>
         </MainButton>
       </MainLeftContainer>
       <MainRightContainer>
         <MainButton
           onPress={() => {
-            setCategory("환경");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('환경');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '환경' },
             });
           }}
         >
-          <Title>환경</Title>
+          <Image
+            source={require('../assets/images/environment.png')}
+            style={styles.image}
+          />
+          <Titleposition>환경</Titleposition>
         </MainButton>
         <MainButton
           onPress={() => {
-            setCategory("교통");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('교통');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '교통' },
             });
           }}
         >
-          <Title>교통</Title>
+          <Image
+            source={require('../assets/images/traffic.png')}
+            style={styles.image}
+          />
+          <Titleposition>교통</Titleposition>
         </MainButton>
         <MainButton
           onPress={() => {
-            setCategory("정치");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('정치');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '정치' },
             });
           }}
         >
-          <Title>정치</Title>
+          <Image
+            source={require('../assets/images/politics.png')}
+            style={styles.image}
+          />
+          <Titleposition>정치</Titleposition>
         </MainButton>
-        <MainButton
+        {/* <MainButton
           onPress={() => {
-            setCategory("경제");
-            navigate("Stacks", {
-              screen: "PostList",
-              params: { category: category },
+            // setCategory('경제');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '경제' },
             });
           }}
         >
           <Title>경제</Title>
+        </MainButton> */}
+        <MainButton
+          onPress={() => {
+            // setCategory('경제');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '기타' },
+            });
+          }}
+        >
+          <Image
+            source={require('../assets/images/etc.png')}
+            style={styles.image}
+          />
+          <Titleposition>etc</Titleposition>
         </MainButton>
       </MainRightContainer>
     </Container>
@@ -128,20 +158,22 @@ export const Container = styled.View`
 
 export const MainButton = styled.TouchableOpacity`
   background-color: lightgray;
-  width: 120px;
-  height: 80px;
+  width: 90px;
+  height: 90px;
   align-items: center;
   justify-content: center;
+  border-radius: 35px;
 `;
 
 export const MainLeftContainer = styled.View`
-  flex: 1;
-  justify-content: space-between;
+  display: flex;
+
   align-items: center;
-  padding: 100px;
+  padding: 70px;
   width: 50%;
   height: 100%;
   /* background-color: red; */
+  justify-content: space-between;
 `;
 
 export const MainRightContainer = styled.View`
@@ -151,5 +183,23 @@ export const MainRightContainer = styled.View`
   flex: 1;
   width: 50%;
   height: 100%;
-  padding: 100px;
+  padding: 70px;
 `;
+
+export const Titleposition = styled.Text`
+  position: absolute;
+  top: 90px;
+  font-size: 18px;
+`;
+
+const styles = StyleSheet.create({
+  image: {
+    justifyContent: 'center',
+    alignItems: 'center',
+    width: 90,
+    height: 90,
+    // resizeMode: 'contain',
+    resizeMode: 'cover',
+    borderRadius: 30,
+  },
+});
