@@ -75,16 +75,6 @@ export default function Tabs({ navigation: { navigate } }) {
         name="TestComment"
         component={TestComment}
       />
-
-      <Tab.Screen
-        options={{
-          tabBarIcon: ({ color, size }) => (
-            <AntDesign name="profile" size={size} color={color} />
-          ),
-        }}
-        name="Post"
-        component={Post}
-      />
     </Tab.Navigator>
   );
 }

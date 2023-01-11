@@ -5,6 +5,10 @@ export const deleteComment = async (commentId) => {
   await deleteDoc(doc(dbService, "comment", commentId));
 };
 
+export const deletePostText = async (Id) => {
+  await deleteDoc(doc(dbService, "posts", Id));
+};
+
 export const editComment = async ({ commentId, editingObj }) => {
   await updateDoc(doc(dbService, "comment", commentId), editingObj);
 };

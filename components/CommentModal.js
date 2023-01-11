@@ -25,6 +25,7 @@ export default function CommentModal({ post, isOpenModal, setIsOpenModal }) {
     setModalContent("");
     setRatings(0);
   };
+
   return (
     <Modal visible={isOpenModal} transparent animationType="fade">
       <Backdrop>

@@ -1,6 +1,8 @@
 import React, { useEffect, useCallback, useState } from "react";
 import {
+  Alert,
   FlatList,
+  ScrollView,
   Text,
   TouchableOpacity,
   useColorScheme,
@@ -14,6 +16,8 @@ import { authService, dbService } from "../firebase";
 import CommentModal from "../components/CommentModal";
 import CommentLoader from "../components/CommnetLoader";
 import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import { useMutation } from "react-query";
+import { deletePostText } from "../api";
 
 export default function Post({
   navigation,
@@ -25,6 +29,36 @@ export default function Post({
   const [comments, setComments] = useState([]);
   const [isOpenModal, setIsOpenModal] = useState(false);
 
+  // ------------- 상단 삭제 --------------
+  const { mutate: removePost } = useMutation((body) => deletePostText(body), {
+    onSuccess: () => {
+      console.log("삭제성공");
+    },
+    onError: (err) => {
+      console.log("err in delete:", err);
+    },
+  });
+
+  const onDelete = async () => {
+    Alert.alert("댓글 삭제", "정말 현재 댓글를 삭제하시겠습니까?", [
+      { text: "cancel", style: "destructive" },
+      {
+        text: "OK. Delete it.",
+        onPress: async () => {
+          try {
+            // await deleteDoc(doc(dbService, "comment", comment.id));
+            await removePost(comment.id);
+            Alert.alert("삭제가 완료되었습니다");
+            navigation.navigate("Main");
+          } catch (err) {
+            console.log("err:", err);
+          }
+        },
+      },
+    ]);
+  };
+
+  // ------------- 상단 삭제 --------------
   // ------------- 상단 header --------------
   useEffect(() => {
     navigation.setOptions({
@@ -37,16 +71,29 @@ export default function Post({
       ),
       headerRight: () => {
         return (
-          <TouchableOpacity
-            style={{ flexDirection: "row" }}
-            onPress={() => {
-              navigate("Stacks", { screen: "PostInput" });
-            }}
-          >
-            <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
-              게시글수정
-            </Text>
-          </TouchableOpacity>
+          <View>
+            <TouchableOpacity
+              style={{ flexDirection: "row" }}
+              onPress={() => {
+                navigation.navigate("Stacks", { screen: "PostInput" });
+              }}
+            >
+              <Text
+                style={{
+                  color: isDark ? YELLOW_COLOR : GREEN_COLOR,
+                  marginRight: "10%",
+                }}
+              >
+                수정
+              </Text>
+              <Text
+                onPress={onDelete}
+                style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}
+              >
+                삭제
+              </Text>
+            </TouchableOpacity>
+          </View>
         );
       },
     });
