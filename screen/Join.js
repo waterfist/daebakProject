@@ -21,13 +21,14 @@ import { emailRegex, pwRegex } from "../util";
 const BgSafeAreaView = styled.View`
   flex: 1;
   justify-content: center;
+  background-color: white;
 `;
 
 const Background = styled.View`
   /* display: flex; */
   align-items: flex-start;
   justify-content: center;
-  /* background-color: #eee; */
+  background-color: white;
   padding: 20px;
 `;
 
@@ -200,7 +201,7 @@ export default function Join({ navigation: { navigate } }) {
                   // color: "gray",
                   marginTop: 10,
                   position: "absolute",
-                  top: -42,
+                  top: -46,
                   right: 10,
                 }}
               />
@@ -213,7 +214,7 @@ export default function Join({ navigation: { navigate } }) {
                   // color: "gray",
                   marginTop: 10,
                   position: "absolute",
-                  top: -42,
+                  top: -46,
                   right: 10,
                 }}
               />
