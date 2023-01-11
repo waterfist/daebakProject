@@ -12,3 +12,7 @@ export const deletePostText = async (Id) => {
 export const editComment = async ({ commentId, editingObj }) => {
   await updateDoc(doc(dbService, "comment", commentId), editingObj);
 };
+
+export const deletePost = async (postId) => {
+  await deleteDoc(doc(dbService, "posts", postId));
+};
