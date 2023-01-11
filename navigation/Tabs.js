@@ -8,6 +8,7 @@ import Main from "../screen/Main";
 import Search from "../screen/Search";
 import My from "../screen/My";
 import TestComment from "../screen/TestComment";
+import Post from "../screen/Post";
 
 const Tab = createBottomTabNavigator();
 
@@ -15,7 +16,7 @@ export default function Tabs({ navigation: { navigate } }) {
   const isDark = useColorScheme() === "dark";
 
   const commentInputHandle = () => {
-    navigate("Stacks", { screen: "Login" });
+    navigate("Stacks", { screen: "CommentInput" });
   };
 
   return (
@@ -29,15 +30,6 @@ export default function Tabs({ navigation: { navigate } }) {
     >
       <Tab.Screen
         options={{
-          headerTitleAlign: "center",
-          headerRight: () => (
-            <TouchableOpacity onPress={() => commentInputHandle()}>
-              <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
-                게시글 작성
-              </Text>
-            </TouchableOpacity>
-          ),
-
           headerTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
 
           tabBarIcon: ({ color, size }) => (

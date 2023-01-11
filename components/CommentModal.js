@@ -5,7 +5,7 @@ import { Modal } from "react-native";
 import { AirbnbRating, Rating } from "react-native-ratings";
 import { authService, dbService } from "../firebase";
 
-export default function CommentModal({ isOpenModal, setIsOpenModal }) {
+export default function CommentModal({ post, isOpenModal, setIsOpenModal }) {
   const [modalTitle, setModalTitle] = useState("");
   const [modalContent, setModalContent] = useState("");
   const [ratings, setRatings] = useState(0);
@@ -18,12 +18,14 @@ export default function CommentModal({ isOpenModal, setIsOpenModal }) {
       contents: modalContent,
       createdAt: Date.now(),
       rating: ratings,
+      userId: authService.currentUser?.uid,
     });
     setIsOpenModal(false);
     setModalTitle("");
     setModalContent("");
     setRatings(0);
   };
+
   return (
     <Modal visible={isOpenModal} transparent animationType="fade">
       <Backdrop>

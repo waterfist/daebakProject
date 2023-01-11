@@ -135,7 +135,6 @@ export default function Login({
         console.log("로그인 성공");
         setEmail("");
         setPassword("");
-
         navigate("Tabs", { screen: "Home" });
       })
       .catch((err) => {

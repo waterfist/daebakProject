@@ -1,5 +1,187 @@
 <dropdown install>
 npm install react-native-dropdown-select-list
-<package.json>
-  "scripts": {
-    "start": "expo start --tunnel",
+
+    <select list 붙은거 삭제바람>
+    <SelectList
+          setSelected={val => setAddPostCategory(val)}
+          data={data}
+          save="value"
+          placeholder="Select category"
+          value={addPostCategory}
+          maxHeight={200}
+        />
+
+
+
+
+  const a = () => {
+    setCategory('기술');
+    navigate('Stacks', {
+      screen: 'PostList',
+      params: { category: category },
+    });
+  };
+  useEffect(() => {
+    console.log(category);
+  }, [category]);
+
+
+  /////////////////// 오늘 알게된것 /////////////////////
+  비동기함수는 동기함수가 다 실행되고 나서 실행되는 것
+
+  //////////////////////////////////////// main 백업
+
+import React, { useEffect, useState } from 'react';
+import { Text, TouchableOpacity, View } from 'react-native';
+import styled from '@emotion/native';
+
+export default function Main({ navigation: { navigate } }) {
+  return (
+    <Container>
+      <MainLeftContainer>
+        <MainButton
+          onPress={() => {
+            // setCategory('기술');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '기술' },
+            });
+          }}
+        >
+          <Title>기술</Title>
+        </MainButton>
+        <MainButton
+          onPress={() => {
+            // setCategory('교육');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '교육' },
+            });
+          }}
+        >
+          <Title>교육</Title>
+        </MainButton>
+        <MainButton
+          onPress={() => {
+            // setCategory('보건');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '보건' },
+            });
+          }}
+        >
+          <Title>보건</Title>
+        </MainButton>
+        <MainButton
+          onPress={() => {
+            // setCategory('문화');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '문화' },
+            });
+          }}
+        >
+          <Title>문화</Title>
+        </MainButton>
+
+        <MainButton
+          onPress={() => {
+            // setCategory('환경');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '환경' },
+            });
+          }}
+        >
+          <Title>환경</Title>
+        </MainButton>
+        <MainButton
+          onPress={() => {
+            // setCategory('교통');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '교통' },
+            });
+          }}
+        >
+          <Title>교통</Title>
+        </MainButton>
+        <MainButton
+          onPress={() => {
+            // setCategory('정치');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '정치' },
+            });
+          }}
+        >
+          <Title>정치</Title>
+        </MainButton>
+        <MainButton
+          onPress={() => {
+            // setCategory('경제');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '경제' },
+            });
+          }}
+        >
+          <Title>경제</Title>
+        </MainButton>
+        <MainButton
+          onPress={() => {
+            // setCategory('경제');
+            navigate('Stacks', {
+              screen: 'PostList',
+              params: { category: '경제' },
+            });
+          }}
+        >
+          <Title>etc</Title>
+        </MainButton>
+      </MainLeftContainer>
+    </Container>
+  );
+}
+
+export const Title = styled.Text`
+  font-size: 30px;
+`;
+
+export const Container = styled.View`
+  flex: 1;
+  /* background-color: lightgray; */
+  align-content: space-between;
+  flex-direction: row;
+`;
+
+export const MainButton = styled.TouchableOpacity`
+  background-color: lightgray;
+  width: 90px;
+  height: 90px;
+  align-items: center;
+  justify-content: center;
+  border-radius: 35px;
+`;
+
+export const MainLeftContainer = styled.View`
+  display: flex;
+
+  align-items: center;
+  padding: 100px;
+  width: 100%;
+  height: 100%;
+  background-color: red;
+  justify-content: space-evenly;
+  column-count: 3;
+`;
+
+export const MainRightContainer = styled.View`
+  justify-content: space-between;
+  /* background-color: green; */
+  align-items: center;
+  flex: 1;
+  width: 50%;
+  height: 100%;
+  padding: 100px;
+`;
