@@ -36,7 +36,7 @@ export default function PostList({
   // ------------- 상단 header --------------
 
   useEffect(() => {
-    console.log(category);
+    // console.log(category);
     setOptions({
       headerLeft: () => (
         <TouchableOpacity

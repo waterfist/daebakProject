@@ -132,4 +132,6 @@ export const UrlInput = styled.TextInput`
   border-radius: 10px;
 `;
 
-export const Btn = styled.Button``;
+export const SelectBox = styled.View``;
+
+export const InputBox = styled.View``;
