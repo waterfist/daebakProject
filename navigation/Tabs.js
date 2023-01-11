@@ -9,14 +9,14 @@ import Search from '../screen/Search';
 import My from '../screen/My';
 import TestComment from '../screen/TestComment';
 import Post from '../screen/Post';
-
+import { authService } from '../firebase';
 const Tab = createBottomTabNavigator();
 
 export default function Tabs({ navigation: { navigate } }) {
   const isDark = useColorScheme() === 'dark';
 
   const commentInputHandle = () => {
-    navigate('Stacks', { screen: 'CommentInput' });
+    navigate('Stacks', { screen: 'Login' });
   };
 
   return (
@@ -30,6 +30,19 @@ export default function Tabs({ navigation: { navigate } }) {
     >
       <Tab.Screen
         options={{
+          headerTitleAlign: 'center',
+          headerRight: () => (
+            <TouchableOpacity onPress={() => commentInputHandle()}>
+              <Text
+                style={{
+                  color: isDark ? YELLOW_COLOR : GREEN_COLOR,
+                  marginHorizontal: 10,
+                }}
+              >
+                {authService.currentUser ? '' : '로그인'}
+              </Text>
+            </TouchableOpacity>
+          ),
           headerTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
 
           tabBarIcon: ({ color, size }) => (
