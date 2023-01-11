@@ -17,43 +17,61 @@ export default function PostLoader({ posts, category, navigate }) {
         )
         .map((post, key) => {
           return (
-            <ListBox key={key}>
-              <ListButton onPress={() => goToComment(post)}>
-                <ListCardTitle>
-                  <TitleText numberOfLines={1} ellipsizeMode="tail">
-                    {post.title}
-                  </TitleText>
-                </ListCardTitle>
-                <ListCardContent>
-                  <ContentText numberOfLines={2} ellipsizeMode="tail">
-                    {post.contents}
-                  </ContentText>
-                </ListCardContent>
-              </ListButton>
-            </ListBox>
+            <SC>
+              <Container>
+                <ListBox key={key}>
+                  <ListButton onPress={() => goToComment(post)}>
+                    <ListCardTitle>
+                      <TitleText numberOfLines={1} ellipsizeMode="tail">
+                        &#91;{category}
+                        &#93;{post.title}
+                      </TitleText>
+                    </ListCardTitle>
+                    <ListCardContent>
+                      <ContentText numberOfLines={2} ellipsizeMode="tail">
+                        {post.contents}
+                      </ContentText>
+                    </ListCardContent>
+                  </ListButton>
+                </ListBox>
+              </Container>
+            </SC>
           );
         })}
     </>
   );
 }
 
+export const SC = styled.ScrollView`
+  flex: 1;
+`;
+
+export const Container = styled.View`
+  flex: 1;
+  align-items: center;
+`;
+
 export const ListBox = styled.View`
-  background-color: lightgray;
-  height: 80px;
+  background-color: #dbe7ff;
+  border: 0.5px solid #074ee8;
+  border-radius: 15px;
+  height: 110px;
+  padding: 10px;
+  width: 85%;
+  margin-top: 20px;
 `;
 
 export const ListButton = styled.TouchableOpacity`
-  border: 1px solid black;
   height: 80px;
 `;
 
 export const ListCardTitle = styled.View`
-  background-color: lightgray;
+  /* background-color: lightgray; */
   height: 40px;
 `;
 
 export const ListCardContent = styled.View`
-  background-color: lightgray;
+  /* background-color: lightgray; */
   height: 40px;
 `;
 
@@ -62,5 +80,5 @@ export const TitleText = styled.Text`
 `;
 
 export const ContentText = styled.Text`
-  font-size: 15px;
+  font-size: 14px;
 `;

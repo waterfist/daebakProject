@@ -164,6 +164,7 @@ export const UrlInput = styled.TextInput`
   border: 1px solid black;
   height: 45px;
   border-radius: 10px;
+  margin-bottom: 10px;
 `;
 
 export const SelectBox = styled.View``;
