@@ -49,25 +49,28 @@ export default function PostList({
         </TouchableOpacity>
       ),
       headerRight: () => {
-        if (!authService.currentUser) {
-          return (
-            <TouchableOpacity
-              style={{ flexDirection: 'row' }}
-              onPress={() => {
+        return (
+          <TouchableOpacity
+            style={{ flexDirection: 'row' }}
+            onPress={() => {
+              if (authService.currentUser) {
                 navigate('Stacks', { screen: 'PostInput' });
-              }}
-            >
-              <AntDesign
-                name="edit"
-                size={24}
-                color={isDark ? YELLOW_COLOR : GREEN_COLOR}
-              />
-              <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
-                게시글작성
-              </Text>
-            </TouchableOpacity>
-          );
-        }
+              } else {
+                alert('로그인을 먼저 해주세요');
+                navigate('Stacks', { screen: 'Login' });
+              }
+            }}
+          >
+            <AntDesign
+              name="edit"
+              size={24}
+              color={isDark ? YELLOW_COLOR : GREEN_COLOR}
+            />
+            <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+              게시글작성
+            </Text>
+          </TouchableOpacity>
+        );
       },
     });
   }, []);
