@@ -6,10 +6,11 @@ import {
   collection,
   orderBy,
   where,
+  getDoc,
 } from "firebase/firestore";
-import { Text, TouchableOpacity } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { authService, dbService } from "../firebase";
+import PostCards from "./PostCards";
 
 const MyPosts = () => {
   const [posts, setPosts] = useState([]);
@@ -34,34 +35,14 @@ const MyPosts = () => {
       return unsubcribe;
     }, [])
   );
+
   return (
     <>
       {posts.map((post) => {
-        return (
-          // delete 기능 추가
-          <UserPostsView key={post.id}>
-            <Text>{post.title}</Text>
-            <Text>{post.contents}</Text>
-            <TouchableOpacity>
-              <Text>삭제</Text>
-            </TouchableOpacity>
-          </UserPostsView>
-        );
+        return <PostCards posts={posts} post={post} key={post.id} />;
       })}
     </>
   );
 };
-
-const UserPostsView = styled.View`
-  flex: 1;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  border-width: 1px;
-  background-color: green;
-
-  height: 130px;
-  width: 230px;
-`;
 
 export default MyPosts;
