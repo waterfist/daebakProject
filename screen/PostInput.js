@@ -15,6 +15,7 @@ import { SelectList } from 'react-native-dropdown-select-list';
 import styled from '@emotion/native';
 import uuid from 'react-native-uuid';
 import Drop from '../components/Drop';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function PostInput({
   navigation: { goBack, setOptions, navigate },
@@ -73,7 +74,7 @@ export default function PostInput({
       headerLeft: () => (
         <TouchableOpacity onPress={() => goBack()}>
           <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
-            뒤로
+            <Ionicons name="arrow-back" size={30} color="#3B71F3" />
           </Text>
         </TouchableOpacity>
       ),

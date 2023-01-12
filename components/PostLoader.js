@@ -27,7 +27,7 @@ export default function PostLoader({ posts, category, navigate }) {
                         <Ionicons
                           name="person-circle-outline"
                           size={60}
-                          color="black"
+                          color="grey"
                         />
                       </Text>
                     </TestBox>
@@ -41,6 +41,9 @@ export default function PostLoader({ posts, category, navigate }) {
                       <ListCardContent>
                         <ContentText numberOfLines={2} ellipsizeMode="tail">
                           {post.contents}
+                          <Text>
+                            {new Date(post.createdAt).toLocaleDateString('kr')}
+                          </Text>
                         </ContentText>
                       </ListCardContent>
                     </TestBoxx>
@@ -65,7 +68,7 @@ export const Container = styled.View`
 
 export const ListBox = styled.View`
   background-color: white;
-  border: 1.3px solid #074ee8;
+  border: 1px solid gray;
   border-radius: 15px;
   height: 100px;
   padding: 10px;
@@ -92,10 +95,12 @@ export const ListCardContent = styled.View`
 
 export const TitleText = styled.Text`
   font-size: 20px;
+  color: black;
 `;
 
 export const ContentText = styled.Text`
   font-size: 14px;
+  color: black;
 `;
 
 export const TestBox = styled.View`

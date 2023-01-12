@@ -1,6 +1,6 @@
-import styled from "@emotion/native";
-import React, { useCallback, useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
+import styled from '@emotion/native';
+import React, { useCallback, useState } from 'react';
+import { Text, View, ScrollView, TouchableOpacity } from 'react-native';
 import {
   getDoc,
   onSnapshot,
@@ -12,15 +12,15 @@ import {
   deleteDoc,
   orderBy,
   getDocs,
-} from "firebase/firestore";
-import { authService, dbService } from "../firebase";
-import { signOut, getAuth } from "firebase/auth";
+} from 'firebase/firestore';
+import { authService, dbService } from '../firebase';
+import { signOut, getAuth } from 'firebase/auth';
 import {
   NavigationHelpersContext,
   useFocusEffect,
-} from "@react-navigation/native";
-import MyComments from "../components/MyComments";
-import MyPosts from "../components/MyPosts";
+} from '@react-navigation/native';
+import MyComments from '../components/MyComments';
+import MyPosts from '../components/MyPosts';
 
 // 로그인 후에만 해당 컴포넌트가 렌더링 되도록 해야한다.
 
@@ -28,11 +28,11 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
   const logout = () => {
     signOut(authService)
       .then(() => {
-        console.log("로그아웃 성공");
-        alert("로그아웃 성공");
-        navigate("Tabs", { screen: "Home" });
+        console.log('로그아웃 성공');
+        alert('로그아웃 성공');
+        navigate('Tabs', { screen: 'Home' });
       })
-      .catch((err) => alert(err));
+      .catch(err => alert(err));
   };
 
   const editNickName = () => {};
@@ -44,15 +44,15 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
           index: 1,
           routes: [
             {
-              name: "Tabs",
+              name: 'Tabs',
               params: {
-                screen: "Home",
+                screen: 'Home',
               },
             },
             {
-              name: "Stacks",
+              name: 'Stacks',
               params: {
-                screen: "Login",
+                screen: 'Login',
               },
             },
           ],
@@ -77,14 +77,14 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
       <UserInformationView>
         {/* onPress 속성으로 이미지 update */}
         <TouchableOpacity>
-          <UserImage source={require("../assets/images/nullimage.png")} />
+          <UserImage source={require('../assets/images/nullimage.png')} />
         </TouchableOpacity>
         {/* onPress 속성으로 닉네임 update */}
         <TouchableOpacity onPress={editNickName}>
           <UserIdText>
             @
             {!authService.currentUser ||
-              authService.currentUser.email.split("@")[0]}
+              authService.currentUser.email.split('@')[0]}
           </UserIdText>
         </TouchableOpacity>
       </UserInformationView>
