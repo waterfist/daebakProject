@@ -49,7 +49,7 @@ export default function Post({
   });
 
   const onDelete = async () => {
-    Alert.alert("댓글 삭제", "정말 현재 댓글를 삭제하시겠습니까?", [
+    Alert.alert("게시글 삭제", "정말 현재 게시글을 삭제하시겠습니까?", [
       { text: "cancel", style: "destructive" },
       {
         text: "OK. Delete it.",
@@ -165,13 +165,12 @@ export default function Post({
         setIsOpenModifyModal={setIsOpenModifyModal}
         navigation={navigation}
       />
-      <CommentModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
 
-      {/* <CommentModal
+      <CommentModal
         postId={post.id}
         isOpenModal={isOpenModal}
         setIsOpenModal={setIsOpenModal}
-      /> */}
+      />
     </Container>
   );
 }
@@ -192,6 +191,11 @@ export const Title = styled.Text`
   font-weight: 500;
   color: ${(props) => props.theme.color.overview};
   margin-bottom: 20px;
+  border-radius: 5px;
+  border-width: 1px;
+  border-color: ${(props) => props.theme.color.title};
+  align-self: center;
+  width: 40%;
 `;
 export const Content = styled.Text`
   font-size: 20px;

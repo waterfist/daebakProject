@@ -12,7 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { authService, dbService } from "../firebase";
 import PostCards from "./PostCards";
 
-const MyPosts = () => {
+const MyPosts = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
 
   useFocusEffect(
@@ -45,7 +45,14 @@ const MyPosts = () => {
   return (
     <>
       {posts.map((post) => {
-        return <PostCards posts={posts} post={post} key={post.id} />;
+        return (
+          <PostCards
+            posts={posts}
+            post={post}
+            key={post.id}
+            navigate={navigate}
+          />
+        );
       })}
     </>
   );

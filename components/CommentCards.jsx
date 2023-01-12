@@ -4,7 +4,7 @@ import { TouchableOpacity, Text, Alert, View } from "react-native";
 import { useMutation } from "react-query";
 import { deleteComment } from "../api";
 
-const CommentCards = ({ comment }) => {
+const CommentCards = ({ comment, navigate }) => {
   const { isLoading: isLoadingDeleting, mutate: removeComment } = useMutation(
     ["deleteComment", comment.id],
     (body) => deleteComment(body),
@@ -36,9 +36,12 @@ const CommentCards = ({ comment }) => {
     ]);
   };
 
-  //   const goToDetail = () => {
-  //     navigate("Stacks", { screen: "Post" });
-  //   };
+  // const goToDetail = (comment) => {
+  //   navigate("Stacks", {
+  //     screen: "CommentEdit",
+  //     params: { comment: comment, from: "My" },
+  //   });
+  // };
 
   if (isLoadingDeleting) {
     return <Text>조금만 기다려주세요!</Text>;
