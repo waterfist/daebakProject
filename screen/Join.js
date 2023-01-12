@@ -80,6 +80,9 @@ const JoinTopText = styled.Text`
   font-size: 32px;
   font-weight: bold;
   margin-left: 30px;
+  /* text-shadow-color: rgba(0, 0, 0, 0.3);
+  text-shadow-offset: 0px 4px;
+  text-shadow-radius: 8px; */
 `;
 
 const JoinTopView = styled.View`
@@ -88,12 +91,12 @@ const JoinTopView = styled.View`
 
 export default function Join({ navigation: { navigate } }) {
   const emailRef = useRef(null);
-  const nicknameRef = useRef(null);
+  // const nicknameRef = useRef(null);
   const passwordRef = useRef(null);
   const checkPasswordRef = useRef(null);
 
   const [email, setEmail] = useState("");
-  const [nickname, setNickname] = useState("");
+  // const [nickname, setNickname] = useState("");
   const [password, setPassword] = useState("");
   const [checkPassword, setCheckPassword] = useState("");
   const [emailError, setEmailError] = useState(false);
@@ -144,7 +147,7 @@ export default function Join({ navigation: { navigate } }) {
       .then(() => {
         console.log("회원가입성공");
         setEmail("");
-        setNickname("");
+        // setNickname("");
         setPassword("");
         setCheckPassword("");
         navigate("Login");
@@ -174,13 +177,13 @@ export default function Join({ navigation: { navigate } }) {
         )}
 
         {/* <TouchableOpacity onPress={() => nicknameRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>닉네임</Text>
+        {/* <Text style={{ color: "#3b71f3", marginTop: 10 }}>닉네임</Text> */}
         {/* </TouchableOpacity> */}
-        <ContainerStyle
+        {/* <ContainerStyle
           ref={nicknameRef}
           value={nickname}
           onChangeText={setNickname}
-        />
+        /> */}
 
         <View style={{ width: "100%" }}>
           <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
