@@ -101,7 +101,11 @@ export default function Post({
                   marginRight: "10%",
                 }}
               >
-                <Feather name="edit" size={24} color="#3b71f3" />
+                {post.userId === authService.currentUser?.uid ? (
+                  <Feather name="edit" size={24} color="#3b71f3" />
+                ) : (
+                  ""
+                )}
               </Text>
             </TouchableOpacity>
           </View>

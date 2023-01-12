@@ -16,7 +16,7 @@ import styled from "@emotion/native";
 import uuid from "react-native-uuid";
 import Drop from "../components/Drop";
 import { Ionicons } from "@expo/vector-icons";
-import { emailRegex, pwRegex, urlRegex } from "../util";
+import { emailRegex, pwRegex, urlRegex, titleRegex } from "../util";
 
 export default function PostInput({
   navigation: { goBack, setOptions, navigate },
@@ -25,7 +25,9 @@ export default function PostInput({
   const [addPostContents, setAddPostContents] = useState("");
   const [addPostUrl, setAddPostUrl] = useState("");
   const [addPostCategory, setAddPostCategory] = useState("");
+  const titleRef = useRef(null);
   const urlRef = useRef(null);
+
   const newPost = {
     title: addPostTitle,
     contents: addPostContents,
@@ -37,14 +39,16 @@ export default function PostInput({
 
   const addPost = async () => {
     await addDoc(collection(dbService, "posts"), newPost);
+    const matchTitle = addPostTitle.match(titleRegex);
     const matchUrl = addPostUrl.match(urlRegex);
 
     if (!addPostCategory) {
       alert("Category를 선택해주세요.");
       return true;
     }
-    if (!addPostTitle) {
-      alert("제목을 입력해주세요");
+    if (matchTitle === null) {
+      alert("제목은 2자 이상 20자 이하로 입력해주세요");
+      titleRef.current.focus();
       return true;
     }
     if (!addPostContents) {
@@ -105,6 +109,7 @@ export default function PostInput({
         <TitleInput
           placeholder="  제목을 입력해주세요."
           value={addPostTitle}
+          useRef={titleRef}
           onChangeText={(text) => setAddPostTitle(text)}
         />
         <ContentInput
