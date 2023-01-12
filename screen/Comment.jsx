@@ -30,7 +30,7 @@ export default function Comment({
         </TouchableOpacity>
       ),
       headerRight: () => {
-        return (
+        return comment.userId === authService.currentUser?.uid ? (
           <TouchableOpacity onPress={onEdit}>
             <AntDesign
               name="edit"
@@ -38,6 +38,8 @@ export default function Comment({
               color={isDark ? YELLOW_COLOR : BLUE_COLOR}
             />
           </TouchableOpacity>
+        ) : (
+          ""
         );
       },
     });

@@ -98,6 +98,7 @@ export default function PostModifyModal({
     return <Text>로딩 중입니다.</Text>;
   }
 
+  console.log(typeof post.title);
   return (
     <Modal visible={isOpenModifyModal} transparent animationType="fade">
       <Backdrop>
@@ -107,8 +108,9 @@ export default function PostModifyModal({
             <TitleInput
               value={modalTitle}
               onChangeText={(text) => setModalTitle(text)}
-              placeholder={post.title}
-            />
+            >
+              <Text>{post.title}</Text>
+            </TitleInput>
             <ModalTitle>내용</ModalTitle>
             <ContentInput
               textAlignVertical="top"
@@ -117,13 +119,17 @@ export default function PostModifyModal({
               multiline
               maxLength={300}
               placeholder={post.contents}
-            />
+            >
+              <Text>{post.contents}</Text>
+            </ContentInput>
             <ModalTitle>Url</ModalTitle>
             <UrlInput
               value={modalUrl}
               onChangeText={(text) => setModalUrl(text)}
               placeholder={post.url}
-            />
+            >
+              <Text>{post.url} </Text>
+            </UrlInput>
           </InputWrapper>
           <Row style={{ justifyContent: "space-between" }}>
             <ModalBtn

@@ -143,17 +143,6 @@ export default function Commentedit({
 
   return (
     <Container>
-      <EditButton
-        disabled={!newContents && !newTitle && !ratings}
-        onPress={onEditDone}
-      >
-        <BtnTitle disabled={!newContents && !newTitle && !ratings}>
-          수정하기
-        </BtnTitle>
-      </EditButton>
-      <EditButton onPress={onDelete}>
-        <BtnTitle>삭제하기</BtnTitle>
-      </EditButton>
       <SectionTitle>평점</SectionTitle>
 
       <AirbnbRating onFinishRating={getRatings} ratingCount={5} size={20} />
@@ -177,6 +166,17 @@ export default function Commentedit({
         maxLength={300}
         placeholder={comment.contents}
       />
+      <CustomButton
+        disabled={!newContents && !newTitle && !ratings}
+        onPress={onEditDone}
+      >
+        <BtnTitle disabled={!newContents && !newTitle && !ratings}>
+          수정하기
+        </BtnTitle>
+      </CustomButton>
+      <CustomButton onPress={onDelete}>
+        <BtnTitle>삭제하기</BtnTitle>
+      </CustomButton>
     </Container>
   );
 }
@@ -216,8 +216,17 @@ const EditButton = styled.TouchableOpacity`
   margin-bottom: 20px;
 `;
 
+export const CustomButton = styled.TouchableOpacity`
+  background-color: #3b71f3;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  align-items: center;
+  margin-top: 10px;
+`;
 const BtnTitle = styled.Text`
-  color: ${(props) => (props.disabled ? "grey" : "yellow")};
+  color: ${(props) => (props.disabled ? "yellow" : "white")};
   font-size: 20px;
   font-weight: 700;
 `;

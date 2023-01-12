@@ -26,6 +26,7 @@ export default function PostInput({
   const [addPostUrl, setAddPostUrl] = useState("");
   const [addPostCategory, setAddPostCategory] = useState("");
   const titleRef = useRef(null);
+  const contentsRef = useRef(null);
   const urlRef = useRef(null);
 
   const newPost = {
@@ -53,6 +54,7 @@ export default function PostInput({
     }
     if (!addPostContents) {
       alert("내용을 입력해주세요");
+      contentsRef.current.focus();
       return true;
     }
     if (matchUrl === null) {
@@ -117,6 +119,7 @@ export default function PostInput({
           multiline={true}
           placeholder="  내용을 입력해주세요."
           value={addPostContents}
+          useRef={contentsRef}
           onChangeText={(text) => setAddPostContents(text)}
         />
         <UrlInput
