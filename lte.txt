@@ -11,7 +11,7 @@ npm install react-native-dropdown-select-list
           maxHeight={200}
         />
 
-1234
+12345678
 
 
   const a = () => {
