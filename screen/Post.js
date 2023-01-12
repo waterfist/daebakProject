@@ -137,24 +137,20 @@ export default function Post({
       <Content>{post.contents}</Content>
       <SectionUrl>URL:</SectionUrl>
       <Content>{post.url}</Content>
-      <SectionStar>별점:</SectionStar>
-      <Content>{post.ratings}</Content>
 
-      {/* 1 authSErvice.currentUser?.uid
-2. authSErvice.currentUser && authSErvice.currentUser.uid 
-1번과 2번은 같다. */}
-      {/* && 뒤 빈문자열은 항상 false이다. */}
-      {post.userId === authService.currentUser?.uid ? (
-        <EditButton onPress={onDelete}>
-          <BtnTitle>글 삭제하기</BtnTitle>
-        </EditButton>
-      ) : (
-        ""
-      )}
+      <CustomButtonBox>
+        {post.userId === authService.currentUser?.uid ? (
+          <CustomButton onPress={onDelete}>
+            <BtnTitle>글 삭제하기</BtnTitle>
+          </CustomButton>
+        ) : (
+          ""
+        )}
 
-      <AddComment onPress={goToComment}>
-        <TempText>댓글추가</TempText>
-      </AddComment>
+        <CustomButton onPress={goToComment}>
+          <BtnTitle>댓글추가</BtnTitle>
+        </CustomButton>
+      </CustomButtonBox>
 
       <FlatList
         showsHorizontalScrollIndicator={false}
@@ -189,7 +185,8 @@ export default function Post({
 // ------------- Post 내용  --------------
 const TempText = styled.Text`
   font-size: 20px;
-  color: ${(props) => props.theme.color.title};
+  /* color: ${(props) => props.theme.color.title}; */
+  color: red;
   text-align: center;
 `;
 export const SectionTitle = styled.Text`
@@ -197,6 +194,10 @@ export const SectionTitle = styled.Text`
   font-weight: 600;
   color: ${(props) => props.theme.color.title};
   margin-bottom: 15px;
+  /* background-color: red; */
+  /* text-align: center; */
+  /* background-color: /beige; */
+  padding: 10px 0px;
 `;
 export const Title = styled.Text`
   font-size: 20px;
@@ -207,7 +208,7 @@ export const Title = styled.Text`
   border-width: 1px;
   border-color: ${(props) => props.theme.color.title};
   align-self: center;
-  width: 40%;
+  width: 100%;
 `;
 export const Content = styled.Text`
   font-size: 20px;
@@ -219,14 +220,15 @@ export const SectionUrl = styled.Text`
   font-size: 20px;
   font-weight: 600;
   color: ${(props) => props.theme.color.title};
-  margin-top: 15px;
+  margin-top: 30px;
 `;
-export const SectionStar = styled.Text`
-  font-size: 20px;
-  font-weight: 600;
-  color: ${(props) => props.theme.color.title};
-  margin-bottom: 15px;
-`;
+// export const SectionStar = styled.Text`
+//   font-size: 20px;
+//   font-weight: 600;
+//   color: ${(props) => props.theme.color.title};
+//   margin-bottom: 15px;
+
+// `;
 const Container = styled.ScrollView`
   padding: 20px;
 `;
@@ -243,7 +245,7 @@ const EditButton = styled.TouchableOpacity`
   margin-bottom: 20px;
 `;
 const BtnTitle = styled.Text`
-  color: ${(props) => (props.disabled ? "grey" : "yellow")};
+  color: ${(props) => (props.disabled ? "yellow" : "white")};
   font-size: 20px;
   font-weight: 700;
 `;
@@ -255,8 +257,29 @@ const AddComment = styled.TouchableOpacity`
   border-width: 1px;
   border-color: ${(props) => props.theme.color.title};
   align-self: center;
-  width: 40%;
+
+  width: 100%;
+  background-color: #3b71f3;
 `;
+
 const HSeprator = styled.View`
   width: 10px;
+`;
+
+export const CustomButton = styled.TouchableOpacity`
+  background-color: #3b71f3;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+export const CustomButtonBox = styled.View`
+  margin-top: 80px;
+`;
+
+export const CustomButtonText = styled.Text`
+  color: white;
 `;

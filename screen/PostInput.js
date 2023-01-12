@@ -147,7 +147,7 @@ export const Container = styled.View`
 `;
 
 export const TitleInput = styled.TextInput`
-  border: 0.5px solid black;
+  border: 1px solid black;
   height: 45px;
   border-radius: 10px;
   margin-bottom: 10px;

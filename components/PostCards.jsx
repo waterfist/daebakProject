@@ -134,3 +134,17 @@ const StaticText = styled.Text`
 const VariableText = styled.Text`
   font-size: 16px;
 `;
+
+export const CustomButton = styled.TouchableOpacity`
+  background-color: #3b71f3;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  align-items: center;
+  margin-top: 15px;
+`;
+
+export const CustomButtonText = styled.Text`
+  color: white;
+`;
