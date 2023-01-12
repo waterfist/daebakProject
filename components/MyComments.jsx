@@ -23,7 +23,11 @@ const MyComments = () => {
       const q = query(
         collection(dbService, "comment"),
         orderBy("createdAt", "desc"),
-        where("userId", "==", authService.currentUser?.uid)
+        where(
+          "userId",
+          "==",
+          !authService.currentUser || authService.currentUser?.uid
+        )
       );
 
       const unsubcribe = onSnapshot(q, (snapshot) => {

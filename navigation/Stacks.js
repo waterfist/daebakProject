@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Text, TouchableOpacity, useColorScheme } from "react-native";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
 import Login from "../screen/Login";
 import { authService } from "../firebase";
 import { signOut } from "firebase/auth";
