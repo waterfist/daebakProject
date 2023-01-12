@@ -1,7 +1,7 @@
-import React from 'react';
-import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import Stacks from './Stacks';
-import Tabs from './Tabs';
+import React from "react";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import Stacks from "./Stacks";
+import Tabs from "./Tabs";
 
 const NativeStack = createNativeStackNavigator();
 
@@ -13,6 +13,3 @@ export default function Root() {
     </NativeStack.Navigator>
   );
 }
-
-// Home, Explore, Account
-// 밑에 하단바임

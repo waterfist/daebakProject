@@ -1,6 +1,6 @@
 import styled from "@emotion/native";
 import React from "react";
-import { FlatList, Text, TouchableOpacity } from "react-native";
+import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function PostLoader({ posts, category, navigate }) {
@@ -85,18 +85,14 @@ export const ListButton = styled.TouchableOpacity`
 `;
 
 export const ListCardTitle = styled.View`
-  /* background-color: lightgray; */
   height: 28px;
-  /* background-color: red; */
 `;
 
 export const ListCardContent = styled.View`
-  /* background-color: blue; */
   height: 45px;
 `;
 
 export const ListCardDate = styled.View`
-  /* background-color: green; */
   height: 20px;
   align-items: flex-end;
   margin-right: 7px;
@@ -113,19 +109,13 @@ export const ContentText = styled.Text`
 `;
 
 export const ProfileBox = styled.View`
-  /* background-color: gray; */
   height: 80px;
   width: 60px;
   margin-right: 5px;
 `;
 
 const InputContainer = styled.View`
-  /* background-color: white; */
   height: 80px;
   width: 250px;
   flex-direction: column;
-`;
-
-const CategoryBox = styled.View`
-  background-color: red;
 `;

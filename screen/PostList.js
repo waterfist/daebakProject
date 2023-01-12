@@ -1,26 +1,11 @@
 import React, { useEffect, useState } from "react";
-import {
-  FlatList,
-  ScrollView,
-  Text,
-  ToastAndroid,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, useColorScheme } from "react-native";
 import { authService, dbService } from "../firebase";
-import { AntDesign } from "@expo/vector-icons";
-import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
-import Loader from "../components/Loader";
+
+import { YELLOW_COLOR, BLUE_COLOR } from "../color";
+
 import { FontAwesome5 } from "@expo/vector-icons";
-import {
-  collection,
-  onSnapshot,
-  orderBy,
-  query,
-  getDoc,
-  doc,
-} from "firebase/firestore";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import styled from "@emotion/native";
 import PostLoader from "../components/PostLoader";
 import { Ionicons } from "@expo/vector-icons";
@@ -38,7 +23,6 @@ export default function PostList({
   // ------------- 상단 header --------------
 
   useEffect(() => {
-    // console.log(category);
     setOptions({
       headerLeft: () => (
         <TouchableOpacity
@@ -94,16 +78,6 @@ export default function PostList({
     });
 
     // ------------- Category 불러오는 부분 ------------
-
-    // const getCategory = async () => {
-    //   const snapshot = await getDoc(
-    //     doc(dbService, 'category', 'currentCategory')
-    //   );
-    //   console.log('snapshot.id:', snapshot.id);
-    //   console.log('snapshot.data():', snapshot.data());
-    //   // setCategory(snapshot.data().category);
-    // };
-    // getCategory();
   }, []);
 
   return (

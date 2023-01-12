@@ -87,7 +87,6 @@ const Backdrop = styled.View`
   background-color: gray;
 `;
 const Dialog = styled.KeyboardAvoidingView`
-  /* background-color: ${(props) => props.theme.color.modalBg}; */
   background-color: white;
   border: #3b71f3;
 

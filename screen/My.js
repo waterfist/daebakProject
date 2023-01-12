@@ -1,28 +1,12 @@
 import styled from "@emotion/native";
-import React, { useCallback, useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
-import {
-  getDoc,
-  onSnapshot,
-  query,
-  collection,
-  doc,
-  oderBy,
-  updateDoc,
-  deleteDoc,
-  orderBy,
-  getDocs,
-} from "firebase/firestore";
-import { authService, dbService } from "../firebase";
-import { signOut, getAuth } from "firebase/auth";
-import {
-  NavigationHelpersContext,
-  useFocusEffect,
-} from "@react-navigation/native";
+import React, { useCallback } from "react";
+import { ScrollView, TouchableOpacity } from "react-native";
+
+import { authService } from "../firebase";
+import { signOut } from "firebase/auth";
+import { useFocusEffect } from "@react-navigation/native";
 import MyComments from "../components/MyComments";
 import MyPosts from "../components/MyPosts";
-
-// 로그인 후에만 해당 컴포넌트가 렌더링 되도록 해야한다.
 
 export default function My({ navigation: { navigate, reset, setOptions } }) {
   const logout = () => {
@@ -73,7 +57,6 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
   return (
     <ScrollView>
       <UserInformationView>
-        {/* onPress 속성으로 이미지 update */}
         <TouchableOpacity>
           <UserImage source={require("../assets/images/nullimage.png")} />
         </TouchableOpacity>
@@ -115,7 +98,7 @@ const UserInformationView = styled.View`
   align-items: center;
   height: 100px;
   width: 100%;
-  /* background-color: green; */
+
   margin-top: 20px;
   margin-bottom: 30px;
 `;
@@ -150,13 +133,6 @@ const MyPostsText = styled.Text`
 `;
 
 const UserPostContainer = styled.View`
-  align-items: center;
-`;
-
-const UserPostedBoxView = styled.View`
-  width: 230px;
-  height: 130px;
-  background-color: green;
   align-items: center;
 `;
 

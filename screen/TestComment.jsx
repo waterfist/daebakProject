@@ -1,27 +1,12 @@
 import styled from "@emotion/native";
 import React from "react";
 
-import { useState, useEffect, useCallback } from "react";
-import {
-  View,
-  Text,
-  useColorScheme,
-  FlatList,
-  TouchableOpacity,
-} from "react-native";
-import { authService, dbService } from "../firebase";
-import {
-  collection,
-  doc,
-  getDocs,
-  onSnapshot,
-  orderBy,
-  query,
-  where,
-} from "firebase/firestore";
+import { useState, useCallback } from "react";
+import { FlatList } from "react-native";
+import { dbService } from "../firebase";
+import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
 import { useFocusEffect } from "@react-navigation/native";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
-import { signOut } from "firebase/auth";
+
 import Vote from "../components/Vote";
 import CommentModal from "../components/CommentModal";
 
@@ -104,10 +89,6 @@ const TempText = styled.Text`
   font-size: 20px;
   color: ${(props) => props.theme.color.title};
   text-align: center;
-`;
-
-const Container = styled.ScrollView`
-  padding: 20px;
 `;
 
 const ListTitle = styled.Text`

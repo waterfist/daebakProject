@@ -1,5 +1,5 @@
 import React, { useState, useCallback } from "react";
-import styled from "@emotion/native";
+
 import {
   onSnapshot,
   query,
@@ -7,7 +7,6 @@ import {
   orderBy,
   where,
 } from "firebase/firestore";
-import { Text, TouchableOpacity } from "react-native";
 import { useFocusEffect } from "@react-navigation/native";
 import { authService, dbService } from "../firebase";
 import CommentCards from "./CommentCards";
@@ -34,8 +33,6 @@ const MyComments = ({ navigate }) => {
           ...doc.data(),
         }));
 
-        console.log("코멘트는? ", newComments);
-
         setComments(newComments);
       });
 
@@ -47,14 +44,6 @@ const MyComments = ({ navigate }) => {
     <>
       {comments.map((comment) => {
         return (
-          // delete 기능 구현
-          // <UserCommentView key={comment.id}>
-          //   <Text>{comment.title}</Text>
-          //   <Text>{comment.contents}</Text>
-          //   <TouchableOpacity>
-          //     <Text>삭제</Text>
-          //   </TouchableOpacity>
-          // </UserCommentView>
           <CommentCards
             comment={comment}
             key={comment.id}

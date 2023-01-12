@@ -1,11 +1,5 @@
-import React, { useEffect, useState } from "react";
-import {
-  Image,
-  Text,
-  TouchableOpacity,
-  View,
-  useColorScheme,
-} from "react-native";
+import React from "react";
+import { Image, useColorScheme } from "react-native";
 import styled from "@emotion/native";
 import { StyleSheet } from "react-native";
 import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
@@ -16,7 +10,6 @@ export default function Main({ navigation: { navigate } }) {
       <MainLeftContainer>
         <MainButton
           onPress={() => {
-            // setCategory('기술');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "기술" },
@@ -33,7 +26,6 @@ export default function Main({ navigation: { navigate } }) {
         </MainButton>
         <MainButton
           onPress={() => {
-            // setCategory('교육');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "교육" },
@@ -50,7 +42,6 @@ export default function Main({ navigation: { navigate } }) {
         </MainButton>
         <MainButton
           onPress={() => {
-            // setCategory('보건');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "보건" },
@@ -67,7 +58,6 @@ export default function Main({ navigation: { navigate } }) {
         </MainButton>
         <MainButton
           onPress={() => {
-            // setCategory('문화');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "문화" },
@@ -86,7 +76,6 @@ export default function Main({ navigation: { navigate } }) {
       <MainRightContainer>
         <MainButton
           onPress={() => {
-            // setCategory('환경');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "환경" },
@@ -103,7 +92,6 @@ export default function Main({ navigation: { navigate } }) {
         </MainButton>
         <MainButton
           onPress={() => {
-            // setCategory('교통');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "교통" },
@@ -120,7 +108,6 @@ export default function Main({ navigation: { navigate } }) {
         </MainButton>
         <MainButton
           onPress={() => {
-            // setCategory('정치');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "정치" },
@@ -135,20 +122,9 @@ export default function Main({ navigation: { navigate } }) {
             정치
           </Titleposition>
         </MainButton>
-        {/* <MainButton
-          onPress={() => {
-            // setCategory('경제');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '경제' },
-            });
-          }}
-        >
-          <Title>경제</Title>
-        </MainButton> */}
+
         <MainButton
           onPress={() => {
-            // setCategory('경제');
             navigate("Stacks", {
               screen: "PostList",
               params: { category: "etc" },
@@ -174,10 +150,9 @@ export const Title = styled.Text`
 
 export const Container = styled.View`
   flex: 1;
-  /* background-color: lightgray; */
+
   align-content: space-between;
   flex-direction: row;
-  /* background-color: white; */
 `;
 
 export const MainButton = styled.TouchableOpacity`
@@ -196,13 +171,13 @@ export const MainLeftContainer = styled.View`
   padding: 70px;
   width: 50%;
   height: 100%;
-  /* background-color: red; */
+
   justify-content: space-between;
 `;
 
 export const MainRightContainer = styled.View`
   justify-content: space-between;
-  /* background-color: green; */
+
   align-items: center;
   flex: 1;
   width: 50%;
@@ -224,7 +199,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     width: 90,
     height: 90,
-    // resizeMode: 'contain',
+
     resizeMode: "cover",
     borderRadius: 30,
   },

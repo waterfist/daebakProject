@@ -1,13 +1,10 @@
 import { useState, useEffect } from "react";
 import styled from "@emotion/native";
 import { AirbnbRating } from "react-native-ratings";
-import { TouchableOpacity, useColorScheme } from "react-native";
-import { deleteDoc, doc, getDoc, updateDoc } from "firebase/firestore";
-import { dbService } from "../firebase";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
-import { AntDesign } from "@expo/vector-icons";
+import { useColorScheme } from "react-native";
+
 import { Alert } from "react-native";
-import { MaterialIcons } from "@expo/vector-icons";
+
 import { useMutation } from "react-query";
 import Loader from "../components/Loader";
 import { deleteComment, editComment } from "../api";
@@ -18,7 +15,6 @@ export default function Commentedit({
     params: { comment, from },
   },
 }) {
-  const isDark = useColorScheme() === "dark";
   const [ratings, setRatings] = useState(0);
   const [newTitle, setNewTitle] = useState("");
   const [newContents, setNewContents] = useState("");
@@ -56,7 +52,6 @@ export default function Commentedit({
         text: "OK. Delete it.",
         onPress: async () => {
           try {
-            // await deleteDoc(doc(dbService, "comment", comment.id));
             await removeComment(comment.id);
             Alert.alert("삭제가 완료되었습니다");
             navigation.navigate("TestComment");
@@ -99,7 +94,6 @@ export default function Commentedit({
           text: "OK. Edit it",
           onPress: async () => {
             try {
-              // await updateDoc(doc(dbService, "comment", comment.id), editingObj);
               await reviseComment({ commentId: comment.id, editingObj });
               setNewContents("");
               setNewTitle("");

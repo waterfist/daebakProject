@@ -1,8 +1,7 @@
-import React, { useEffect, useCallback, useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Alert,
   FlatList,
-  ScrollView,
   Text,
   TouchableOpacity,
   useColorScheme,
@@ -10,9 +9,8 @@ import {
 } from "react-native";
 import Hyperlink from "react-native-hyperlink";
 import { Linking } from "react-native";
-import { createNativeStackNavigator } from "@react-navigation/native-stack";
-import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
-import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
+
+import { YELLOW_COLOR, BLUE_COLOR } from "../color";
 import styled from "@emotion/native";
 import { authService, dbService } from "../firebase";
 import CommentModal from "../components/CommentModal";
@@ -29,7 +27,7 @@ import {
 } from "firebase/firestore";
 import { useMutation } from "react-query";
 import { deletePostText } from "../api";
-// import Hyperlink from "react-native-hyperlink";
+
 export default function Post({
   navigation,
   route: {
@@ -58,7 +56,6 @@ export default function Post({
         text: "OK. Delete it.",
         onPress: async () => {
           try {
-            // await deleteDoc(doc(dbService, "comment", comment.id));
             await removePost(post.id);
             Alert.alert("삭제가 완료되었습니다");
             navigation.navigate("Main");
@@ -70,7 +67,6 @@ export default function Post({
     ]);
   };
 
-  const hyperUrl = post.url;
   const openURL = (url) => {
     Linking.openURL(url);
   };
@@ -146,9 +142,7 @@ export default function Post({
       <Title>{post.title}</Title>
       <SectionTitle>내용</SectionTitle>
       <Content>{post.contents}</Content>
-      {/* <Hyperlink> */}
       <SectionUrl>URL:</SectionUrl>
-      {/* </Hyperlink> */}
       <Hyperlink onPress={(hyperUrl) => openURL(hyperUrl)}>
         <Content style={{ color: "blue" }}>{post.url}</Content>
       </Hyperlink>
@@ -200,7 +194,7 @@ export default function Post({
 // ------------- Post 내용  --------------
 const TempText = styled.Text`
   font-size: 20px;
-  /* color: ${(props) => props.theme.color.title}; */
+
   color: red;
   text-align: center;
 `;
@@ -209,9 +203,7 @@ export const SectionTitle = styled.Text`
   font-weight: 600;
   color: ${(props) => props.theme.color.title};
   margin-bottom: 15px;
-  /* background-color: red; */
-  /* text-align: center; */
-  /* background-color: /beige; */
+
   padding: 10px 0px;
 `;
 export const Title = styled.Text`
@@ -237,44 +229,15 @@ export const SectionUrl = styled.Text`
   color: ${(props) => props.theme.color.title};
   margin-top: 30px;
 `;
-// export const SectionStar = styled.Text`
-//   font-size: 20px;
-//   font-weight: 600;
-//   color: ${(props) => props.theme.color.title};
-//   margin-bottom: 15px;
 
-// `;
 const Container = styled.ScrollView`
   padding: 20px;
 `;
-const EditButton = styled.TouchableOpacity`
-  width: 100%;
-  padding: 10px 15px;
-  justify-content: center;
-  align-items: center;
-  background-color: ${(props) => props.theme.color.overview};
-  border-width: 1px;
-  border-color: ${(props) =>
-    props.disabled ? "grey" : props.theme.color.title};
-  border-radius: 10px;
-  margin-bottom: 20px;
-`;
+
 const BtnTitle = styled.Text`
   color: ${(props) => (props.disabled ? "yellow" : "white")};
   font-size: 20px;
   font-weight: 700;
-`;
-
-const AddComment = styled.TouchableOpacity`
-  padding: 10px;
-  margin-bottom: 20px;
-  border-radius: 5px;
-  border-width: 1px;
-  border-color: ${(props) => props.theme.color.title};
-  align-self: center;
-
-  width: 100%;
-  background-color: #3b71f3;
 `;
 
 const HSeprator = styled.View`

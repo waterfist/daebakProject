@@ -25,7 +25,6 @@ const CommentCards = ({ comment, navigate }) => {
         text: "OK. Delete it.",
         onPress: async () => {
           try {
-            // await deleteDoc(doc(dbService, "reviews", review.id));
             await removeComment(id);
             alert("삭제가 완료되었습니다.");
           } catch (err) {

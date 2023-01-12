@@ -1,22 +1,14 @@
 import { addDoc, collection } from "firebase/firestore";
 import React, { useEffect, useState, useRef } from "react";
-import {
-  Button,
-  Text,
-  TextInput,
-  TouchableOpacity,
-  useColorScheme,
-  View,
-} from "react-native";
+import { Text, TouchableOpacity, useColorScheme } from "react-native";
 import { authService, dbService } from "../firebase";
-import { AntDesign } from "@expo/vector-icons";
-import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
+
+import { YELLOW_COLOR, BLUE_COLOR } from "../color";
 import { SelectList } from "react-native-dropdown-select-list";
 import styled from "@emotion/native";
-import uuid from "react-native-uuid";
-import Drop from "../components/Drop";
+
 import { Ionicons } from "@expo/vector-icons";
-import { emailRegex, pwRegex, urlRegex, titleRegex } from "../util";
+import { urlRegex, titleRegex } from "../util";
 
 export default function PostInput({
   navigation: { goBack, setOptions, navigate },
@@ -97,7 +89,6 @@ export default function PostInput({
   return (
     <Container>
       <SelectBox>
-        {/* <Drop addPostCategory={addPostCategory} /> */}
         <SelectList
           setSelected={(val) => setAddPostCategory(val)}
           data={data}
@@ -157,8 +148,6 @@ export const Container = styled.View`
   flex: 1;
   margin: 30px;
   flex-direction: column;
-
-  /* justify-content: space-evenly; */
 `;
 
 export const TitleInput = styled.TextInput`

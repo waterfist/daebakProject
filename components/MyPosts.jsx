@@ -1,16 +1,15 @@
-import React, { useState, useCallback } from 'react';
-import styled from '@emotion/native';
+import React, { useState, useCallback } from "react";
+
 import {
   onSnapshot,
   query,
   collection,
   orderBy,
   where,
-  getDoc,
-} from 'firebase/firestore';
-import { useFocusEffect } from '@react-navigation/native';
-import { authService, dbService } from '../firebase';
-import PostCards from './PostCards';
+} from "firebase/firestore";
+import { useFocusEffect } from "@react-navigation/native";
+import { authService, dbService } from "../firebase";
+import PostCards from "./PostCards";
 
 const MyPosts = ({ navigate }) => {
   const [posts, setPosts] = useState([]);
@@ -19,17 +18,17 @@ const MyPosts = ({ navigate }) => {
     useCallback(() => {
       // 현재 로그인 사용자의 post만 나오도록 구현
       const q = query(
-        collection(dbService, 'posts'),
-        orderBy('createdAt', 'desc'),
+        collection(dbService, "posts"),
+        orderBy("createdAt", "desc"),
         where(
-          'userId',
-          '==',
+          "userId",
+          "==",
           !authService.currentUser || authService.currentUser?.uid
         )
       );
 
-      const unsubcribe = onSnapshot(q, snapshot => {
-        const newPosts = snapshot.docs.map(doc => ({
+      const unsubcribe = onSnapshot(q, (snapshot) => {
+        const newPosts = snapshot.docs.map((doc) => ({
           id: doc.id,
           ...doc.data(),
         }));
@@ -40,11 +39,9 @@ const MyPosts = ({ navigate }) => {
     }, [])
   );
 
-  // 주석입니다
-
   return (
     <>
-      {posts.map(post => {
+      {posts.map((post) => {
         return (
           <PostCards
             posts={posts}

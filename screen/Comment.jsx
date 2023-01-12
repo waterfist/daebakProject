@@ -2,9 +2,9 @@ import { useEffect } from "react";
 import styled from "@emotion/native";
 import { useColorScheme, TouchableOpacity } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
-import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
+import { YELLOW_COLOR, BLUE_COLOR } from "../color";
 import { authService } from "../firebase";
-import { useFocusEffect } from "@react-navigation/native";
+
 import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 

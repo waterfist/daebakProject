@@ -4,11 +4,6 @@ import styled from "@emotion/native";
 import { useMutation } from "react-query";
 import { deletePost } from "../api";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { BLUE_COLOR } from "../color";
-// MY > MyPosts =  MyComments > Postcards = CommentCards
-
-// props으로 navigation을 받아와야하는데 안됨
-// navigate가 함수가 아니라고 오류뚬
 
 const PostCards = ({ post, navigate }) => {
   const { isLoading: isLoadingDeleting, mutate: removePost } = useMutation(
@@ -23,8 +18,6 @@ const PostCards = ({ post, navigate }) => {
       },
     }
   );
-
-  const [modalVisible, setModalVisible] = useState(false);
 
   const onDeletePost = async (id) => {
     Alert.alert("게시글 삭제", "정말 현재 게시글을 삭제하시겠습니까?", [
@@ -42,10 +35,6 @@ const PostCards = ({ post, navigate }) => {
       },
     ]);
   };
-
-  // const goToPost = () => {
-  //   navigate("Stacks", { screen: "Post" });
-  // };
 
   if (isLoadingDeleting) {
     return <Text>조금만 기다려주세요!</Text>;

@@ -34,11 +34,10 @@ export default function PostModifyModal({
   );
   const onEditPost = async (id) => {
     if (!ratings && !modalTitle && !modalContent && !modalUrl) {
-      // 입력값 3개 중 아무것도 입력없으면 그대로 원상복구
       alert("수정한 부분이 없습니다.");
       return;
     }
-    // 입력값이 3개 중 하나라도 있으면 해당값만 patch할 수 있도록 객체 구성
+
     let editingObj = {};
     if (ratings) {
       Object.assign(editingObj, { rating: ratings });
@@ -61,7 +60,6 @@ export default function PostModifyModal({
           text: "OK. Edit it",
           onPress: async () => {
             try {
-              // await updateDoc(doc(dbService, "reviews", review.id), editingObj);
               console.log("성공");
               await revisePost({ postId: id, editingObj });
               setModalContent("");
@@ -98,7 +96,6 @@ export default function PostModifyModal({
     return <Text>로딩 중입니다.</Text>;
   }
 
-  console.log(typeof post.title);
   return (
     <Modal visible={isOpenModifyModal} transparent animationType="fade">
       <Backdrop>
@@ -137,7 +134,6 @@ export default function PostModifyModal({
               title="취소"
             />
             <ModalBtn
-              // disabled={!ratings || !modalUrl || !modalContent}
               onPress={() => {
                 onEditPost(id);
               }}
@@ -170,7 +166,6 @@ const ModalBtn = styled.Button`
   color: black;
 `;
 const InputWrapper = styled.View``;
-const AddButton = styled.Button``;
 
 const Backdrop = styled.View`
   flex: 1;

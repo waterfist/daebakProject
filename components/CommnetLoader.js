@@ -27,7 +27,6 @@ export default function CommentLoader({ comment }) {
   );
 }
 
-const Reviews = styled.ScrollView``;
 const Column = styled.TouchableOpacity`
   justify-content: space-between;
   border-width: 1px;

@@ -1,14 +1,5 @@
-import React, { createRef, useEffect, useRef, useState } from "react";
-import {
-  SafeAreaView,
-  Text,
-  View,
-  Image,
-  StyleSheet,
-  TextInput,
-  TouchableOpacity,
-  Pressable,
-} from "react-native";
+import React, { useEffect, useRef, useState } from "react";
+import { Text, View, TouchableOpacity } from "react-native";
 
 import styled from "@emotion/native";
 import { authService } from "../firebase";
@@ -29,12 +20,9 @@ export default function Login({
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  // const inputRef = createRef();
 
   const handlerInputClear = () => {
     setPassword("");
-    // inputRef.current.clear;
-    // clearRef.current.value = "";
   };
 
   const visibleToggle = () => {
@@ -42,24 +30,10 @@ export default function Login({
   };
 
   const handleLogin = () => {
-    // if (!email) {
-    //   alert("email을 입력해주세요.");
-    //   emailRef.current.focus();
-    //   return true;
-    // }
-    // if (!password) {
-    //   alert("password를 입력해주세요.");
-    //   passwordRef.current.focus();
-    //   return true;
-    // }
-
     const matchedEmail = email.match(emailRegex);
     const matchedPw = password.match(pwRegex);
 
     if (matchedEmail === null) {
-      // alert("이메일 형식에 맞게 입력해 주세요.");
-      // emailRef.current.focus();
-      // return true;
       setEmailError(true);
       emailRef.current.focus();
       return true;
@@ -67,9 +41,6 @@ export default function Login({
       setEmailError(false);
     }
     if (matchedPw === null) {
-      // alert("비밀번호는 8자리 이상 영문자, 숫자, 특수문자 조합이어야 합니다.");
-      // passwordRef.current.focus();
-      // return true;
       setPasswordShortError(true);
       passwordRef.current.focus();
       return true;
@@ -103,24 +74,15 @@ export default function Login({
     <Background>
       <ImageLogo source={require("../assets/images/Logo_1.png")} />
 
-      {/* <TouchableOpacity onPress={() => emailRef.current.focus()}> */}
       <Text style={{ color: "black", marginTop: 10 }}>아이디</Text>
-      {/* </TouchableOpacity> */}
+
       <ContainerStyle value={email} ref={emailRef} onChangeText={setEmail} />
       {emailError && (
         <Text style={{ color: "red", marginTop: 10 }}>
           이메일이 올바르지 않습니다.
         </Text>
       )}
-      {/* <TouchableOpacity onPress={() => passwordRef.current.focus()}>
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
-      </TouchableOpacity>
-      <ContainerStyle
-        value={password}
-        ref={passwordRef}
-        onChangeText={setPassword}
-        secureTextEntry={true}
-      /> */}
+
       <View style={{ width: "100%" }}>
         <Text style={{ color: "black", marginTop: 10 }}>비밀번호</Text>
         <ContainerStyle
@@ -129,7 +91,6 @@ export default function Login({
           value={password}
           onChangeText={setPassword}
           style={{ position: "relative" }}
-          // inputRef={inputRef}
         />
 
         <TouchableOpacity onPress={handlerInputClear}>
@@ -147,7 +108,6 @@ export default function Login({
               size={24}
               color="gray"
               style={{
-                // color: "gray",
                 marginTop: 10,
                 position: "absolute",
                 top: -45,
@@ -160,7 +120,6 @@ export default function Login({
               size={24}
               color="gray"
               style={{
-                // color: "gray",
                 marginTop: 10,
                 position: "absolute",
                 top: -45,
@@ -189,7 +148,7 @@ const Background = styled.View`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-  /* background-color: black; */
+
   padding: 20px;
 `;
 const ImageLogo = styled.Image`
