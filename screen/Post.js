@@ -15,7 +15,13 @@ import styled from '@emotion/native';
 import { authService, dbService } from '../firebase';
 import CommentModal from '../components/CommentModal';
 import CommentLoader from '../components/CommnetLoader';
-import { collection, onSnapshot, orderBy, query } from 'firebase/firestore';
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from 'firebase/firestore';
 import { useMutation } from 'react-query';
 import { deletePostText } from '../api';
 
@@ -94,7 +100,8 @@ export default function Post({
 
     const q = query(
       collection(dbService, 'comment'),
-      orderBy('createdAt', 'desc')
+      orderBy('createdAt', 'desc'),
+      where('postId', '==', post.id)
     );
     const unsubscribe = onSnapshot(q, snapshot => {
       const newComments = snapshot.docs.map(doc => ({
