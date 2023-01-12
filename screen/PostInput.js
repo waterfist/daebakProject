@@ -15,6 +15,7 @@ import { SelectList } from "react-native-dropdown-select-list";
 import styled from "@emotion/native";
 import uuid from "react-native-uuid";
 import Drop from "../components/Drop";
+import { uuidv4 } from "@firebase/util";
 
 export default function PostInput({
   navigation: { goBack, setOptions, navigate },
