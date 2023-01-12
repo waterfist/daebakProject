@@ -1,20 +1,20 @@
-import styled from '@emotion/native';
-import React from 'react';
-import { FlatList, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import styled from "@emotion/native";
+import React from "react";
+import { FlatList, Text, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function PostLoader({ posts, category, navigate }) {
   const goToComment = (post, postId) => {
-    navigate('Stacks', {
-      screen: 'Post',
-      params: { post: post, from: 'My' },
+    navigate("Stacks", {
+      screen: "Post",
+      params: { post: post, from: "My" },
     });
   };
   return (
     <>
       {posts
         .filter(
-          cate => cate.category === category && cate.category !== undefined
+          (cate) => cate.category === category && cate.category !== undefined
         )
         .map((post, key) => {
           return (

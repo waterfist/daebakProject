@@ -12,7 +12,7 @@ import { useFocusEffect } from "@react-navigation/native";
 import { authService, dbService } from "../firebase";
 import CommentCards from "./CommentCards";
 
-const MyComments = () => {
+const MyComments = ({ navigate }) => {
   const [comments, setComments] = useState([]);
 
   console.log("지금 아이디는?", authService.currentUser?.uid);
@@ -57,7 +57,11 @@ const MyComments = () => {
           //     <Text>삭제</Text>
           //   </TouchableOpacity>
           // </UserCommentView>
-          <CommentCards comment={comment} key={comment.id} />
+          <CommentCards
+            comment={comment}
+            key={comment.id}
+            navigate={navigate}
+          />
         );
       })}
     </>
