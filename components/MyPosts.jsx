@@ -40,6 +40,8 @@ const MyPosts = () => {
     }, [])
   );
 
+  // 주석입니다
+
   return (
     <>
       {posts.map((post) => {
