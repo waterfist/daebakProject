@@ -1,9 +1,194 @@
-import React from "react";
-import { Text, View } from "react-native";
-export default function Postinput() {
+import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect, useState, useRef } from "react";
+import {
+  Button,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  useColorScheme,
+  View,
+} from "react-native";
+import { authService, dbService } from "../firebase";
+import { AntDesign } from "@expo/vector-icons";
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
+import { SelectList } from "react-native-dropdown-select-list";
+import styled from "@emotion/native";
+import uuid from "react-native-uuid";
+import Drop from "../components/Drop";
+import { Ionicons } from "@expo/vector-icons";
+import { emailRegex, pwRegex, urlRegex, titleRegex } from "../util";
+
+export default function PostInput({
+  navigation: { goBack, setOptions, navigate },
+}) {
+  const [addPostTitle, setAddPostTitle] = useState("");
+  const [addPostContents, setAddPostContents] = useState("");
+  const [addPostUrl, setAddPostUrl] = useState("");
+  const [addPostCategory, setAddPostCategory] = useState("");
+  const titleRef = useRef(null);
+  const contentsRef = useRef(null);
+  const urlRef = useRef(null);
+
+  const newPost = {
+    title: addPostTitle,
+    contents: addPostContents,
+    url: addPostUrl,
+    category: addPostCategory,
+    createdAt: Date.now(),
+    userId: authService.currentUser?.uid,
+  };
+
+  const addPost = async () => {
+    await addDoc(collection(dbService, "posts"), newPost);
+    const matchTitle = addPostTitle.match(titleRegex);
+    const matchUrl = addPostUrl.match(urlRegex);
+
+    if (!addPostCategory) {
+      alert("Category를 선택해주세요.");
+      return true;
+    }
+    if (matchTitle === null) {
+      alert("제목은 2자 이상 20자 이하로 입력해주세요");
+      titleRef.current.focus();
+      return true;
+    }
+    if (!addPostContents) {
+      alert("내용을 입력해주세요");
+      contentsRef.current.focus();
+      return true;
+    }
+    if (matchUrl === null) {
+      alert("올바른 URL을 입력해주세요");
+      urlRef.current.focus();
+      return true;
+    }
+    goBack();
+    alert("작성완료");
+  };
+
+  const data = [
+    { key: "1", value: "기술" },
+    { key: "2", value: "교육" },
+    { key: "3", value: "보건" },
+    { key: "4", value: "문화" },
+    { key: "5", value: "환경" },
+    { key: "6", value: "교통" },
+    { key: "7", value: "정치" },
+    { key: "8", value: "etc" },
+  ];
+
+  const isDark = useColorScheme() === "dark";
+
+  useEffect(() => {
+    setOptions({
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => goBack()}>
+          <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
+            <Ionicons name="arrow-back" size={30} color="#3B71F3" />
+          </Text>
+        </TouchableOpacity>
+      ),
+      headerRight: () => {
+        return null;
+      },
+    });
+  }, []);
+
   return (
-    <View>
-      <Text>하이</Text>
-    </View>
+    <Container>
+      <SelectBox>
+        {/* <Drop addPostCategory={addPostCategory} /> */}
+        <SelectList
+          setSelected={(val) => setAddPostCategory(val)}
+          data={data}
+          save="value"
+          placeholder="Select category"
+          value={addPostCategory}
+          maxHeight={200}
+        />
+      </SelectBox>
+      <InputBox>
+        <TitleInput
+          placeholder="  제목을 입력해주세요."
+          value={addPostTitle}
+          useRef={titleRef}
+          onChangeText={(text) => setAddPostTitle(text)}
+        />
+        <ContentInput
+          style={{ flexShrink: 1 }}
+          multiline={true}
+          placeholder="  내용을 입력해주세요."
+          value={addPostContents}
+          useRef={contentsRef}
+          onChangeText={(text) => setAddPostContents(text)}
+        />
+        <UrlInput
+          placeholder="  Url을 입력해주세요."
+          value={addPostUrl}
+          useRef={urlRef}
+          onChangeText={(text) => setAddPostUrl(text)}
+        />
+        <CustomButton onPress={addPost}>
+          <CustomButtonText>작성완료</CustomButtonText>
+        </CustomButton>
+      </InputBox>
+    </Container>
   );
 }
+
+export const CustomButton = styled.TouchableOpacity`
+  background-color: #3b71f3;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  align-items: center;
+  margin-top: 10px;
+`;
+
+export const CustomButtonText = styled.Text`
+  color: ${(props) => (props.disabled ? "yellow" : "white")};
+  font-size: 20px;
+  font-weight: 700;
+`;
+
+export const Container = styled.View`
+  padding: 20px;
+  flex: 1;
+  margin: 30px;
+  flex-direction: column;
+
+  /* justify-content: space-evenly; */
+`;
+
+export const TitleInput = styled.TextInput`
+  border: 1px solid black;
+  height: 45px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  margin-top: 10px;
+  padding: 10px;
+  border-color: #3f4d57;
+`;
+
+export const ContentInput = styled.TextInput`
+  border: 0.5px solid black;
+  height: 150px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-color: #3f4d57;
+`;
+
+export const UrlInput = styled.TextInput`
+  border: 0.5px solid black;
+  height: 45px;
+  border-radius: 10px;
+  margin-bottom: 10px;
+  padding: 10px;
+  border-color: #3f4d57;
+`;
+
+export const SelectBox = styled.View``;
+
+export const InputBox = styled.View``;
