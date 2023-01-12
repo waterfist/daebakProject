@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { authService, dbService } from '../firebase';
 import { AntDesign } from '@expo/vector-icons';
-import { GREEN_COLOR, YELLOW_COLOR } from '../color';
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from '../color';
 import Loader from '../components/Loader';
 import {
   collection,
@@ -22,6 +22,7 @@ import {
 } from 'firebase/firestore';
 import styled from '@emotion/native';
 import PostLoader from '../components/PostLoader';
+import { Ionicons } from '@expo/vector-icons';
 
 export default function PostList({
   navigation: { goBack, navigate, setOptions },
@@ -44,8 +45,8 @@ export default function PostList({
             goBack();
           }}
         >
-          <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
-            뒤로
+          <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
+            <Ionicons name="arrow-back" size={30} color="#3B71F3" />
           </Text>
         </TouchableOpacity>
       ),
@@ -62,14 +63,8 @@ export default function PostList({
               }
             }}
           >
-            <AntDesign
-              name="edit"
-              size={24}
-              color={isDark ? YELLOW_COLOR : GREEN_COLOR}
-            />
-            <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
-              게시글작성
-            </Text>
+            <Ionicons name="create" size={30} color="#3B71F3" />
+            <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}></Text>
           </TouchableOpacity>
         );
       },

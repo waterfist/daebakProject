@@ -10,7 +10,7 @@ import {
 } from 'react-native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { NavigationContainer, useFocusEffect } from '@react-navigation/native';
-import { GREEN_COLOR, YELLOW_COLOR } from '../color';
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from '../color';
 import styled from '@emotion/native';
 import { authService, dbService } from '../firebase';
 import CommentModal from '../components/CommentModal';
@@ -64,7 +64,7 @@ export default function Post({
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+          <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
             뒤로
           </Text>
         </TouchableOpacity>
@@ -80,7 +80,7 @@ export default function Post({
             >
               <Text
                 style={{
-                  color: isDark ? YELLOW_COLOR : GREEN_COLOR,
+                  color: isDark ? YELLOW_COLOR : BLUE_COLOR,
                   marginRight: '10%',
                 }}
               >
@@ -173,15 +173,14 @@ const EditButton = styled.TouchableOpacity`
   padding: 10px 15px;
   justify-content: center;
   align-items: center;
-  background-color: ${(props) => props.theme.color.overview};
+  background-color: ${props => props.theme.color.overview};
   border-width: 1px;
-  border-color: ${(props) =>
-    props.disabled ? "grey" : props.theme.color.title};
+  border-color: ${props => (props.disabled ? 'grey' : props.theme.color.title)};
   border-radius: 10px;
   margin-bottom: 20px;
 `;
 const BtnTitle = styled.Text`
-  color: ${(props) => (props.disabled ? "grey" : "yellow")};
+  color: ${props => (props.disabled ? 'grey' : 'yellow')};
   font-size: 20px;
   font-weight: 700;
 `;
