@@ -1,26 +1,30 @@
-import styled from '@emotion/native';
-import React from 'react';
-import { FlatList, TouchableOpacity } from 'react-native';
+import styled from "@emotion/native";
+import React from "react";
+import { FlatList, TouchableOpacity } from "react-native";
 
 export default function PostLoader({ posts, category, navigate }) {
-  const goToComment = theComment => {
-    navigate('Stacks', {
-      screen: 'Post',
-      params: { comment: theComment, from: 'My' },
+  const goToComment = (post, postId) => {
+    navigate("Stacks", {
+      screen: "Post",
+      params: { post: post, from: "My" },
     });
   };
   return (
     <>
       {posts
         .filter(
-          cate => cate.category === category && cate.category !== undefined
+          (cate) => cate.category === category && cate.category !== undefined
         )
         .map((post, key) => {
           return (
-            <SC>
+            <SC key={key}>
               <Container>
-                <ListBox key={key}>
-                  <ListButton onPress={() => goToComment(post)}>
+                <ListBox>
+                  <ListButton
+                    onPress={() => {
+                      goToComment(post);
+                    }}
+                  >
                     <ListCardTitle>
                       <TitleText numberOfLines={1} ellipsizeMode="tail">
                         &#91;{category}
