@@ -21,7 +21,11 @@ const MyPosts = () => {
       const q = query(
         collection(dbService, 'posts'),
         orderBy('createdAt', 'desc'),
-        where('userId', '==', authService.currentUser?.uid)
+        where(
+          'userId',
+          '==',
+          !authService.currentUser || authService.currentUser?.uid
+        )
       );
 
       const unsubcribe = onSnapshot(q, snapshot => {
@@ -35,6 +39,8 @@ const MyPosts = () => {
       return unsubcribe;
     }, [])
   );
+
+  // 주석입니다
 
   return (
     <>

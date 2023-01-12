@@ -35,7 +35,6 @@ const PostCards = ({ post }) => {
         text: 'OK. Delete it.',
         onPress: async () => {
           try {
-            // await deleteDoc(doc(dbService, "reviews", review.id));
             await removePost(id);
             alert('삭제가 완료되었습니다.');
           } catch (err) {
@@ -46,6 +45,10 @@ const PostCards = ({ post }) => {
     ]);
   };
 
+  // const goToPost = () => {
+  //   navigate("Stacks", { screen: "Post" });
+  // };
+
   if (isLoadingDeleting) {
     return <Text>조금만 기다려주세요!</Text>;
   }
@@ -53,47 +56,29 @@ const PostCards = ({ post }) => {
   return (
     <>
       <UserPostsView key={post.id}>
-        <Text>{post.title}</Text>
-        <Text>{post.contents}</Text>
-        <Text>{new Date(post.createdAt).toLocaleDateString('kr')}</Text>
-        <TouchableOpacity onPress={() => onDeletePost(post.id)}>
-          <Text>삭제</Text>
-          <View style={styles.centeredView}>
-            <Modal
-              animationType="slide"
-              transparent={true}
-              visible={modalVisible}
-              onRequestClose={() => {
-                Alert.alert('Modal has been closed.');
-                setModalVisible(!modalVisible);
-              }}
-            >
-              <View style={styles.centeredView}>
-                <View style={styles.modalView}>
-                  <Text style={styles.modalText}>
-                    <Text>{post.title}</Text>
-                    <Text>{post.contents}</Text>
-                    <Text>
-                      {new Date(post.createdAt).toLocaleDateString('kr')}
-                    </Text>
-                  </Text>
-                  <Pressable
-                    style={[styles.button, styles.buttonClose]}
-                    onPress={() => setModalVisible(!modalVisible)}
-                  >
-                    <Text style={styles.textStyle}>Hide Modal</Text>
-                  </Pressable>
-                </View>
-              </View>
-            </Modal>
-            <Pressable
-              style={[styles.button, styles.buttonOpen]}
-              onPress={() => setModalVisible(true)}
-            >
-              <Text style={styles.textStyle}>Show Modal</Text>
-            </Pressable>
-          </View>
-        </TouchableOpacity>
+        <TextContainer>
+          <StaticText>제목</StaticText>
+          <VariableText numberOfLines={1} ellipsizeMode="tail">
+            {post.title}
+          </VariableText>
+        </TextContainer>
+        <TextContainer>
+          <StaticText>내용</StaticText>
+          <VariableText numberOfLines={1} ellipsizeMode="tail">
+            {post.contents}
+          </VariableText>
+        </TextContainer>
+        <TextContainer>
+          <StaticText>작성일</StaticText>
+          <VariableText numberOfLines={1} ellipsizeMode="tail">
+            {new Date(post.createdAt).toLocaleDateString('kr')}
+          </VariableText>
+        </TextContainer>
+        <DeleteButtonBoxView>
+          <TouchableOpacity onPress={() => onDeletePost(post.id)}>
+            <Text style={{ fontSize: 18, color: 'white' }}>삭제</Text>
+          </TouchableOpacity>
+        </DeleteButtonBoxView>
       </UserPostsView>
     </>
   );
@@ -104,13 +89,43 @@ export default PostCards;
 const UserPostsView = styled.View`
   flex: 1;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  border-radius: 10px;
   border-width: 1px;
-  background-color: green;
+  border-color: #3b71f3;
+  background-color: #dbe7ff;
 
   height: 130px;
-  width: 230px;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+`;
+
+const TextContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  width: 240px;
+`;
+
+const DeleteButtonBoxView = styled.View`
+  align-items: center;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #dbe7ff;
+  background-color: #3b71f3;
+
+  width: 25%;
+  height: 25%;
+
+  margin-top: 7px;
+`;
+
+const StaticText = styled.Text`
+  font-size: 18px;
+  margin-right: 7px;
+`;
+
+const VariableText = styled.Text`
+  font-size: 14px;
 `;
 
 const styles = StyleSheet.create({

@@ -1,6 +1,6 @@
 import styled from "@emotion/native";
 import React from "react";
-import { TouchableOpacity, Text, Alert } from "react-native";
+import { TouchableOpacity, Text, Alert, View } from "react-native";
 import { useMutation } from "react-query";
 import { deleteComment } from "../api";
 
@@ -36,6 +36,10 @@ const CommentCards = ({ comment }) => {
     ]);
   };
 
+  //   const goToDetail = () => {
+  //     navigate("Stacks", { screen: "Post" });
+  //   };
+
   if (isLoadingDeleting) {
     return <Text>조금만 기다려주세요!</Text>;
   }
@@ -43,11 +47,33 @@ const CommentCards = ({ comment }) => {
   return (
     <>
       <UserCommentsView key={comment.id}>
-        <Text>{comment.title}</Text>
-        <Text>{comment.contents}</Text>
-        <Text>{new Date(comment.createdAt).toLocaleDateString("kr")}</Text>
-        <TouchableOpacity onPress={() => onDeleteComment(comment.id)}>
-          <Text>삭제</Text>
+        {/* TouchableOpacity에 onPress로 oToDetail  */}
+        <TouchableOpacity>
+          <View>
+            <TextContainer>
+              <StaticText>제목</StaticText>
+              <VariableText numberOfLines={1} ellipsizeMode="tail">
+                {comment.title}
+              </VariableText>
+            </TextContainer>
+            <TextContainer>
+              <StaticText>내용</StaticText>
+              <VariableText numberOfLines={1} ellipsizeMode="tail">
+                {comment.contents}
+              </VariableText>
+            </TextContainer>
+            <TextContainer>
+              <StaticText>작성일</StaticText>
+              <VariableText numberOfLines={1} ellipsizeMode="tail">
+                {new Date(comment.createdAt).toLocaleDateString("kr")}
+              </VariableText>
+            </TextContainer>
+            <DeleteButtonBoxView>
+              <TouchableOpacity onPress={() => onDeleteComment(comment.id)}>
+                <Text style={{ fontSize: 18, color: "white" }}>삭제</Text>
+              </TouchableOpacity>
+            </DeleteButtonBoxView>
+          </View>
         </TouchableOpacity>
       </UserCommentsView>
     </>
@@ -59,11 +85,41 @@ export default CommentCards;
 const UserCommentsView = styled.View`
   flex: 1;
   flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  border-radius: 10px;
   border-width: 1px;
-  background-color: green;
+  border-color: #3b71f3;
+  background-color: #dbe7ff;
 
   height: 130px;
-  width: 230px;
+  width: 300px;
+  padding: 10px;
+  margin-bottom: 10px;
+`;
+
+const TextContainer = styled.View`
+  flex-direction: row;
+  align-items: center;
+  width: 240px;
+`;
+
+const DeleteButtonBoxView = styled.View`
+  align-items: center;
+  border-width: 1px;
+  border-radius: 5px;
+  border-color: #dbe7ff;
+  background-color: #3b71f3;
+
+  width: 25%;
+  height: 25%;
+
+  margin-top: 7px;
+`;
+
+const StaticText = styled.Text`
+  font-size: 18px;
+  margin-right: 7px;
+`;
+
+const VariableText = styled.Text`
+  font-size: 14px;
 `;

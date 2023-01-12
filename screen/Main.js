@@ -154,6 +154,7 @@ export const Container = styled.View`
   /* background-color: lightgray; */
   align-content: space-between;
   flex-direction: row;
+  /* background-color: white; */
 `;
 
 export const MainButton = styled.TouchableOpacity`

@@ -33,6 +33,7 @@ export default function Tabs({ navigation: { navigate } }) {
     >
       <Tab.Screen
         options={{
+          headerTitle: '2023그거알고있니',
           headerTitleAlign: 'center',
           headerRight: () => (
             <TouchableOpacity onPress={() => commentInputHandle()}>
@@ -49,7 +50,7 @@ export default function Tabs({ navigation: { navigate } }) {
           headerTintColor: isDark ? YELLOW_COLOR : BLUE_COLOR,
 
           tabBarIcon: ({ color, size }) => (
-            <FontAwesome name="home" size={24} color="black" />
+            <FontAwesome name="home" size={30} color="black" />
           ),
         }}
         name="Home"
@@ -59,7 +60,7 @@ export default function Tabs({ navigation: { navigate } }) {
       <Tab.Screen
         options={{
           tabBarIcon: ({ color, size }) => (
-            <Ionicons name="person-circle" size={24} color="black" />
+            <Ionicons name="person-circle" size={30} color="black" />
           ),
         }}
         name="My"

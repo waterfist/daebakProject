@@ -35,8 +35,6 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
       .catch(err => alert(err));
   };
 
-  const editNickName = () => {};
-
   useFocusEffect(
     useCallback(() => {
       if (!authService.currentUser) {
@@ -64,7 +62,7 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
         headerRight: () => {
           return (
             <TouchableOpacity style={{ marginRight: 10 }} onPress={logout}>
-              <Text>로그아웃</Text>
+              <LogoutText>로그아웃</LogoutText>
             </TouchableOpacity>
           );
         },
@@ -79,14 +77,12 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
         <TouchableOpacity>
           <UserImage source={require('../assets/images/nullimage.png')} />
         </TouchableOpacity>
-        {/* onPress 속성으로 닉네임 update */}
-        <TouchableOpacity onPress={editNickName}>
-          <UserIdText>
-            @
-            {!authService.currentUser ||
-              authService.currentUser.email.split('@')[0]}
-          </UserIdText>
-        </TouchableOpacity>
+
+        <UserIdText>
+          @
+          {!authService.currentUser ||
+            authService.currentUser.email.split('@')[0]}
+        </UserIdText>
       </UserInformationView>
 
       <TextView>
@@ -105,6 +101,12 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
     </ScrollView>
   );
 }
+
+const LogoutText = styled.Text`
+  color: #3b71f3;
+  font-size: 16px;
+  margin-right: 5px;
+`;
 
 const UserInformationView = styled.View`
   flex: 1;
@@ -137,10 +139,12 @@ const TextView = styled.View`
   margin-left: 12%;
   margin-right: 12%;
   margin-bottom: 5%;
+  border-color: #3b71f3;
 `;
 
 const MyPostsText = styled.Text`
   font-size: 25px;
+  color: #3b71f3;
 `;
 
 const UserPostContainer = styled.View`
