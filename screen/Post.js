@@ -8,6 +8,8 @@ import {
   useColorScheme,
   View,
 } from "react-native";
+import Hyperlink from "react-native-hyperlink";
+import { Linking } from "react-native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
 import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
@@ -27,7 +29,7 @@ import {
 } from "firebase/firestore";
 import { useMutation } from "react-query";
 import { deletePostText } from "../api";
-
+// import Hyperlink from "react-native-hyperlink";
 export default function Post({
   navigation,
   route: {
@@ -66,6 +68,11 @@ export default function Post({
         },
       },
     ]);
+  };
+
+  const hyperUrl = post.url;
+  const openURL = (url) => {
+    Linking.openURL(url);
   };
 
   // ------------- 상단 삭제 --------------
@@ -135,9 +142,12 @@ export default function Post({
       <Title>{post.title}</Title>
       <SectionTitle>내용</SectionTitle>
       <Content>{post.contents}</Content>
+      {/* <Hyperlink> */}
       <SectionUrl>URL:</SectionUrl>
-      <Content>{post.url}</Content>
-
+      {/* </Hyperlink> */}
+      <Hyperlink onPress={(hyperUrl) => openURL(hyperUrl)}>
+        <Content style={{ color: "blue" }}>{post.url}</Content>
+      </Hyperlink>
       <CustomButtonBox>
         {post.userId === authService.currentUser?.uid ? (
           <CustomButton onPress={onDelete}>
