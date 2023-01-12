@@ -4,10 +4,10 @@ import { FlatList, Text, TouchableOpacity } from 'react-native';
 import { Ionicons } from '@expo/vector-icons';
 
 export default function PostLoader({ posts, category, navigate }) {
-  const goToComment = theComment => {
+  const goToComment = (post, postId) => {
     navigate('Stacks', {
       screen: 'Post',
-      params: { comment: theComment, from: 'My' },
+      params: { post: post, from: 'My' },
     });
   };
   return (
