@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
-import { Text, View, TouchableOpacity } from "react-native";
+import { Text, View, TouchableOpacity, TextInput } from "react-native";
 
 import styled from "@emotion/native";
 import { authService } from "../firebase";
@@ -7,7 +7,7 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { emailRegex, pwRegex } from "../util";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-
+import { LinearGradient } from "expo-linear-gradient";
 export default function Login({
   navigation: { navigate, setOptions, goBack },
 }) {
@@ -71,84 +71,98 @@ export default function Login({
   }, []);
 
   return (
-    <Background>
-      <ImageLogo source={require("../assets/images/Logo_1.png")} />
+    <BgSafeAreaView>
+      <Background>
+        <ImageLogo source={require("../assets/images/Logo_1.png")} />
 
-      <Text style={{ color: "black", marginTop: 10 }}>아이디</Text>
+        <Text style={{ color: "black", marginTop: 10 }}>아이디</Text>
 
-      <ContainerStyle value={email} ref={emailRef} onChangeText={setEmail} />
-      {emailError && (
-        <Text style={{ color: "red", marginTop: 10 }}>
-          이메일이 올바르지 않습니다.
-        </Text>
-      )}
+        <ContainerStyle value={email} ref={emailRef} onChangeText={setEmail} />
+        {emailError && (
+          <Text style={{ color: "red", marginTop: 10 }}>
+            이메일이 올바르지 않습니다.
+          </Text>
+        )}
 
-      <View style={{ width: "100%" }}>
-        <Text style={{ color: "black", marginTop: 10 }}>비밀번호</Text>
-        <ContainerStyle
-          secureTextEntry={visablePassword}
-          ref={passwordRef}
-          value={password}
-          onChangeText={setPassword}
-          style={{ position: "relative" }}
-        />
-
-        <TouchableOpacity onPress={handlerInputClear}>
-          <MaterialIcons
-            name="cancel"
-            size={24}
-            color="black"
-            style={{ position: "absolute", top: -35, right: 35, color: "gray" }}
+        <View style={{ width: "100%" }}>
+          <Text style={{ color: "black", marginTop: 10 }}>비밀번호</Text>
+          <ContainerStyle
+            secureTextEntry={visablePassword}
+            ref={passwordRef}
+            value={password}
+            onChangeText={setPassword}
+            style={{ position: "relative" }}
           />
-        </TouchableOpacity>
-        <TouchableOpacity onPress={visibleToggle}>
-          {visablePassword ? (
-            <Entypo
-              name="eye"
+
+          <TouchableOpacity onPress={handlerInputClear}>
+            <MaterialIcons
+              name="cancel"
               size={24}
-              color="gray"
+              color="black"
               style={{
-                marginTop: 10,
                 position: "absolute",
-                top: -45,
-                right: 10,
+                top: -35,
+                right: 35,
+                color: "gray",
               }}
             />
-          ) : (
-            <Entypo
-              name="eye-with-line"
-              size={24}
-              color="gray"
-              style={{
-                marginTop: 10,
-                position: "absolute",
-                top: -45,
-                right: 10,
-              }}
-            />
-          )}
-        </TouchableOpacity>
-      </View>
-      {passwordShortError && (
-        <Text style={{ color: "red", marginTop: 10 }}>
-          8자리 이상 영문자, 숫자, 특수문자 조합이어야 합니다.
-        </Text>
-      )}
-      <CustomButton onPress={handleLogin}>
-        <CustomButtonText>로그인</CustomButtonText>
-      </CustomButton>
-      <CustomButton2 onPress={() => navigate("Join")}>
-        <CustomButtonText2>회원가입</CustomButtonText2>
-      </CustomButton2>
-    </Background>
+          </TouchableOpacity>
+          <TouchableOpacity onPress={visibleToggle}>
+            {visablePassword ? (
+              <Entypo
+                name="eye"
+                size={24}
+                color="gray"
+                style={{
+                  marginTop: 10,
+                  position: "absolute",
+                  top: -45,
+                  right: 10,
+                }}
+              />
+            ) : (
+              <Entypo
+                name="eye-with-line"
+                size={24}
+                color="gray"
+                style={{
+                  marginTop: 10,
+                  position: "absolute",
+                  top: -45,
+                  right: 10,
+                }}
+              />
+            )}
+          </TouchableOpacity>
+        </View>
+        {passwordShortError && (
+          <Text style={{ color: "red", marginTop: 10 }}>
+            8자리 이상 영문자, 숫자, 특수문자 조합이어야 합니다.
+          </Text>
+        )}
+        <CustomButton onPress={handleLogin}>
+          <CustomButtonText>로그인</CustomButtonText>
+        </CustomButton>
+        <CustomButton2 onPress={() => navigate("Join")}>
+          <CustomButtonText2>회원가입</CustomButtonText2>
+        </CustomButton2>
+      </Background>
+    </BgSafeAreaView>
   );
 }
+
+const BgSafeAreaView = styled.View`
+  flex: 1;
+  justify-content: center;
+
+  background-color: white;
+`;
 
 const Background = styled.View`
   display: flex;
   align-items: flex-start;
   justify-content: center;
-
+  background-color: white;
   padding: 20px;
 `;
 const ImageLogo = styled.Image`
@@ -158,7 +172,8 @@ const ImageLogo = styled.Image`
 const ContainerStyle = styled.TextInput`
   width: 100%;
   background-color: white;
-  border-color: #e8e8e8;
+  border-color: cornflowerblue;
+
   border-width: 1px;
   border-radius: 5px;
   padding-top: 10px;
@@ -178,7 +193,7 @@ const CustomButton = styled.TouchableOpacity`
 `;
 
 const CustomButton2 = styled.TouchableOpacity`
-  background-color: white;
+  background-color: #b7bdc7;
   width: 100%;
   padding: 15px;
   margin: 5px 0px;

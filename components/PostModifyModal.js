@@ -104,10 +104,9 @@ export default function PostModifyModal({
             <ModalTitle>제목</ModalTitle>
             <TitleInput
               value={modalTitle}
+              placeholder={post.title}
               onChangeText={(text) => setModalTitle(text)}
-            >
-              <Text>{post.title}</Text>
-            </TitleInput>
+            ></TitleInput>
             <ModalTitle>내용</ModalTitle>
             <ContentInput
               textAlignVertical="top"
@@ -116,16 +115,14 @@ export default function PostModifyModal({
               multiline
               maxLength={300}
               placeholder={post.contents}
-            >
-              <Text>{post.contents}</Text>
-            </ContentInput>
+            ></ContentInput>
             <ModalTitle>Url</ModalTitle>
             <UrlInput
               value={modalUrl}
               onChangeText={(text) => setModalUrl(text)}
               placeholder={post.url}
             >
-              <Text>{post.url} </Text>
+              {/* <Text>{post.url} </Text> */}
             </UrlInput>
           </InputWrapper>
           <Row style={{ justifyContent: "space-between" }}>

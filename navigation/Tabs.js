@@ -31,7 +31,7 @@ export default function Tabs({ navigation: { navigate } }) {
     >
       <Tab.Screen
         options={{
-          headerTitle: "2023그거알고있니",
+          headerTitle: "2023 그거알고있니",
           headerTitleAlign: "center",
           headerRight: () => (
             <TouchableOpacity onPress={() => commentInputHandle()}>

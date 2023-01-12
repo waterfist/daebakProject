@@ -3,7 +3,8 @@ import styled from "@emotion/native";
 import { SCREEN_WIDTH } from "../util";
 import Vote from "./Vote";
 import { useNavigation } from "@react-navigation/native";
-
+import { View } from "react-native";
+import { StyleSheet } from "react-native";
 export default function CommentLoader({ comment }) {
   const { navigate } = useNavigation();
   const goToPost = () => {
@@ -19,6 +20,12 @@ export default function CommentLoader({ comment }) {
         <ReviewDate>
           {new Date(comment.createdAt).toLocaleDateString("kr")}
         </ReviewDate>
+        <View
+          style={{
+            borderBottomColor: "black",
+            borderBottomWidth: StyleSheet.hairlineWidth,
+          }}
+        />
         <ReviewTitle>{comment.title}</ReviewTitle>
         <ReviewContents numberOfLines={5}>{comment.contents}</ReviewContents>
       </AbovePart>
@@ -43,7 +50,7 @@ const ReviewDate = styled.Text`
 `;
 const ReviewTitle = styled.Text`
   color: ${(props) => props.theme.color.title};
-  margin-bottom: 10px;
+  margin-top: 5px;
 `;
 const ReviewContents = styled.Text`
   color: ${(props) => props.theme.color.overview};

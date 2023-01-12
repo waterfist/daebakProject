@@ -17,4 +17,5 @@ export const urlRegex =
   /(http|https):\/\/(\w+:{0,1}\w*@)?(\S+)(:[0-9]+)?(\/|\/([\w#!:.?+=&%@!\-\/]))?/;
 // url 정규식
 
-export const titleRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,20}$/;
+// export const titleRegex = /^[ㄱ-ㅎ|가-힣|a-z|A-Z|0-9|]{2,20}$/;
+export const titleRegex = /^[\w\Wㄱ-ㅎㅏ-ㅣ가-힣]{2,20}$/;

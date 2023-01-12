@@ -190,7 +190,6 @@ export const Titleposition = styled.Text`
   top: 90px;
   font-size: 20px;
   margin-top: 7px;
-  font-weight: bold;
 `;
 
 const styles = StyleSheet.create({

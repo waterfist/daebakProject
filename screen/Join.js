@@ -12,20 +12,22 @@ import { emailRegex, pwRegex } from "../util";
 const BgSafeAreaView = styled.View`
   flex: 1;
   justify-content: center;
-  background-color: #eee;
+
+  background-color: white;
 `;
 
 const Background = styled.View`
   align-items: flex-start;
   justify-content: center;
-  background-color: #eee;
+
+  background-color: white;
   padding: 20px;
 `;
 
 const ContainerStyle = styled.TextInput`
   width: 100%;
   background-color: white;
-  border-color: #e8e8e8;
+  border-color: cornflowerblue;
   border-width: 1px;
   border-radius: 5px;
   padding-top: 10px;
@@ -45,7 +47,7 @@ const CustomButton = styled.TouchableOpacity`
 `;
 
 const CustomButton2 = styled.TouchableOpacity`
-  background-color: white;
+  background-color: #b7bdc7;
   width: 100%;
   padding: 15px;
   margin: 5px 0px;
@@ -67,9 +69,17 @@ const CustomButtonText2 = styled.Text`
 
 const JoinTopText = styled.Text`
   color: black;
-  font-size: 32px;
+  font-size: 44px;
   font-weight: bold;
-  margin-left: 30px;
+  margin-left: 0px;
+  margin-top: -30px;
+`;
+
+const JoinMiddleText = styled.Text`
+  color: gray;
+  font-size: 24px;
+  font-weight: bold;
+  margin-left: 0px;
 `;
 
 const JoinTopView = styled.View`
@@ -141,7 +151,8 @@ export default function Join({ navigation: { navigate } }) {
     <BgSafeAreaView>
       <Background>
         <JoinTopView>
-          <JoinTopText>2023 그거 알고 있니?</JoinTopText>
+          <JoinTopText>회원가입</JoinTopText>
+          <JoinMiddleText>Enter Your Details to Register</JoinMiddleText>
         </JoinTopView>
 
         <Text style={{ color: "black", marginTop: 10 }}>아이디</Text>

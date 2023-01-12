@@ -42,7 +42,7 @@ export default function Stack({
   return (
     <NativeStack.Navigator
       screenOptions={{
-        headerTitle: "2023그거알고있니",
+        headerTitle: "2023 그거알고있니",
         headerTitleAlign: "center",
         headerLeft: () => (
           <TouchableOpacity onPress={() => goBack()}>

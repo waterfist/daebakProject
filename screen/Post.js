@@ -94,11 +94,11 @@ export default function Post({
               <Text
                 style={{
                   color: isDark ? YELLOW_COLOR : BLUE_COLOR,
-                  marginRight: "10%",
+                  // marginRight: "10%",
                 }}
               >
                 {post.userId === authService.currentUser?.uid ? (
-                  <Feather name="edit" size={24} color="#3b71f3" />
+                  <Feather name="edit" size={26} color="#3b71f3" />
                 ) : (
                   ""
                 )}
@@ -192,12 +192,7 @@ export default function Post({
   );
 }
 // ------------- Post 내용  --------------
-const TempText = styled.Text`
-  font-size: 20px;
 
-  color: red;
-  text-align: center;
-`;
 export const SectionTitle = styled.Text`
   font-size: 30px;
   font-weight: 600;
@@ -255,7 +250,8 @@ export const CustomButton = styled.TouchableOpacity`
 `;
 
 export const CustomButtonBox = styled.View`
-  margin-top: 80px;
+  margin-top: 50px;
+  margin-bottom: 20px;
 `;
 
 export const CustomButtonText = styled.Text`
