@@ -18,7 +18,7 @@ export default function PostLoader({ posts, category, navigate }) {
         )
         .map((post, key) => {
           return (
-            <SC>
+            <SC key={key}>
               <Container>
                 <ListBox key={key}>
                   <ListButton onPress={() => goToComment(post)}>

@@ -18,6 +18,7 @@ import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
 const Background = styled.View`
   display: flex;
+  flex: 1;
   align-items: flex-start;
   justify-content: center;
   background-color: white;

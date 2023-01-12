@@ -22,7 +22,7 @@ import { deletePostText } from '../api';
 export default function Post({
   navigation,
   route: {
-    params: { comment, from },
+    params: { post, from },
   },
 }) {
   const isDark = useColorScheme() === 'dark';
@@ -119,7 +119,7 @@ export default function Post({
   // ------------- Post 내용  --------------
   return (
     <Container>
-      <Text>{comment.title}</Text>
+      <Text>{post.title}</Text>
       <EditButton onPress={onDelete}>
         <BtnTitle>삭제하기</BtnTitle>
       </EditButton>
@@ -143,7 +143,11 @@ export default function Post({
         }}
       />
 
-      <CommentModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+      <CommentModal
+        postId={post.id}
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+      />
     </Container>
   );
 }
