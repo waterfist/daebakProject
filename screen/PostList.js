@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState } from "react";
 import {
   FlatList,
   ScrollView,
@@ -7,11 +7,12 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
-} from 'react-native';
-import { authService, dbService } from '../firebase';
-import { AntDesign } from '@expo/vector-icons';
-import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from '../color';
-import Loader from '../components/Loader';
+} from "react-native";
+import { authService, dbService } from "../firebase";
+import { AntDesign } from "@expo/vector-icons";
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
+import Loader from "../components/Loader";
+import { FontAwesome5 } from "@expo/vector-icons";
 import {
   collection,
   onSnapshot,
@@ -19,10 +20,10 @@ import {
   query,
   getDoc,
   doc,
-} from 'firebase/firestore';
-import styled from '@emotion/native';
-import PostLoader from '../components/PostLoader';
-import { Ionicons } from '@expo/vector-icons';
+} from "firebase/firestore";
+import styled from "@emotion/native";
+import PostLoader from "../components/PostLoader";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function PostList({
   navigation: { goBack, navigate, setOptions },
@@ -32,7 +33,7 @@ export default function PostList({
 }) {
   const [posts, setPosts] = useState([]);
 
-  const isDark = useColorScheme() === 'dark';
+  const isDark = useColorScheme() === "dark";
 
   // ------------- 상단 header --------------
 
@@ -53,17 +54,17 @@ export default function PostList({
       headerRight: () => {
         return (
           <TouchableOpacity
-            style={{ flexDirection: 'row' }}
+            style={{ flexDirection: "row" }}
             onPress={() => {
               if (authService.currentUser) {
-                navigate('Stacks', { screen: 'PostInput' });
+                navigate("Stacks", { screen: "PostInput" });
               } else {
-                alert('로그인을 먼저 해주세요');
-                navigate('Stacks', { screen: 'Login' });
+                alert("로그인을 먼저 해주세요");
+                navigate("Stacks", { screen: "Login" });
               }
             }}
           >
-            <Ionicons name="create" size={30} color="#3B71F3" />
+            <FontAwesome5 name="pencil-alt" size={22} color="#3B71F3" />
             <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}></Text>
           </TouchableOpacity>
         );
@@ -77,12 +78,12 @@ export default function PostList({
 
   useEffect(() => {
     const q = query(
-      collection(dbService, 'posts'),
-      orderBy('createdAt', 'desc')
+      collection(dbService, "posts"),
+      orderBy("createdAt", "desc")
     );
 
-    onSnapshot(q, snapshot => {
-      const newPosts = snapshot.docs.map(doc => {
+    onSnapshot(q, (snapshot) => {
+      const newPosts = snapshot.docs.map((doc) => {
         const newPost = {
           id: doc.id,
           ...doc.data(),

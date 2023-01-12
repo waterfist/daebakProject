@@ -1,10 +1,12 @@
-import { useEffect } from 'react';
-import styled from '@emotion/native';
-import { useColorScheme, TouchableOpacity } from 'react-native';
-import { AntDesign } from '@expo/vector-icons';
-import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from '../color';
-import { authService } from '../firebase';
-import { useFocusEffect } from '@react-navigation/native';
+import { useEffect } from "react";
+import styled from "@emotion/native";
+import { useColorScheme, TouchableOpacity } from "react-native";
+import { AntDesign } from "@expo/vector-icons";
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
+import { authService } from "../firebase";
+import { useFocusEffect } from "@react-navigation/native";
+import { Text } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function Comment({
   navigation,
@@ -12,15 +14,21 @@ export default function Comment({
     params: { comment, from },
   },
 }) {
-  const isDark = useColorScheme() === 'dark';
+  const isDark = useColorScheme() === "dark";
 
   const onEdit = () => {
-    navigation.navigate('Commentedit', { comment, from });
+    navigation.navigate("Commentedit", { comment, from });
   };
 
   useEffect(() => {
     navigation.setOptions({
-      headerLeft: null,
+      headerLeft: () => (
+        <TouchableOpacity onPress={() => navigation.goBack()}>
+          <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
+            <Ionicons name="arrow-back" size={30} color="#3B71F3" />
+          </Text>
+        </TouchableOpacity>
+      ),
       headerRight: () => {
         return (
           <TouchableOpacity onPress={onEdit}>
@@ -59,24 +67,24 @@ export const Container = styled.ScrollView`
 export const SectionTitle = styled.Text`
   font-size: 30px;
   font-weight: 600;
-  color: ${props => props.theme.color.title};
+  color: ${(props) => props.theme.color.title};
   margin-bottom: 15px;
 `;
 
 export const Ratings = styled.Text`
-  color: ${props => props.theme.color.overview};
+  color: ${(props) => props.theme.color.overview};
   font-size: 20px;
   margin-bottom: 20px;
 `;
 export const Title = styled.Text`
   font-size: 20px;
   font-weight: 500;
-  color: ${props => props.theme.color.overview};
+  color: ${(props) => props.theme.color.overview};
   margin-bottom: 20px;
 `;
 export const Content = styled.Text`
   font-size: 20px;
   font-weight: 500;
-  color: ${props => props.theme.color.overview};
+  color: ${(props) => props.theme.color.overview};
   line-height: 30px;
 `;

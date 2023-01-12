@@ -16,7 +16,8 @@ import { authService, dbService } from "../firebase";
 import CommentModal from "../components/CommentModal";
 import CommentLoader from "../components/CommnetLoader";
 import PostModifyModal from "../components/PostModifyModal";
-
+import { Ionicons } from "@expo/vector-icons";
+import { Feather } from "@expo/vector-icons";
 import {
   collection,
   onSnapshot,
@@ -74,7 +75,7 @@ export default function Post({
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.goBack()}>
           <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
-            뒤로
+            <Ionicons name="arrow-back" size={30} color="#3B71F3" />
           </Text>
         </TouchableOpacity>
       ),
@@ -93,7 +94,7 @@ export default function Post({
                   marginRight: "10%",
                 }}
               >
-                수정
+                <Feather name="edit" size={24} color="#3b71f3" />
               </Text>
             </TouchableOpacity>
           </View>
@@ -127,6 +128,7 @@ export default function Post({
   };
   // ------------- 댓글 box --------------
   // ------------- Post 내용  --------------
+
   return (
     <Container>
       <SectionTitle>제목</SectionTitle>
@@ -137,9 +139,19 @@ export default function Post({
       <Content>{post.url}</Content>
       <SectionStar>별점:</SectionStar>
       <Content>{post.ratings}</Content>
-      <EditButton onPress={onDelete}>
-        <BtnTitle>글 삭제하기</BtnTitle>
-      </EditButton>
+
+      {/* 1 authSErvice.currentUser?.uid
+2. authSErvice.currentUser && authSErvice.currentUser.uid 
+1번과 2번은 같다. */}
+      {/* && 뒤 빈문자열은 항상 false이다. */}
+      {post.userId === authService.currentUser?.uid ? (
+        <EditButton onPress={onDelete}>
+          <BtnTitle>글 삭제하기</BtnTitle>
+        </EditButton>
+      ) : (
+        ""
+      )}
+
       <AddComment onPress={goToComment}>
         <TempText>댓글추가</TempText>
       </AddComment>

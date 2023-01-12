@@ -17,7 +17,7 @@ import Commentedit from "../screen/Commentedit";
 import PostList from "../screen/PostList";
 import PostCards from "../components/PostCards";
 import CommentCards from "../components/CommentCards";
-
+import { Ionicons } from "@expo/vector-icons";
 const NativeStack = createNativeStackNavigator();
 
 export default function Stack({
@@ -47,7 +47,7 @@ export default function Stack({
         headerLeft: () => (
           <TouchableOpacity onPress={() => goBack()}>
             <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
-              뒤로
+              <Ionicons name="arrow-back" size={30} color="#3B71F3" />
             </Text>
           </TouchableOpacity>
         ),

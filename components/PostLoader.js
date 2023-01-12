@@ -1,20 +1,20 @@
-import styled from '@emotion/native';
-import React from 'react';
-import { FlatList, Text, TouchableOpacity } from 'react-native';
-import { Ionicons } from '@expo/vector-icons';
+import styled from "@emotion/native";
+import React from "react";
+import { FlatList, Text, TouchableOpacity } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function PostLoader({ posts, category, navigate }) {
-  const goToPost = post => {
-    navigate('Stacks', {
-      screen: 'Post',
-      params: { post: post, from: 'My' },
+  const goToPost = (post) => {
+    navigate("Stacks", {
+      screen: "Post",
+      params: { post: post, from: "My" },
     });
   };
   return (
     <>
       {posts
         .filter(
-          cate => cate.category === category && cate.category !== undefined
+          (cate) => cate.category === category && cate.category !== undefined
         )
         .map((post, key) => {
           return (
@@ -27,7 +27,7 @@ export default function PostLoader({ posts, category, navigate }) {
                         <Ionicons
                           name="person-circle-outline"
                           size={60}
-                          color="grey"
+                          color="#3B71F3"
                         />
                       </Text>
                     </ProfileBox>
@@ -45,8 +45,8 @@ export default function PostLoader({ posts, category, navigate }) {
                       <ListCardDate>
                         <Text>
                           &#91;{category}
-                          &#93;
-                          {new Date(post.createdAt).toLocaleDateString('kr')}
+                          &#93;{" "}
+                          {new Date(post.createdAt).toLocaleDateString("kr")}
                         </Text>
                       </ListCardDate>
                     </InputContainer>
@@ -71,7 +71,7 @@ export const Container = styled.View`
 
 export const ListBox = styled.View`
   background-color: white;
-  border: 1px solid gray;
+  border: 0.5px solid #3b71f3;
   border-radius: 15px;
   height: 110px;
   padding: 10px;
@@ -99,6 +99,7 @@ export const ListCardDate = styled.View`
   /* background-color: green; */
   height: 20px;
   align-items: flex-end;
+  margin-right: 7px;
 `;
 
 export const TitleText = styled.Text`

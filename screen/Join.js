@@ -21,14 +21,14 @@ import { emailRegex, pwRegex } from "../util";
 const BgSafeAreaView = styled.View`
   flex: 1;
   justify-content: center;
-  background-color: white;
+  background-color: #eee;
 `;
 
 const Background = styled.View`
   /* display: flex; */
   align-items: flex-start;
   justify-content: center;
-  background-color: white;
+  background-color: #eee;
   padding: 20px;
 `;
 
@@ -76,7 +76,7 @@ const CustomButtonText2 = styled.Text`
 `;
 
 const JoinTopText = styled.Text`
-  color: #3b71f3;
+  color: black;
   font-size: 32px;
   font-weight: bold;
   margin-left: 30px;
@@ -164,10 +164,10 @@ export default function Join({ navigation: { navigate } }) {
     <BgSafeAreaView>
       <Background>
         <JoinTopView>
-          <JoinTopText>2023 그거알고 있니?</JoinTopText>
+          <JoinTopText>2023 그거 알고 있니?</JoinTopText>
         </JoinTopView>
         {/* <TouchableOpacity onPress={() => idRef.current.focus()}> */}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>아이디</Text>
+        <Text style={{ color: "black", marginTop: 10 }}>아이디</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle ref={emailRef} value={email} onChangeText={setEmail} />
         {emailError && (
@@ -186,7 +186,7 @@ export default function Join({ navigation: { navigate } }) {
         /> */}
 
         <View style={{ width: "100%" }}>
-          <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
+          <Text style={{ color: "black", marginTop: 10 }}>비밀번호</Text>
           <ContainerStyle
             secureTextEntry={visablePassword}
             ref={passwordRef}
@@ -232,7 +232,7 @@ export default function Join({ navigation: { navigate } }) {
             8자리 이상 영문자, 숫자, 특수문자 조합이어야 합니다.
           </Text>
         )}
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호 확인</Text>
+        <Text style={{ color: "black", marginTop: 10 }}>비밀번호 확인</Text>
         {/* </TouchableOpacity> */}
         <ContainerStyle
           secureTextEntry={visablePassword}

@@ -1,5 +1,5 @@
-import { addDoc, collection } from 'firebase/firestore';
-import React, { useEffect, useState } from 'react';
+import { addDoc, collection } from "firebase/firestore";
+import React, { useEffect, useState } from "react";
 import {
   Button,
   Text,
@@ -7,23 +7,23 @@ import {
   TouchableOpacity,
   useColorScheme,
   View,
-} from 'react-native';
-import { authService, dbService } from '../firebase';
-import { AntDesign } from '@expo/vector-icons';
-import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from '../color';
-import { SelectList } from 'react-native-dropdown-select-list';
-import styled from '@emotion/native';
-import uuid from 'react-native-uuid';
-import Drop from '../components/Drop';
-import { Ionicons } from '@expo/vector-icons';
+} from "react-native";
+import { authService, dbService } from "../firebase";
+import { AntDesign } from "@expo/vector-icons";
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
+import { SelectList } from "react-native-dropdown-select-list";
+import styled from "@emotion/native";
+import uuid from "react-native-uuid";
+import Drop from "../components/Drop";
+import { Ionicons } from "@expo/vector-icons";
 
 export default function PostInput({
   navigation: { goBack, setOptions, navigate },
 }) {
-  const [addPostTitle, setAddPostTitle] = useState('');
-  const [addPostContents, setAddPostContents] = useState('');
-  const [addPostUrl, setAddPostUrl] = useState('');
-  const [addPostCategory, setAddPostCategory] = useState('');
+  const [addPostTitle, setAddPostTitle] = useState("");
+  const [addPostContents, setAddPostContents] = useState("");
+  const [addPostUrl, setAddPostUrl] = useState("");
+  const [addPostCategory, setAddPostCategory] = useState("");
 
   const newPost = {
     title: addPostTitle,
@@ -35,39 +35,39 @@ export default function PostInput({
   };
 
   const addPost = async () => {
-    await addDoc(collection(dbService, 'posts'), newPost);
+    await addDoc(collection(dbService, "posts"), newPost);
     if (!addPostCategory) {
-      alert('Category를 선택해주세요.');
+      alert("Category를 선택해주세요.");
       return true;
     }
     if (!addPostTitle) {
-      alert('제목을 입력해주세요');
+      alert("제목을 입력해주세요");
       return true;
     }
     if (!addPostContents) {
-      alert('내용을 입력해주세요');
+      alert("내용을 입력해주세요");
       return true;
     }
     if (!addPostUrl) {
-      alert('URL을 입력해주세요');
+      alert("URL을 입력해주세요");
       return true;
     }
     goBack();
-    alert('작성완료');
+    alert("작성완료");
   };
 
   const data = [
-    { key: '1', value: '기술' },
-    { key: '2', value: '교육' },
-    { key: '3', value: '보건' },
-    { key: '4', value: '문화' },
-    { key: '5', value: '환경' },
-    { key: '6', value: '교통' },
-    { key: '7', value: '정치' },
-    { key: '8', value: 'etc' },
+    { key: "1", value: "기술" },
+    { key: "2", value: "교육" },
+    { key: "3", value: "보건" },
+    { key: "4", value: "문화" },
+    { key: "5", value: "환경" },
+    { key: "6", value: "교통" },
+    { key: "7", value: "정치" },
+    { key: "8", value: "etc" },
   ];
 
-  const isDark = useColorScheme() === 'dark';
+  const isDark = useColorScheme() === "dark";
 
   useEffect(() => {
     setOptions({
@@ -89,7 +89,7 @@ export default function PostInput({
       <SelectBox>
         {/* <Drop addPostCategory={addPostCategory} /> */}
         <SelectList
-          setSelected={val => setAddPostCategory(val)}
+          setSelected={(val) => setAddPostCategory(val)}
           data={data}
           save="value"
           placeholder="Select category"
@@ -101,19 +101,19 @@ export default function PostInput({
         <TitleInput
           placeholder="  제목을 입력해주세요."
           value={addPostTitle}
-          onChangeText={text => setAddPostTitle(text)}
+          onChangeText={(text) => setAddPostTitle(text)}
         />
         <ContentInput
           style={{ flexShrink: 1 }}
           multiline={true}
           placeholder="  내용을 입력해주세요."
           value={addPostContents}
-          onChangeText={text => setAddPostContents(text)}
+          onChangeText={(text) => setAddPostContents(text)}
         />
         <UrlInput
           placeholder="  Url을 입력해주세요."
           value={addPostUrl}
-          onChangeText={text => setAddPostUrl(text)}
+          onChangeText={(text) => setAddPostUrl(text)}
         />
         <CustomButton onPress={addPost}>
           <CustomButtonText>작성완료</CustomButtonText>
@@ -147,25 +147,31 @@ export const Container = styled.View`
 `;
 
 export const TitleInput = styled.TextInput`
-  border: 1px solid black;
+  border: 0.5px solid black;
   height: 45px;
   border-radius: 10px;
   margin-bottom: 10px;
   margin-top: 10px;
+  padding: 10px;
+  border-color: #3f4d57;
 `;
 
 export const ContentInput = styled.TextInput`
-  border: 1px solid black;
+  border: 0.5px solid black;
   height: 150px;
   border-radius: 10px;
   margin-bottom: 10px;
+  padding: 10px;
+  border-color: #3f4d57;
 `;
 
 export const UrlInput = styled.TextInput`
-  border: 1px solid black;
+  border: 0.5px solid black;
   height: 45px;
   border-radius: 10px;
   margin-bottom: 10px;
+  padding: 10px;
+  border-color: #3f4d57;
 `;
 
 export const SelectBox = styled.View``;

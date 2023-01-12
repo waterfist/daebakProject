@@ -3,7 +3,7 @@ import React from "react";
 import { TouchableOpacity, Text, Alert, View } from "react-native";
 import { useMutation } from "react-query";
 import { deleteComment } from "../api";
-
+import { MaterialCommunityIcons } from "@expo/vector-icons";
 const CommentCards = ({ comment, navigate }) => {
   const { isLoading: isLoadingDeleting, mutate: removeComment } = useMutation(
     ["deleteComment", comment.id],
@@ -36,12 +36,12 @@ const CommentCards = ({ comment, navigate }) => {
     ]);
   };
 
-  // const goToDetail = (comment) => {
-  //   navigate("Stacks", {
-  //     screen: "CommentEdit",
-  //     params: { comment: comment, from: "My" },
-  //   });
-  // };
+  const goMyComment = (comment) => {
+    navigate("Stacks", {
+      screen: "Comment",
+      params: { comment: comment, from: "My" },
+    });
+  };
 
   if (isLoadingDeleting) {
     return <Text>조금만 기다려주세요!</Text>;
@@ -50,8 +50,7 @@ const CommentCards = ({ comment, navigate }) => {
   return (
     <>
       <UserCommentsView key={comment.id}>
-        {/* TouchableOpacity에 onPress로 oToDetail  */}
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => goMyComment(comment)}>
           <View>
             <TextContainer>
               <StaticText>제목</StaticText>
@@ -73,7 +72,11 @@ const CommentCards = ({ comment, navigate }) => {
             </TextContainer>
             <DeleteButtonBoxView>
               <TouchableOpacity onPress={() => onDeleteComment(comment.id)}>
-                <Text style={{ fontSize: 18, color: "white" }}>삭제</Text>
+                <MaterialCommunityIcons
+                  name="delete-forever-outline"
+                  size={30}
+                  color="black"
+                />
               </TouchableOpacity>
             </DeleteButtonBoxView>
           </View>
@@ -90,8 +93,8 @@ const UserCommentsView = styled.View`
   flex-direction: column;
   border-radius: 10px;
   border-width: 1px;
-  border-color: #3b71f3;
-  background-color: #dbe7ff;
+  border: 0.3px solid #3b71f3;
+  background-color: white;
 
   height: 130px;
   width: 300px;
@@ -103,26 +106,21 @@ const TextContainer = styled.View`
   flex-direction: row;
   align-items: center;
   width: 240px;
+  margin-top: 10px;
 `;
 
 const DeleteButtonBoxView = styled.View`
-  align-items: center;
-  border-width: 1px;
-  border-radius: 5px;
-  border-color: #dbe7ff;
-  background-color: #3b71f3;
-
-  width: 25%;
+  align-items: flex-end;
+  width: 100%;
   height: 25%;
-
-  margin-top: 7px;
+  justify-content: flex-end;
+  margin-top: -13px;
 `;
-
 const StaticText = styled.Text`
-  font-size: 18px;
+  font-size: 22px;
   margin-right: 7px;
 `;
 
 const VariableText = styled.Text`
-  font-size: 14px;
+  font-size: 16px;
 `;

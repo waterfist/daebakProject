@@ -104,7 +104,7 @@ export default function Login({
       <ImageLogo source={require("../assets/images/Logo_1.png")} />
 
       {/* <TouchableOpacity onPress={() => emailRef.current.focus()}> */}
-      <Text style={{ color: "#3b71f3", marginTop: 10 }}>아이디</Text>
+      <Text style={{ color: "black", marginTop: 10 }}>아이디</Text>
       {/* </TouchableOpacity> */}
       <ContainerStyle value={email} ref={emailRef} onChangeText={setEmail} />
       {emailError && (
@@ -122,7 +122,7 @@ export default function Login({
         secureTextEntry={true}
       /> */}
       <View style={{ width: "100%" }}>
-        <Text style={{ color: "#3b71f3", marginTop: 10 }}>비밀번호</Text>
+        <Text style={{ color: "black", marginTop: 10 }}>비밀번호</Text>
         <ContainerStyle
           secureTextEntry={visablePassword}
           ref={passwordRef}
