@@ -16,3 +16,7 @@ export const editComment = async ({ commentId, editingObj }) => {
 export const deletePost = async (postId) => {
   await deleteDoc(doc(dbService, "posts", postId));
 };
+
+export const editPost = async ({ postId, editingObj }) => {
+  await updateDoc(doc(dbService, "posts", postId), editingObj);
+};
