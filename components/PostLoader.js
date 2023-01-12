@@ -4,7 +4,7 @@ import { FlatList, Text, TouchableOpacity } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 export default function PostLoader({ posts, category, navigate }) {
-  const goToComment = (post, postId) => {
+  const goToPost = (post, postId) => {
     navigate("Stacks", {
       screen: "Post",
       params: { post: post, from: "My" },
@@ -21,7 +21,7 @@ export default function PostLoader({ posts, category, navigate }) {
             <SC key={key}>
               <Container>
                 <ListBox key={key}>
-                  <ListButton onPress={() => goToComment(post)}>
+                  <ListButton onPress={() => goToPost(post)}>
                     <TestBox>
                       <Text>
                         <Ionicons
