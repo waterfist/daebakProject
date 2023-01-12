@@ -1,5 +1,5 @@
 import { addDoc, collection } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import {
   Button,
   Text,
@@ -25,7 +25,7 @@ export default function PostInput({
   const [addPostContents, setAddPostContents] = useState("");
   const [addPostUrl, setAddPostUrl] = useState("");
   const [addPostCategory, setAddPostCategory] = useState("");
-
+  const urlRef = useRef(null);
   const newPost = {
     title: addPostTitle,
     contents: addPostContents,
@@ -37,6 +37,8 @@ export default function PostInput({
 
   const addPost = async () => {
     await addDoc(collection(dbService, "posts"), newPost);
+    const matchUrl = addPostUrl.match(urlRegex);
+
     if (!addPostCategory) {
       alert("Category를 선택해주세요.");
       return true;
@@ -49,8 +51,9 @@ export default function PostInput({
       alert("내용을 입력해주세요");
       return true;
     }
-    if (!addPostUrl) {
-      alert("URL을 입력해주세요");
+    if (matchUrl === null) {
+      alert("올바른 URL을 입력해주세요");
+      urlRef.current.focus();
       return true;
     }
     goBack();
@@ -114,6 +117,7 @@ export default function PostInput({
         <UrlInput
           placeholder="  Url을 입력해주세요."
           value={addPostUrl}
+          useRef={urlRef}
           onChangeText={(text) => setAddPostUrl(text)}
         />
         <CustomButton onPress={addPost}>
