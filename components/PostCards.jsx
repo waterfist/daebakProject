@@ -1,8 +1,8 @@
-import React from "react";
-import { TouchableOpacity, Text, Alert, View } from "react-native";
-import styled from "@emotion/native";
-import { useMutation } from "react-query";
-import { deletePost } from "../api";
+import React, { useState } from 'react';
+import { TouchableOpacity, Text, Alert, View } from 'react-native';
+import styled from '@emotion/native';
+import { useMutation } from 'react-query';
+import { deletePost } from '../api';
 
 // MY > MyPosts =  MyComments > Postcards = CommentCards
 
@@ -11,29 +11,31 @@ import { deletePost } from "../api";
 
 const PostCards = ({ post, navigate }) => {
   const { isLoading: isLoadingDeleting, mutate: removePost } = useMutation(
-    ["deletePost", post.id],
-    (body) => deletePost(body),
+    ['deletePost', post.id],
+    body => deletePost(body),
     {
       onSuccess: () => {
-        console.log("삭제성공");
+        console.log('삭제성공');
       },
-      onError: (err) => {
-        console.log("err in delete:", err);
+      onError: err => {
+        console.log('err in delete:', err);
       },
     }
   );
 
-  const onDeletePost = async (id) => {
-    Alert.alert("게시글 삭제", "정말 현재 게시글을 삭제하시겠습니까?", [
-      { text: "cancel", style: "destructive" },
+  const [modalVisible, setModalVisible] = useState(false);
+
+  const onDeletePost = async id => {
+    Alert.alert('게시글 삭제', '정말 현재 게시글을 삭제하시겠습니까?', [
+      { text: 'cancel', style: 'destructive' },
       {
-        text: "OK. Delete it.",
+        text: 'OK. Delete it.',
         onPress: async () => {
           try {
             await removePost(id);
-            alert("삭제가 완료되었습니다.");
+            alert('삭제가 완료되었습니다.');
           } catch (err) {
-            console.log("err:", err);
+            console.log('err:', err);
           }
         },
       },
@@ -76,12 +78,12 @@ const PostCards = ({ post, navigate }) => {
           <TextContainer>
             <StaticText>작성일</StaticText>
             <VariableText numberOfLines={1} ellipsizeMode="tail">
-              {new Date(post.createdAt).toLocaleDateString("kr")}
+              {new Date(post.createdAt).toLocaleDateString('kr')}
             </VariableText>
           </TextContainer>
           <DeleteButtonBoxView>
             <TouchableOpacity onPress={() => onDeletePost(post.id)}>
-              <Text style={{ fontSize: 18, color: "white" }}>삭제</Text>
+              <Text style={{ fontSize: 18, color: 'white' }}>삭제</Text>
             </TouchableOpacity>
           </DeleteButtonBoxView>
         </UserPostsView>
