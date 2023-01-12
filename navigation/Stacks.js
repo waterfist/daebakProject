@@ -1,7 +1,7 @@
 import React from "react";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Text, TouchableOpacity, useColorScheme } from "react-native";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
 import Login from "../screen/Login";
 import { authService } from "../firebase";
 import { signOut } from "firebase/auth";
@@ -15,6 +15,8 @@ import TestComment from "../screen/TestComment";
 import Comment from "../screen/Comment";
 import Commentedit from "../screen/Commentedit";
 import PostList from "../screen/PostList";
+import PostCards from "../components/PostCards";
+import CommentCards from "../components/CommentCards";
 
 const NativeStack = createNativeStackNavigator();
 
@@ -40,10 +42,11 @@ export default function Stack({
   return (
     <NativeStack.Navigator
       screenOptions={{
+        headerTitle: "2023그거알고있니",
         headerTitleAlign: "center",
         headerLeft: () => (
           <TouchableOpacity onPress={() => goBack()}>
-            <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+            <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
               뒤로
             </Text>
           </TouchableOpacity>
@@ -51,13 +54,13 @@ export default function Stack({
         headerRight: () => {
           return (
             <TouchableOpacity onPress={handleAuth}>
-              <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+              <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
                 {authService.currentUser ? "로그아웃" : "로그인"}
               </Text>
             </TouchableOpacity>
           );
         },
-        headerTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
+        headerTintColor: isDark ? YELLOW_COLOR : BLUE_COLOR,
       }}
     >
       {/* Screen 페이지 9개 */}
@@ -70,6 +73,8 @@ export default function Stack({
       <NativeStack.Screen name="PostInput" component={PostInput} />
       <NativeStack.Screen name="PostList" component={PostList} />
       <NativeStack.Screen name="Main" component={Main} />
+      <NativeStack.Screen name="PostCards" component={PostCards} />
+      <NativeStack.Screen name="CommentCards" component={CommentCards} />
     </NativeStack.Navigator>
   );
 }

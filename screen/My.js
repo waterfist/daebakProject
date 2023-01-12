@@ -1,24 +1,9 @@
 import styled from "@emotion/native";
 import React, { useCallback, useState } from "react";
-import { Text, View, ScrollView, TouchableOpacity } from "react-native";
-import {
-  getDoc,
-  onSnapshot,
-  query,
-  collection,
-  doc,
-  oderBy,
-  updateDoc,
-  deleteDoc,
-  orderBy,
-  getDocs,
-} from "firebase/firestore";
-import { authService, dbService } from "../firebase";
-import { signOut, getAuth } from "firebase/auth";
-import {
-  NavigationHelpersContext,
-  useFocusEffect,
-} from "@react-navigation/native";
+import { Text, ScrollView, TouchableOpacity } from "react-native";
+import { authService } from "../firebase";
+import { signOut } from "firebase/auth";
+import { useFocusEffect } from "@react-navigation/native";
 import MyComments from "../components/MyComments";
 import MyPosts from "../components/MyPosts";
 
@@ -29,12 +14,11 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
     signOut(authService)
       .then(() => {
         console.log("로그아웃 성공");
-        navigate("Tabs", { name: "Home" });
+        alert("로그아웃 성공");
+        navigate("Tabs", { screen: "Home" });
       })
       .catch((err) => alert(err));
   };
-
-  const editNickName = () => {};
 
   useFocusEffect(
     useCallback(() => {
@@ -63,7 +47,7 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
         headerRight: () => {
           return (
             <TouchableOpacity style={{ marginRight: 10 }} onPress={logout}>
-              <Text>로그아웃</Text>
+              <LogoutText>로그아웃</LogoutText>
             </TouchableOpacity>
           );
         },
@@ -78,12 +62,12 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
         <TouchableOpacity>
           <UserImage source={require("../assets/images/nullimage.png")} />
         </TouchableOpacity>
-        {/* onPress 속성으로 닉네임 update */}
-        <TouchableOpacity onPress={editNickName}>
-          <UserIdText>
-            @{authService.currentUser.email.split("@")[0]}
-          </UserIdText>
-        </TouchableOpacity>
+
+        <UserIdText>
+          @
+          {!authService.currentUser ||
+            authService.currentUser.email.split("@")[0]}
+        </UserIdText>
       </UserInformationView>
 
       <TextView>
@@ -102,6 +86,12 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
     </ScrollView>
   );
 }
+
+const LogoutText = styled.Text`
+  color: #3b71f3;
+  font-size: 16px;
+  margin-right: 5px;
+`;
 
 const UserInformationView = styled.View`
   flex: 1;
@@ -134,10 +124,12 @@ const TextView = styled.View`
   margin-left: 12%;
   margin-right: 12%;
   margin-bottom: 5%;
+  border-color: #3b71f3;
 `;
 
 const MyPostsText = styled.Text`
   font-size: 25px;
+  color: #3b71f3;
 `;
 
 const UserPostContainer = styled.View`

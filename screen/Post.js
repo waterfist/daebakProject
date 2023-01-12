@@ -8,20 +8,29 @@ import {
   useColorScheme,
   View,
 } from "react-native";
-import { GREEN_COLOR, YELLOW_COLOR } from "../color";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
+import { NavigationContainer, useFocusEffect } from "@react-navigation/native";
+import { GREEN_COLOR, YELLOW_COLOR, BLUE_COLOR } from "../color";
 import styled from "@emotion/native";
 import { authService, dbService } from "../firebase";
 import CommentModal from "../components/CommentModal";
 import CommentLoader from "../components/CommnetLoader";
-import { collection, onSnapshot, orderBy, query } from "firebase/firestore";
+import PostModifyModal from "../components/PostModifyModal";
+
+import {
+  collection,
+  onSnapshot,
+  orderBy,
+  query,
+  where,
+} from "firebase/firestore";
 import { useMutation } from "react-query";
 import { deletePostText } from "../api";
-import PostModifyModal from "../components/PostModifyModal";
 
 export default function Post({
   navigation,
   route: {
-    params: { comment, from },
+    params: { post },
   },
 }) {
   const isDark = useColorScheme() === "dark";
@@ -47,7 +56,7 @@ export default function Post({
         onPress: async () => {
           try {
             // await deleteDoc(doc(dbService, "comment", comment.id));
-            await removePost(comment.id);
+            await removePost(post.id);
             Alert.alert("삭제가 완료되었습니다");
             navigation.navigate("Main");
           } catch (err) {
@@ -64,7 +73,7 @@ export default function Post({
     navigation.setOptions({
       headerLeft: () => (
         <TouchableOpacity onPress={() => navigation.goBack()}>
-          <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+          <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
             뒤로
           </Text>
         </TouchableOpacity>
@@ -80,7 +89,7 @@ export default function Post({
             >
               <Text
                 style={{
-                  color: isDark ? YELLOW_COLOR : GREEN_COLOR,
+                  color: isDark ? YELLOW_COLOR : BLUE_COLOR,
                   marginRight: "10%",
                 }}
               >
@@ -94,7 +103,8 @@ export default function Post({
 
     const q = query(
       collection(dbService, "comment"),
-      orderBy("createdAt", "desc")
+      orderBy("createdAt", "desc"),
+      where("postId", "==", post.id ?? "")
     );
     const unsubscribe = onSnapshot(q, (snapshot) => {
       const newComments = snapshot.docs.map((doc) => ({
@@ -104,7 +114,7 @@ export default function Post({
       setComments(newComments);
     });
     return unsubscribe;
-  }, []);
+  }, [post.id]);
   // ------------- 상단 header --------------
   // ------------- 댓글 box --------------
   const goToComment = async () => {
@@ -120,13 +130,13 @@ export default function Post({
   return (
     <Container>
       <SectionTitle>제목</SectionTitle>
-      <Title>{comment.title}</Title>
+      <Title>{post.title}</Title>
       <SectionTitle>내용</SectionTitle>
-      <Content>{comment.contents}</Content>
+      <Content>{post.contents}</Content>
       <SectionUrl>URL:</SectionUrl>
-      <Content>{comment.url}</Content>
+      <Content>{post.url}</Content>
       <SectionStar>별점:</SectionStar>
-      <Content>{comment.ratings}</Content>
+      <Content>{post.ratings}</Content>
       <EditButton onPress={onDelete}>
         <BtnTitle>글 삭제하기</BtnTitle>
       </EditButton>
@@ -150,12 +160,18 @@ export default function Post({
         }}
       />
       <PostModifyModal
-        id={comment.id}
+        id={post.id}
         isOpenModifyModal={isOpenModifyModal}
         setIsOpenModifyModal={setIsOpenModifyModal}
         navigation={navigation}
       />
       <CommentModal isOpenModal={isOpenModal} setIsOpenModal={setIsOpenModal} />
+
+      {/* <CommentModal
+        postId={post.id}
+        isOpenModal={isOpenModal}
+        setIsOpenModal={setIsOpenModal}
+      /> */}
     </Container>
   );
 }

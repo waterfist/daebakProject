@@ -75,7 +75,7 @@ export default function PostModifyModal({
                   {
                     name: "Post",
                     params: {
-                      comment: {
+                      post: {
                         title: modalTitle,
                         contents: modalContent,
                         url: modalUrl,

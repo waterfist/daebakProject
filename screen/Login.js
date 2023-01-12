@@ -16,59 +16,6 @@ import { signInWithEmailAndPassword } from "firebase/auth";
 import { emailRegex, pwRegex } from "../util";
 import { Entypo } from "@expo/vector-icons";
 import { MaterialIcons } from "@expo/vector-icons";
-const Background = styled.View`
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  /* background-color: black; */
-  padding: 20px;
-`;
-const ImageLogo = styled.Image`
-  width: 100%;
-`;
-
-const ContainerStyle = styled.TextInput`
-  width: 100%;
-  background-color: white;
-  border-color: #e8e8e8;
-  border-width: 1px;
-  border-radius: 5px;
-  padding-top: 10px;
-  padding-bottom: 10px;
-  margin-top: 15px;
-  padding: 13px;
-`;
-
-const CustomButton = styled.TouchableOpacity`
-  background-color: #3b71f3;
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0px;
-  border-radius: 5px;
-  align-items: center;
-  margin-top: 15px;
-`;
-
-const CustomButton2 = styled.TouchableOpacity`
-  background-color: white;
-  width: 100%;
-  padding: 15px;
-  margin: 5px 0px;
-  border: #bdbdc9;
-  border-radius: 5px;
-  align-items: center;
-  margin-top: 15px;
-`;
-
-const CustomButtonText = styled.Text`
-  color: white;
-  font-weight: bold;
-`;
-
-const CustomButtonText2 = styled.Text`
-  color: black;
-  font-weight: bold;
-`;
 
 export default function Login({
   navigation: { navigate, setOptions, goBack },
@@ -82,13 +29,13 @@ export default function Login({
 
   const emailRef = useRef(null);
   const passwordRef = useRef(null);
-  const inputRef = createRef();
+  // const inputRef = createRef();
 
-  // const handlerInputClear = () => {
-  //   setPassword("");
-  //   inputRef.current.clear;
-  //   console.log(inputRef);
-  // };
+  const handlerInputClear = () => {
+    setPassword("");
+    // inputRef.current.clear;
+    // clearRef.current.value = "";
+  };
 
   const visibleToggle = () => {
     setVisablePassword(!visablePassword);
@@ -182,9 +129,17 @@ export default function Login({
           value={password}
           onChangeText={setPassword}
           style={{ position: "relative" }}
-          inputRef={inputRef}
+          // inputRef={inputRef}
         />
 
+        <TouchableOpacity onPress={handlerInputClear}>
+          <MaterialIcons
+            name="cancel"
+            size={24}
+            color="black"
+            style={{ position: "absolute", top: -35, right: 35, color: "gray" }}
+          />
+        </TouchableOpacity>
         <TouchableOpacity onPress={visibleToggle}>
           {visablePassword ? (
             <Entypo
@@ -195,7 +150,7 @@ export default function Login({
                 // color: "gray",
                 marginTop: 10,
                 position: "absolute",
-                top: -42,
+                top: -45,
                 right: 10,
               }}
             />
@@ -208,15 +163,12 @@ export default function Login({
                 // color: "gray",
                 marginTop: 10,
                 position: "absolute",
-                top: -42,
+                top: -45,
                 right: 10,
               }}
             />
           )}
         </TouchableOpacity>
-        {/* <TouchableOpacity onPress={handlerInputClear}>
-          <MaterialIcons name="cancel" size={24} color="black" />
-        </TouchableOpacity> */}
       </View>
       {passwordShortError && (
         <Text style={{ color: "red", marginTop: 10 }}>
@@ -232,3 +184,57 @@ export default function Login({
     </Background>
   );
 }
+
+const Background = styled.View`
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  /* background-color: black; */
+  padding: 20px;
+`;
+const ImageLogo = styled.Image`
+  width: 100%;
+`;
+
+const ContainerStyle = styled.TextInput`
+  width: 100%;
+  background-color: white;
+  border-color: #e8e8e8;
+  border-width: 1px;
+  border-radius: 5px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-top: 15px;
+  padding: 13px;
+`;
+
+const CustomButton = styled.TouchableOpacity`
+  background-color: #3b71f3;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0px;
+  border-radius: 5px;
+  align-items: center;
+  margin-top: 15px;
+`;
+
+const CustomButton2 = styled.TouchableOpacity`
+  background-color: white;
+  width: 100%;
+  padding: 15px;
+  margin: 5px 0px;
+  border: #bdbdc9;
+  border-radius: 5px;
+  align-items: center;
+  margin-top: 15px;
+`;
+
+const CustomButtonText = styled.Text`
+  color: white;
+  font-weight: bold;
+`;
+
+const CustomButtonText2 = styled.Text`
+  color: black;
+  font-weight: bold;
+`;

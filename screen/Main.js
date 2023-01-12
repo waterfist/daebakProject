@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Image, Text, TouchableOpacity, View } from 'react-native';
-import styled from '@emotion/native';
-import { StyleSheet } from 'react-native';
+import React, { useEffect, useState } from "react";
+import { Image, Text, TouchableOpacity, View } from "react-native";
+import styled from "@emotion/native";
+import { StyleSheet } from "react-native";
 
 export default function Main({ navigation: { navigate } }) {
   return (
@@ -10,14 +10,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('기술');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '기술' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "기술" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/technology.png')}
+            source={require("../assets/images/technology.png")}
             style={styles.image}
           />
           <Titleposition>기술</Titleposition>
@@ -25,14 +25,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('교육');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '교육' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "교육" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/education.png')}
+            source={require("../assets/images/education.png")}
             style={styles.image}
           />
           <Titleposition>교육</Titleposition>
@@ -40,14 +40,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('보건');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '보건' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "보건" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/health.png')}
+            source={require("../assets/images/health.png")}
             style={styles.image}
           />
           <Titleposition>보건</Titleposition>
@@ -55,14 +55,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('문화');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '문화' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "문화" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/culture.png')}
+            source={require("../assets/images/culture.png")}
             style={styles.image}
           />
           <Titleposition>문화</Titleposition>
@@ -72,14 +72,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('환경');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '환경' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "환경" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/environment.png')}
+            source={require("../assets/images/environment.png")}
             style={styles.image}
           />
           <Titleposition>환경</Titleposition>
@@ -87,14 +87,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('교통');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '교통' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "교통" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/traffic.png')}
+            source={require("../assets/images/traffic.png")}
             style={styles.image}
           />
           <Titleposition>교통</Titleposition>
@@ -102,14 +102,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('정치');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '정치' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "정치" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/politics.png')}
+            source={require("../assets/images/politics.png")}
             style={styles.image}
           />
           <Titleposition>정치</Titleposition>
@@ -128,14 +128,14 @@ export default function Main({ navigation: { navigate } }) {
         <MainButton
           onPress={() => {
             // setCategory('경제');
-            navigate('Stacks', {
-              screen: 'PostList',
-              params: { category: '기타' },
+            navigate("Stacks", {
+              screen: "PostList",
+              params: { category: "etc" },
             });
           }}
         >
           <Image
-            source={require('../assets/images/etc.png')}
+            source={require("../assets/images/etc.png")}
             style={styles.image}
           />
           <Titleposition>etc</Titleposition>
@@ -194,12 +194,12 @@ export const Titleposition = styled.Text`
 
 const styles = StyleSheet.create({
   image: {
-    justifyContent: 'center',
-    alignItems: 'center',
+    justifyContent: "center",
+    alignItems: "center",
     width: 90,
     height: 90,
     // resizeMode: 'contain',
-    resizeMode: 'cover',
+    resizeMode: "cover",
     borderRadius: 30,
   },
 });
