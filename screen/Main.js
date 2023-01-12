@@ -130,7 +130,7 @@ export default function Main({ navigation: { navigate } }) {
             // setCategory('경제');
             navigate("Stacks", {
               screen: "PostList",
-              params: { category: "기타" },
+              params: { category: "etc" },
             });
           }}
         >

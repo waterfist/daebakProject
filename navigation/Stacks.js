@@ -42,10 +42,11 @@ export default function Stack({
   return (
     <NativeStack.Navigator
       screenOptions={{
+        headerTitle: "2023그거알고있니",
         headerTitleAlign: "center",
         headerLeft: () => (
           <TouchableOpacity onPress={() => goBack()}>
-            <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+            <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
               뒤로
             </Text>
           </TouchableOpacity>
@@ -53,13 +54,13 @@ export default function Stack({
         headerRight: () => {
           return (
             <TouchableOpacity onPress={handleAuth}>
-              <Text style={{ color: isDark ? YELLOW_COLOR : GREEN_COLOR }}>
+              <Text style={{ color: isDark ? YELLOW_COLOR : BLUE_COLOR }}>
                 {authService.currentUser ? "로그아웃" : "로그인"}
               </Text>
             </TouchableOpacity>
           );
         },
-        headerTintColor: isDark ? YELLOW_COLOR : GREEN_COLOR,
+        headerTintColor: isDark ? YELLOW_COLOR : BLUE_COLOR,
       }}
     >
       {/* Screen 페이지 9개 */}

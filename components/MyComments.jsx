@@ -15,6 +15,8 @@ import CommentCards from "./CommentCards";
 const MyComments = () => {
   const [comments, setComments] = useState([]);
 
+  console.log("지금 아이디는?", authService.currentUser?.uid);
+
   useFocusEffect(
     useCallback(() => {
       // 현재 로그인 사용자의 comment만 나오도록 구현
@@ -29,6 +31,9 @@ const MyComments = () => {
           id: doc.id,
           ...doc.data(),
         }));
+
+        console.log("코멘트는? ", newComments);
+
         setComments(newComments);
       });
 

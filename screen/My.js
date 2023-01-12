@@ -14,8 +14,8 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
     signOut(authService)
       .then(() => {
         console.log("로그아웃 성공");
+        alert("로그아웃 성공");
         navigate("Tabs", { screen: "Home" });
-        alert("로그아웃 되었습니다");
       })
       .catch((err) => alert(err));
   };
