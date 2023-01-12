@@ -89,14 +89,14 @@ export default function My({ navigation: { navigate, reset, setOptions } }) {
         <MyPostsText>My Posts</MyPostsText>
       </TextView>
       <UserPostContainer>
-        <MyPosts />
+        <MyPosts navigate={navigate} />
       </UserPostContainer>
 
       <TextView>
         <MyPostsText>My Comments</MyPostsText>
       </TextView>
       <UserCommentContainer>
-        <MyComments />
+        <MyComments navigate={navigate} />
       </UserCommentContainer>
     </ScrollView>
   );

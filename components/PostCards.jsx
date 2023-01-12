@@ -1,18 +1,15 @@
 import React, { useState } from 'react';
-import {
-  TouchableOpacity,
-  Text,
-  Alert,
-  Modal,
-  StyleSheet,
-  Pressable,
-  View,
-} from 'react-native';
+import { TouchableOpacity, Text, Alert, View } from 'react-native';
 import styled from '@emotion/native';
 import { useMutation } from 'react-query';
 import { deletePost } from '../api';
 
-const PostCards = ({ post }) => {
+// MY > MyPosts =  MyComments > Postcards = CommentCards
+
+// props으로 navigation을 받아와야하는데 안됨
+// navigate가 함수가 아니라고 오류뚬
+
+const PostCards = ({ post, navigate }) => {
   const { isLoading: isLoadingDeleting, mutate: removePost } = useMutation(
     ['deletePost', post.id],
     body => deletePost(body),
@@ -52,35 +49,46 @@ const PostCards = ({ post }) => {
   if (isLoadingDeleting) {
     return <Text>조금만 기다려주세요!</Text>;
   }
+  // navigator 할려고 onpress를 줬으나, 프롭으로 받았느데 작동을 안함
+
+  //   const goToPost = (post, postId) => {
+  //     navigate("Stacks", {
+  //       screen: "Post",
+  //       params: { post: post, from: "My" },
+  //     });
+  //   };
+  // }
 
   return (
-    <>
-      <UserPostsView key={post.id}>
-        <TextContainer>
-          <StaticText>제목</StaticText>
-          <VariableText numberOfLines={1} ellipsizeMode="tail">
-            {post.title}
-          </VariableText>
-        </TextContainer>
-        <TextContainer>
-          <StaticText>내용</StaticText>
-          <VariableText numberOfLines={1} ellipsizeMode="tail">
-            {post.contents}
-          </VariableText>
-        </TextContainer>
-        <TextContainer>
-          <StaticText>작성일</StaticText>
-          <VariableText numberOfLines={1} ellipsizeMode="tail">
-            {new Date(post.createdAt).toLocaleDateString('kr')}
-          </VariableText>
-        </TextContainer>
-        <DeleteButtonBoxView>
-          <TouchableOpacity onPress={() => onDeletePost(post.id)}>
-            <Text style={{ fontSize: 18, color: 'white' }}>삭제</Text>
-          </TouchableOpacity>
-        </DeleteButtonBoxView>
-      </UserPostsView>
-    </>
+    <TouchableOpacity style={{ flex: 1 }}>
+      <View>
+        <UserPostsView key={post.id}>
+          <TextContainer>
+            <StaticText>제목</StaticText>
+            <VariableText numberOfLines={1} ellipsizeMode="tail">
+              {post.title}
+            </VariableText>
+          </TextContainer>
+          <TextContainer>
+            <StaticText>내용</StaticText>
+            <VariableText numberOfLines={1} ellipsizeMode="tail">
+              {post.contents}
+            </VariableText>
+          </TextContainer>
+          <TextContainer>
+            <StaticText>작성일</StaticText>
+            <VariableText numberOfLines={1} ellipsizeMode="tail">
+              {new Date(post.createdAt).toLocaleDateString('kr')}
+            </VariableText>
+          </TextContainer>
+          <DeleteButtonBoxView>
+            <TouchableOpacity onPress={() => onDeletePost(post.id)}>
+              <Text style={{ fontSize: 18, color: 'white' }}>삭제</Text>
+            </TouchableOpacity>
+          </DeleteButtonBoxView>
+        </UserPostsView>
+      </View>
+    </TouchableOpacity>
   );
 };
 
@@ -127,49 +135,3 @@ const StaticText = styled.Text`
 const VariableText = styled.Text`
   font-size: 14px;
 `;
-
-const styles = StyleSheet.create({
-  centeredView: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center',
-    marginTop: 22,
-  },
-  modalView: {
-    margin: 20,
-    width: 400,
-    height: 400,
-    backgroundColor: 'white',
-    borderRadius: 20,
-    padding: 35,
-    alignItems: 'center',
-    shadowColor: '#000',
-    shadowOffset: {
-      width: 0,
-      height: 2,
-    },
-    shadowOpacity: 0.25,
-    shadowRadius: 4,
-    elevation: 5,
-  },
-  button: {
-    borderRadius: 20,
-    padding: 10,
-    elevation: 2,
-  },
-  buttonOpen: {
-    backgroundColor: '#F194FF',
-  },
-  buttonClose: {
-    backgroundColor: '#2196F3',
-  },
-  textStyle: {
-    color: 'white',
-    fontWeight: 'bold',
-    textAlign: 'center',
-  },
-  modalText: {
-    marginBottom: 15,
-    textAlign: 'center',
-  },
-});
