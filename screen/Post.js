@@ -182,6 +182,7 @@ export default function Post({
         isOpenModifyModal={isOpenModifyModal}
         setIsOpenModifyModal={setIsOpenModifyModal}
         navigation={navigation}
+        post={post}
       />
 
       <CommentModal

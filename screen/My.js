@@ -126,6 +126,7 @@ const UserImage = styled.Image`
   width: 100px;
   border-radius: 50px;
   margin-right: 10%;
+  background-color: cornflowerblue;
 `;
 
 const UserIdText = styled.Text`

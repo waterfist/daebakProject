@@ -53,11 +53,11 @@ export default function CommentModal({ postId, isOpenModal, setIsOpenModal }) {
             />
           </InputWrapper>
           <Row style={{ justifyContent: "space-between" }}>
-            <ModalBtn onPress={() => setIsOpenModal(false)} title="Cancel" />
+            <ModalBtn onPress={() => setIsOpenModal(false)} title="취소" />
             <ModalBtn
               disabled={!ratings || !modalContent}
               onPress={addComment}
-              title="Add Comment"
+              title="댓글 추가"
             />
           </Row>
         </Dialog>
@@ -70,9 +70,11 @@ const TitleInput = styled.TextInput`
   padding: 10px;
   background-color: white;
   border-radius: 5px;
+  border: 0.4px solid black;
 `;
 const ContentInput = styled(TitleInput)`
-  min-height: 100px;
+  min-height: 200px;
+  border: 0.4px solid black;
 `;
 const ModalBtn = styled.Button``;
 const InputWrapper = styled.View``;
@@ -82,14 +84,18 @@ const Backdrop = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: gray;
 `;
 const Dialog = styled.KeyboardAvoidingView`
-  background-color: ${(props) => props.theme.color.modalBg};
+  /* background-color: ${(props) => props.theme.color.modalBg}; */
+  background-color: white;
+  border: #3b71f3;
+
   width: 80%;
   height: 70%;
   padding: 20px;
   justify-content: space-between;
-  border-radius: 5px;
+  border-radius: 10px;
 `;
 const ModalTitle = styled.Text`
   font-size: 20px;

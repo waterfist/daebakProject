@@ -16,6 +16,7 @@ import styled from "@emotion/native";
 import uuid from "react-native-uuid";
 import Drop from "../components/Drop";
 import { Ionicons } from "@expo/vector-icons";
+import { emailRegex, pwRegex, urlRegex } from "../util";
 
 export default function PostInput({
   navigation: { goBack, setOptions, navigate },
@@ -130,11 +131,13 @@ export const CustomButton = styled.TouchableOpacity`
   margin: 5px 0px;
   border-radius: 5px;
   align-items: center;
-  margin-top: 15px;
+  margin-top: 10px;
 `;
 
 export const CustomButtonText = styled.Text`
-  color: white;
+  color: ${(props) => (props.disabled ? "yellow" : "white")};
+  font-size: 20px;
+  font-weight: 700;
 `;
 
 export const Container = styled.View`

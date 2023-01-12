@@ -1,14 +1,14 @@
 import { useState } from "react";
 import styled from "@emotion/native";
-import { collection, doc, updateDoc } from "firebase/firestore";
+
 import { Modal, Alert, Text } from "react-native";
-import { authService, dbService } from "../firebase";
-import { AirbnbRating, Rating } from "react-native-ratings";
+
 import { useMutation } from "react-query";
 import { editPost } from "../api";
 
 export default function PostModifyModal({
   id,
+  post,
   isOpenModifyModal,
   setIsOpenModifyModal,
   navigation,
@@ -102,17 +102,12 @@ export default function PostModifyModal({
     <Modal visible={isOpenModifyModal} transparent animationType="fade">
       <Backdrop>
         <Dialog>
-          <ModalTitle>별점</ModalTitle>
           <InputWrapper>
-            <AirbnbRating
-              onFinishRating={getRatings}
-              ratingCount={5}
-              size={20}
-            />
             <ModalTitle>제목</ModalTitle>
             <TitleInput
               value={modalTitle}
               onChangeText={(text) => setModalTitle(text)}
+              placeholder={post.title}
             />
             <ModalTitle>내용</ModalTitle>
             <ContentInput
@@ -121,11 +116,13 @@ export default function PostModifyModal({
               onChangeText={(text) => setModalContent(text)}
               multiline
               maxLength={300}
+              placeholder={post.contents}
             />
             <ModalTitle>Url</ModalTitle>
             <UrlInput
               value={modalUrl}
               onChangeText={(text) => setModalUrl(text)}
+              placeholder={post.url}
             />
           </InputWrapper>
           <Row style={{ justifyContent: "space-between" }}>
@@ -151,14 +148,17 @@ const TitleInput = styled.TextInput`
   padding: 10px;
   background-color: white;
   border-radius: 5px;
+  border: 0.4px solid black;
 `;
 const ContentInput = styled(TitleInput)`
-  min-height: 100px;
+  min-height: 250px;
+  border: 0.4px solid black;
 `;
 const UrlInput = styled.TextInput`
   padding: 10px;
   background-color: white;
   border-radius: 5px;
+  border: 0.4px solid black;
 `;
 const ModalBtn = styled.Button`
   color: black;
@@ -170,6 +170,7 @@ const Backdrop = styled.View`
   flex: 1;
   justify-content: center;
   align-items: center;
+  background-color: gray;
 `;
 const Dialog = styled.KeyboardAvoidingView`
   background-color: ${(props) => props.theme.color.modalBg};
@@ -178,9 +179,11 @@ const Dialog = styled.KeyboardAvoidingView`
   padding: 20px;
   justify-content: space-between;
   border-radius: 5px;
+  background-color: white;
+  border: #3b71f3;
 `;
 const ModalTitle = styled.Text`
-  font-size: 15px;
+  font-size: 20px;
   font-weight: 600;
   color: black;
   margin-bottom: 10px;
