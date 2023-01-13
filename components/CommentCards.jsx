@@ -96,11 +96,6 @@ const UserCommentsView = styled.View`
   border-radius: 10px;
   height: 130px;
   padding: 10px;
-
-  height: 130px;
-  width: 300px;
-  padding: 10px;
-  margin-bottom: 10px;
 `;
 
 const TextContainer = styled.View`
