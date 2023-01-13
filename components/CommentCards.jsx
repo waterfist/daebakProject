@@ -4,6 +4,7 @@ import { TouchableOpacity, Text, Alert, View } from "react-native";
 import { useMutation } from "react-query";
 import { deleteComment } from "../api";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { Card } from "react-native-shadow-cards";
 const CommentCards = ({ comment, navigate }) => {
   const { isLoading: isLoadingDeleting, mutate: removeComment } = useMutation(
     ["deleteComment", comment.id],
@@ -48,39 +49,41 @@ const CommentCards = ({ comment, navigate }) => {
 
   return (
     <>
-      <UserCommentsView key={comment.id}>
-        <TouchableOpacity onPress={() => goMyComment(comment)}>
-          <View>
-            <TextContainer>
-              <StaticText>제목</StaticText>
-              <VariableText numberOfLines={1} ellipsizeMode="tail">
-                {comment.title}
-              </VariableText>
-            </TextContainer>
-            <TextContainer>
-              <StaticText>내용</StaticText>
-              <VariableText numberOfLines={1} ellipsizeMode="tail">
-                {comment.contents}
-              </VariableText>
-            </TextContainer>
-            <TextContainer>
-              <StaticText>작성일</StaticText>
-              <VariableText numberOfLines={1} ellipsizeMode="tail">
-                {new Date(comment.createdAt).toLocaleDateString("kr")}
-              </VariableText>
-            </TextContainer>
-            <DeleteButtonBoxView>
-              <TouchableOpacity onPress={() => onDeleteComment(comment.id)}>
-                <MaterialCommunityIcons
-                  name="delete-forever-outline"
-                  size={30}
-                  color="black"
-                />
-              </TouchableOpacity>
-            </DeleteButtonBoxView>
-          </View>
-        </TouchableOpacity>
-      </UserCommentsView>
+      <Card style={{ padding: 5, margin: 7 }}>
+        <UserCommentsView key={comment.id}>
+          <TouchableOpacity onPress={() => goMyComment(comment)}>
+            <View>
+              <TextContainer>
+                <StaticText>제목</StaticText>
+                <VariableText numberOfLines={1} ellipsizeMode="tail">
+                  {comment.title}
+                </VariableText>
+              </TextContainer>
+              <TextContainer>
+                <StaticText>내용</StaticText>
+                <VariableText numberOfLines={1} ellipsizeMode="tail">
+                  {comment.contents}
+                </VariableText>
+              </TextContainer>
+              <TextContainer>
+                <StaticText>작성일</StaticText>
+                <VariableText numberOfLines={1} ellipsizeMode="tail">
+                  {new Date(comment.createdAt).toLocaleDateString("kr")}
+                </VariableText>
+              </TextContainer>
+              <DeleteButtonBoxView>
+                <TouchableOpacity onPress={() => onDeleteComment(comment.id)}>
+                  <MaterialCommunityIcons
+                    name="delete-forever-outline"
+                    size={30}
+                    color="black"
+                  />
+                </TouchableOpacity>
+              </DeleteButtonBoxView>
+            </View>
+          </TouchableOpacity>
+        </UserCommentsView>
+      </Card>
     </>
   );
 };
@@ -91,9 +94,10 @@ const UserCommentsView = styled.View`
   flex: 1;
   flex-direction: column;
   border-radius: 10px;
-  border-width: 1px;
-  border: 0.3px solid #3b71f3;
-  background-color: white;
+  height: 130px;
+  padding: 10px;
+  /* border-width: 1px; */
+  /* border: 0.3px solid #3b71f3; */
 
   height: 130px;
   width: 300px;

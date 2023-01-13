@@ -2,7 +2,7 @@ import styled from "@emotion/native";
 import React from "react";
 import { Text } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-
+import { Card } from "react-native-shadow-cards";
 export default function PostLoader({ posts, category, navigate }) {
   const goToPost = (post) => {
     navigate("Stacks", {
@@ -20,38 +20,40 @@ export default function PostLoader({ posts, category, navigate }) {
           return (
             <SC key={key}>
               <Container>
-                <ListBox key={key}>
-                  <ListButton onPress={() => goToPost(post)}>
-                    <ProfileBox>
-                      <Text>
-                        <Ionicons
-                          name="person-circle-outline"
-                          size={60}
-                          color="#3B71F3"
-                        />
-                      </Text>
-                    </ProfileBox>
-                    <InputContainer>
-                      <ListCardTitle>
-                        <TitleText numberOfLines={1} ellipsizeMode="tail">
-                          {post.title}
-                        </TitleText>
-                      </ListCardTitle>
-                      <ListCardContent>
-                        <ContentText numberOfLines={2} ellipsizeMode="tail">
-                          {post.contents}
-                        </ContentText>
-                      </ListCardContent>
-                      <ListCardDate>
+                <Card style={{ padding: 5, margin: 7 }}>
+                  <ListBox key={key}>
+                    <ListButton onPress={() => goToPost(post)}>
+                      <ProfileBox>
                         <Text>
-                          &#91;{category}
-                          &#93;{" "}
-                          {new Date(post.createdAt).toLocaleDateString("kr")}
+                          <Ionicons
+                            name="person-circle-outline"
+                            size={60}
+                            color="#3B71F3"
+                          />
                         </Text>
-                      </ListCardDate>
-                    </InputContainer>
-                  </ListButton>
-                </ListBox>
+                      </ProfileBox>
+                      <InputContainer>
+                        <ListCardTitle>
+                          <TitleText numberOfLines={1} ellipsizeMode="tail">
+                            {post.title}
+                          </TitleText>
+                        </ListCardTitle>
+                        <ListCardContent>
+                          <ContentText numberOfLines={2} ellipsizeMode="tail">
+                            {post.contents}
+                          </ContentText>
+                        </ListCardContent>
+                        <ListCardDate>
+                          <Text>
+                            &#91;{category}
+                            &#93;{" "}
+                            {new Date(post.createdAt).toLocaleDateString("kr")}
+                          </Text>
+                        </ListCardDate>
+                      </InputContainer>
+                    </ListButton>
+                  </ListBox>
+                </Card>
               </Container>
             </SC>
           );
@@ -70,8 +72,8 @@ export const Container = styled.View`
 `;
 
 export const ListBox = styled.View`
-  background-color: white;
-  border: 0.5px solid #3b71f3;
+  /* background-color: red; */
+  /* border: 0.5px solid #3b71f3; */
   border-radius: 15px;
   height: 110px;
   padding: 10px;

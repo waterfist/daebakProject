@@ -90,6 +90,7 @@ export default function PostInput({
     <Container>
       <SelectBox>
         <SelectList
+          style={{ backgroundColor: "red" }}
           setSelected={(val) => setAddPostCategory(val)}
           data={data}
           save="value"

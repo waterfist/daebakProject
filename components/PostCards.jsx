@@ -4,7 +4,8 @@ import styled from "@emotion/native";
 import { useMutation } from "react-query";
 import { deletePost } from "../api";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
-
+import { Card } from "react-native-shadow-cards";
+import { Button } from "react-native";
 const PostCards = ({ post, navigate }) => {
   const { isLoading: isLoadingDeleting, mutate: removePost } = useMutation(
     ["deletePost", post.id],
@@ -50,35 +51,37 @@ const PostCards = ({ post, navigate }) => {
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={() => goMyPost(post)}>
       <View>
-        <UserPostsView key={post.id}>
-          <TextContainer>
-            <StaticText>제목</StaticText>
-            <VariableText numberOfLines={1} ellipsizeMode="tail">
-              {post.title}
-            </VariableText>
-          </TextContainer>
-          <TextContainer>
-            <StaticText>내용</StaticText>
-            <VariableText numberOfLines={1} ellipsizeMode="tail">
-              {post.contents}
-            </VariableText>
-          </TextContainer>
-          <TextContainer>
-            <StaticText>작성일</StaticText>
-            <VariableText numberOfLines={1} ellipsizeMode="tail">
-              {new Date(post.createdAt).toLocaleDateString("kr")}
-            </VariableText>
-          </TextContainer>
-          <DeleteButtonBoxView>
-            <TouchableOpacity onPress={() => onDeletePost(post.id)}>
-              <MaterialCommunityIcons
-                name="delete-forever-outline"
-                size={30}
-                color="black"
-              />
-            </TouchableOpacity>
-          </DeleteButtonBoxView>
-        </UserPostsView>
+        <Card style={{ padding: 5, margin: 15 }}>
+          <UserPostsView key={post.id}>
+            <TextContainer>
+              <StaticText>제목</StaticText>
+              <VariableText numberOfLines={1} ellipsizeMode="tail">
+                {post.title}
+              </VariableText>
+            </TextContainer>
+            <TextContainer>
+              <StaticText>내용</StaticText>
+              <VariableText numberOfLines={1} ellipsizeMode="tail">
+                {post.contents}
+              </VariableText>
+            </TextContainer>
+            <TextContainer>
+              <StaticText>작성일</StaticText>
+              <VariableText numberOfLines={1} ellipsizeMode="tail">
+                {new Date(post.createdAt).toLocaleDateString("kr")}
+              </VariableText>
+            </TextContainer>
+            <DeleteButtonBoxView>
+              <TouchableOpacity onPress={() => onDeletePost(post.id)}>
+                <MaterialCommunityIcons
+                  name="delete-forever-outline"
+                  size={30}
+                  color="black"
+                />
+              </TouchableOpacity>
+            </DeleteButtonBoxView>
+          </UserPostsView>
+        </Card>
       </View>
     </TouchableOpacity>
   );
@@ -90,14 +93,14 @@ const UserPostsView = styled.View`
   flex: 1;
   flex-direction: column;
   border-radius: 10px;
-  border-width: 1px;
-  border: 0.3px solid #3b71f3;
-  background-color: white;
-
   height: 130px;
-  width: 300px;
   padding: 10px;
-  margin-bottom: 10px;
+
+  /* border-width: 1px; */
+  /* border: 0.3px solid #3b71f3; */
+  /* width: 300px; */
+  /* margin-bottom: 10px; */
+  /* margin: 10px 0px; */
 `;
 
 const TextContainer = styled.View`
