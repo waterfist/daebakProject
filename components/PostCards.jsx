@@ -51,7 +51,7 @@ const PostCards = ({ post, navigate }) => {
   return (
     <TouchableOpacity style={{ flex: 1 }} onPress={() => goMyPost(post)}>
       <View>
-        <Card style={{ padding: 5, margin: 15 }}>
+        <Card style={{ padding: 5, margin: 10 }}>
           <UserPostsView key={post.id}>
             <TextContainer>
               <StaticText>제목</StaticText>
@@ -95,12 +95,6 @@ const UserPostsView = styled.View`
   border-radius: 10px;
   height: 130px;
   padding: 10px;
-
-  /* border-width: 1px; */
-  /* border: 0.3px solid #3b71f3; */
-  /* width: 300px; */
-  /* margin-bottom: 10px; */
-  /* margin: 10px 0px; */
 `;
 
 const TextContainer = styled.View`

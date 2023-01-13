@@ -49,7 +49,7 @@ const CommentCards = ({ comment, navigate }) => {
 
   return (
     <>
-      <Card style={{ padding: 5, margin: 7 }}>
+      <Card style={{ padding: 5, margin: 10 }}>
         <UserCommentsView key={comment.id}>
           <TouchableOpacity onPress={() => goMyComment(comment)}>
             <View>
@@ -96,8 +96,6 @@ const UserCommentsView = styled.View`
   border-radius: 10px;
   height: 130px;
   padding: 10px;
-  /* border-width: 1px; */
-  /* border: 0.3px solid #3b71f3; */
 
   height: 130px;
   width: 300px;

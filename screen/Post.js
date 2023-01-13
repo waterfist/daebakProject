@@ -27,7 +27,7 @@ import {
 } from "firebase/firestore";
 import { useMutation } from "react-query";
 import { deletePostText } from "../api";
-
+import { StyleSheet } from "react-native";
 export default function Post({
   navigation,
   route: {
@@ -139,9 +139,23 @@ export default function Post({
   return (
     <Container>
       <SectionTitle>제목</SectionTitle>
+
       <Title>{post.title}</Title>
+
       <SectionTitle>내용</SectionTitle>
+      <View
+        style={{
+          borderBottomColor: "black",
+          borderBottomWidth: StyleSheet.hairlineWidth,
+        }}
+      />
       <Content>{post.contents}</Content>
+      <View
+        style={{
+          borderBottomColor: "black",
+          borderBottomWidth: StyleSheet.hairlineWidth,
+        }}
+      />
       <SectionUrl>URL:</SectionUrl>
       <Hyperlink onPress={(hyperUrl) => openURL(hyperUrl)}>
         <Content style={{ color: "blue" }}>{post.url}</Content>
@@ -202,9 +216,10 @@ export const SectionTitle = styled.Text`
   padding: 10px 0px;
 `;
 export const Title = styled.Text`
-  font-size: 20px;
+  font-size: 24px;
   font-weight: 500;
-  color: ${(props) => props.theme.color.overview};
+  /* color: ${(props) => props.theme.color.overview}; */
+  color: gray;
   margin-bottom: 20px;
   border-radius: 5px;
   border-width: 1px;
@@ -215,8 +230,10 @@ export const Title = styled.Text`
 export const Content = styled.Text`
   font-size: 20px;
   font-weight: 500;
-  color: ${(props) => props.theme.color.overview};
+  /* color: ${(props) => props.theme.color.overview}; */
+  color: gray;
   line-height: 30px;
+  margin: 10px 0px;
 `;
 export const SectionUrl = styled.Text`
   font-size: 20px;
