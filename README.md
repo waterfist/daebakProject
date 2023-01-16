@@ -24,3 +24,5 @@
 ***
 
 <img width="207" alt="Screenshot 2023-01-13 at 3 30 22 AM" src="https://user-images.githubusercontent.com/117061219/212244214-0ae635a3-48d0-48ae-9bc2-22f062e4cce1.png">
+
+[프로젝트 노션](https://www.notion.so/Team-A-2-2-e6649f7cdf45473d8ed348b03457eff2)
